@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./tailwind.css";
 
 export const metadata: Metadata = {
   title: "B2BMarket - Global Wholesale & Manufacturers",
