@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { HERO_WIDE_BANNERS, OVERLAPPING_CARDS } from "../data/heroCarouselData";
+import { HERO_WIDE_BANNERS } from "../data/heroCarouselData";
 
 export const HeroBannerWithAttachedCards: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -41,7 +41,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
 
   return (
     <div
-      className="relative w-full select-none overflow-hidden bg-[#eaeded] pb-10"
+      className="relative w-full select-none overflow-hidden bg-[#eaeded] pb-8"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -63,7 +63,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
                 <img
                   src={banner.image}
                   alt={banner.alt}
-                  className="w-full h-auto max-h-[380px] sm:max-h-[420px] md:max-h-[460px] object-cover sm:object-contain object-center block mx-auto transition-transform duration-500"
+                  className="w-full h-auto max-h-[340px] sm:max-h-[380px] md:max-h-[420px] object-cover sm:object-contain object-center block mx-auto transition-transform duration-500"
                   loading={idx === 0 ? "eager" : "lazy"}
                 />
               </Link>
@@ -72,14 +72,14 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
         </div>
 
         {/* Soft Gradient Overlay at bottom for seamless card overlapping */}
-        <div className="absolute inset-x-0 bottom-0 h-40 sm:h-48 bg-gradient-to-t from-[#eaeded] via-[#eaeded]/60 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-44 sm:h-52 bg-gradient-to-t from-[#eaeded] via-[#eaeded]/75 to-transparent pointer-events-none z-10" />
 
         {/* Banner Left Arrow Button */}
         <button
           type="button"
           onClick={handlePrev}
           aria-label="Previous Slide"
-          className="absolute left-2 sm:left-4 top-1/3 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
+          className="absolute left-2 sm:left-4 top-1/4 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
         >
           <ChevronLeft className="w-6 h-6 stroke-[2.5]" />
         </button>
@@ -89,13 +89,13 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           type="button"
           onClick={handleNext}
           aria-label="Next Slide"
-          className="absolute right-2 sm:right-4 top-1/3 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
+          className="absolute right-2 sm:right-4 top-1/4 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
         >
           <ChevronRight className="w-6 h-6 stroke-[2.5]" />
         </button>
 
-        {/* Carousel Dots Pagination */}
-        <div className="absolute bottom-28 sm:bottom-36 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+        {/* Carousel Dots Pagination (Higher position so not blocked by overlapping cards) */}
+        <div className="absolute top-4 right-6 flex items-center gap-1.5 z-20 bg-black/20 px-2.5 py-1 rounded-full backdrop-blur-xs">
           {HERO_WIDE_BANNERS.map((_, idx) => (
             <button
               key={idx}
@@ -103,7 +103,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
               onClick={() => setCurrentSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                currentSlide === idx ? "w-8 bg-slate-800" : "w-2 bg-slate-800/40 hover:bg-slate-800/70"
+                currentSlide === idx ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
               }`}
             />
           ))}
@@ -111,19 +111,19 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. OVERLAPPING 4 CARDS (Prime removed - 4 Cards Grid Matching User Image) */}
+      {/* 2. OVERLAPPING 4 CARDS (High Overlap: -mt-44 to -mt-60 for deep banner attachment) */}
       {/* ========================================================================= */}
-      <div className="relative -mt-24 sm:-mt-28 md:-mt-32 max-w-[1530px] mx-auto px-3 sm:px-6 z-30">
+      <div className="relative -mt-36 sm:-mt-48 md:-mt-56 lg:-mt-64 max-w-[1530px] mx-auto px-3 sm:px-6 z-30">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
           {/* ---------------- CARD 1: Top discounts for you ---------------- */}
-          <div className="bg-white rounded-xl p-4 sm:p-5 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group">
+          <div className="bg-white rounded-xl p-3.5 sm:p-4 shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group min-h-[290px] sm:min-h-[310px]">
             <div>
-              <h3 className="font-bold text-slate-900 text-base sm:text-[17px] mb-3 group-hover:text-[#1559ac] transition-colors">
+              <h3 className="font-bold text-slate-900 text-sm sm:text-[15px] mb-2.5 group-hover:text-[#1559ac] transition-colors">
                 Top discounts for you
               </h3>
 
-              {/* 2 Workstation Towers Side by Side matching Image */}
-              <div className="grid grid-cols-2 gap-2 h-36 sm:h-40 w-full mb-3">
+              {/* 2 Workstation Towers Side by Side */}
+              <div className="grid grid-cols-2 gap-2 h-28 sm:h-32 w-full mb-2.5">
                 <div className="h-full w-full rounded-lg overflow-hidden bg-slate-900 flex items-center justify-center p-1 border border-slate-100">
                   <img
                     src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=300&q=80"
@@ -140,12 +140,12 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-[11.5px] text-slate-500 line-clamp-1">
+              <p className="text-[11px] sm:text-[11.5px] text-slate-500 line-clamp-1">
                 High-spec refurbished and wholesale workstations
               </p>
             </div>
 
-            <div className="pt-3 mt-2 border-t border-slate-100">
+            <div className="pt-2 mt-2 border-t border-slate-100">
               <Link
                 href="/products?cat=workstations"
                 className="text-xs font-bold text-[#007185] hover:text-[#c7511f] transition-colors"
@@ -156,31 +156,31 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           </div>
 
           {/* ---------------- CARD 2: Business Essentials ---------------- */}
-          <div className="bg-white rounded-xl p-4 sm:p-5 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group">
+          <div className="bg-white rounded-xl p-3.5 sm:p-4 shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group min-h-[290px] sm:min-h-[310px]">
             <div>
-              <h3 className="font-bold text-slate-900 text-base sm:text-[17px] mb-3 group-hover:text-[#1559ac] transition-colors">
+              <h3 className="font-bold text-slate-900 text-sm sm:text-[15px] mb-2.5 group-hover:text-[#1559ac] transition-colors">
                 Business Essentials
               </h3>
 
               {/* Orange Circular Badge matching Image */}
-              <div className="h-36 sm:h-40 w-full rounded-lg bg-slate-50 flex items-center justify-center mb-3 p-3 border border-slate-100/80">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ff9900] to-[#e67a00] flex flex-col items-center justify-center text-white text-center shadow-md shrink-0 p-1 group-hover:scale-105 transition duration-300">
-                    <span className="font-extrabold text-[11px] leading-tight">Business</span>
-                    <span className="font-medium text-[9px] leading-tight">Essentials</span>
+              <div className="h-28 sm:h-32 w-full rounded-lg bg-slate-50 flex items-center justify-center mb-2.5 p-2.5 border border-slate-100/80">
+                <div className="flex items-center gap-2.5 w-full">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#ff9900] to-[#e67a00] flex flex-col items-center justify-center text-white text-center shadow-md shrink-0 p-1 group-hover:scale-105 transition duration-300">
+                    <span className="font-extrabold text-[10.5px] leading-tight">Business</span>
+                    <span className="font-medium text-[8.5px] leading-tight">Essentials</span>
                   </div>
-                  <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                  <p className="text-[11.5px] sm:text-xs text-slate-700 font-medium leading-tight">
                     Get everything you need for your business!
                   </p>
                 </div>
               </div>
 
-              <p className="text-[11.5px] text-slate-500 line-clamp-1">
+              <p className="text-[11px] sm:text-[11.5px] text-slate-500 line-clamp-1">
                 Office supplies, pantry, stationery & daily utilities
               </p>
             </div>
 
-            <div className="pt-3 mt-2 border-t border-slate-100">
+            <div className="pt-2 mt-2 border-t border-slate-100">
               <Link
                 href="/products?cat=essentials"
                 className="text-xs font-bold text-[#007185] hover:text-[#c7511f] transition-colors"
@@ -191,37 +191,37 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           </div>
 
           {/* ---------------- CARD 3: Get GST* benefits ---------------- */}
-          <div className="bg-white rounded-xl p-4 sm:p-5 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group">
+          <div className="bg-white rounded-xl p-3.5 sm:p-4 shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group min-h-[290px] sm:min-h-[310px]">
             <div>
-              <h3 className="font-bold text-slate-900 text-base sm:text-[17px] mb-3 group-hover:text-[#1559ac] transition-colors">
+              <h3 className="font-bold text-slate-900 text-sm sm:text-[15px] mb-2.5 group-hover:text-[#1559ac] transition-colors">
                 Get GST* benefits
               </h3>
 
               {/* Circular Fresh Groceries with GST badge matching Image */}
-              <div className="h-36 sm:h-40 w-full rounded-lg bg-amber-50/50 flex items-center justify-center mb-3 p-3 border border-amber-100/60">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-white shadow-md border-2 border-amber-400 shrink-0 relative group-hover:scale-105 transition duration-300">
+              <div className="h-28 sm:h-32 w-full rounded-lg bg-amber-50/50 flex items-center justify-center mb-2.5 p-2.5 border border-amber-100/60">
+                <div className="flex items-center gap-2.5 w-full">
+                  <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-md border-2 border-amber-400 shrink-0 relative group-hover:scale-105 transition duration-300">
                     <img
                       src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=200&q=80"
                       alt="GST Fresh"
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute bottom-0 inset-x-0 bg-red-600 text-white font-black text-[8px] text-center py-0.5">
+                    <span className="absolute bottom-0 inset-x-0 bg-red-600 text-white font-black text-[7.5px] text-center py-0.5">
                       % OFF
                     </span>
                   </div>
-                  <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                  <p className="text-[11.5px] sm:text-xs text-slate-700 font-medium leading-tight">
                     Save up to 18% with GST* invoice now on Groceries + Guaranteed cashback*
                   </p>
                 </div>
               </div>
 
-              <p className="text-[11.5px] text-slate-500 line-clamp-1">
+              <p className="text-[11px] sm:text-[11.5px] text-slate-500 line-clamp-1">
                 Verified GST tax invoice with full ITC claim
               </p>
             </div>
 
-            <div className="pt-3 mt-2 border-t border-slate-100">
+            <div className="pt-2 mt-2 border-t border-slate-100">
               <Link
                 href="/b2c-gst"
                 className="text-xs font-bold text-[#007185] hover:text-[#c7511f] transition-colors"
@@ -232,34 +232,34 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           </div>
 
           {/* ---------------- CARD 4: Computers & Accessories ---------------- */}
-          <div className="bg-white rounded-xl p-4 sm:p-5 shadow-md hover:shadow-xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group">
+          <div className="bg-white rounded-xl p-3.5 sm:p-4 shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group min-h-[290px] sm:min-h-[310px]">
             <div>
-              <h3 className="font-bold text-slate-900 text-base sm:text-[17px] mb-3 group-hover:text-[#1559ac] transition-colors">
+              <h3 className="font-bold text-slate-900 text-sm sm:text-[15px] mb-2.5 group-hover:text-[#1559ac] transition-colors">
                 Computers & Accessories
               </h3>
 
               {/* Circular Screen Display matching Image */}
-              <div className="h-36 sm:h-40 w-full rounded-lg bg-sky-50/50 flex items-center justify-center mb-3 p-3 border border-sky-100/60">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-slate-900 shadow-md border-2 border-sky-400 shrink-0 group-hover:scale-105 transition duration-300">
+              <div className="h-28 sm:h-32 w-full rounded-lg bg-sky-50/50 flex items-center justify-center mb-2.5 p-2.5 border border-sky-100/60">
+                <div className="flex items-center gap-2.5 w-full">
+                  <div className="w-14 h-14 rounded-full overflow-hidden bg-slate-900 shadow-md border-2 border-sky-400 shrink-0 group-hover:scale-105 transition duration-300">
                     <img
                       src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=200&q=80"
                       alt="Computers & Laptops"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                  <p className="text-[11.5px] sm:text-xs text-slate-700 font-medium leading-tight">
                     Get never before offers on Laptops, Tablets, Monitors & more.
                   </p>
                 </div>
               </div>
 
-              <p className="text-[11.5px] text-slate-500 line-clamp-1">
+              <p className="text-[11px] sm:text-[11.5px] text-slate-500 line-clamp-1">
                 Top brands with commercial manufacturer warranty
               </p>
             </div>
 
-            <div className="pt-3 mt-2 border-t border-slate-100">
+            <div className="pt-2 mt-2 border-t border-slate-100">
               <Link
                 href="/products?cat=computers"
                 className="text-xs font-bold text-[#007185] hover:text-[#c7511f] transition-colors"
