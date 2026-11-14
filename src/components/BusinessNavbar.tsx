@@ -17,6 +17,8 @@ import {
   Layers,
   Camera,
   Store,
+  Target,
+  Mail,
 } from "lucide-react";
 import { CategoriesCarouselMegaMenu } from "./CategoriesCarouselMegaMenu";
 
@@ -364,21 +366,45 @@ export const BusinessNavbar: React.FC = () => {
           </form>
         </div>
 
-        {/* Right Fixed Group: Help&Support + Settings */}
-        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 pl-1 z-10">
+        {/* Right Fixed Group: Post My RFQ + Messages + Help&Support + Settings */}
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0 pl-1 z-10">
+          {/* 1. Post My RFQ Button (Image Based: Target Icon with arrow in red/coral) */}
+          <Link
+            href="/rfq"
+            aria-label="Post My RFQ"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-rose-50/70 text-[#e11d48] font-bold text-xs sm:text-[12.5px] transition cursor-pointer select-none group"
+          >
+            <div className="relative flex items-center justify-center">
+              <Target className="w-4 h-4 text-[#e11d48] group-hover:scale-110 transition-transform stroke-[2.2]" />
+            </div>
+            <span>Post My RFQ</span>
+          </Link>
+
+          {/* 2. Messages Button (Image Based: Envelope Icon + 'Messages' text) */}
+          <Link
+            href="/messages"
+            aria-label="Messages"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-slate-100 text-slate-800 font-bold text-xs sm:text-[12.5px] transition cursor-pointer select-none group"
+          >
+            <Mail className="w-4 h-4 text-slate-700 group-hover:text-[#1559ac] group-hover:scale-110 transition-all stroke-[2.2]" />
+            <span>Messages</span>
+          </Link>
+
+          {/* 3. Help & Support */}
           <button
             type="button"
             aria-label="Help & Support"
-            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2.5 py-1 rounded-full text-xs sm:text-[13px] font-medium transition cursor-pointer select-none"
+            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none"
           >
             <Headset className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2.2]" />
             <span className="hidden sm:inline">Help&Support</span>
           </button>
 
+          {/* 4. Settings */}
           <button
             type="button"
             aria-label="Settings"
-            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2.5 py-1 rounded-full text-xs sm:text-[13px] font-medium transition cursor-pointer select-none"
+            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none"
           >
             <Settings className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2]" />
             <span className="hidden sm:inline">Settings</span>
