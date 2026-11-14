@@ -5,6 +5,13 @@ import "./tailwind.css";
 export const metadata: Metadata = {
   title: "1PLACEE Business - Universal Multi-Vendor B2B & B2C Marketplace",
   description: "Wholesale bulk hub with volume price slabs, verified GST tax invoicing, Input Tax Credit (ITC) & verified merchant selling.",
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
