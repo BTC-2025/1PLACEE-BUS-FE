@@ -3,6 +3,7 @@
 import React from "react";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { HeroBannerWithAttachedCards } from "@/components/HeroBannerWithAttachedCards";
+import { IndustrialMachineryProductGrid } from "@/components/IndustrialMachineryProductGrid";
 
 export default function B2BPage() {
   return (
@@ -11,6 +12,9 @@ export default function B2BPage() {
       <main className="w-full">
         {/* Subnav Below: Hero Banner Carousel based on uploaded images 2 & 3 */}
         <HeroBannerWithAttachedCards />
+
+        {/* Four Cards Below: Industrial & Apparel Machinery Products Grid */}
+        <IndustrialMachineryProductGrid />
       </main>
     </div>
   );
