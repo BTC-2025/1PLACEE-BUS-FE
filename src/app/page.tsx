@@ -6,11 +6,10 @@ import { HeroBannerWithAttachedCards } from "@/components/HeroBannerWithAttached
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#eaeded] text-slate-800 font-sans">
+    <div className="min-h-screen bg-[#f5f6f9] text-slate-800 font-sans">
       <BusinessNavbar />
       <main className="w-full">
-        {/* Full Image Banner Carousel with Attached Cards Carousel */}
-        <HeroBannerWithAttachedCards />
+        {/* Clean canvas */}
       </main>
     </div>
   );
