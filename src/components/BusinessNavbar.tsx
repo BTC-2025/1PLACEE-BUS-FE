@@ -122,7 +122,7 @@ export const BusinessNavbar: React.FC = () => {
 
             {isLocationOpen && (
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 border border-slate-200 z-50 text-xs">
-                {["Chennai, TN", "Bengaluru, KA", "Mumbai, MH", "Delhi, DL", "Hyderabad, TS"].map(
+                {["Chennai, TN", "Vellore", "trichy", "Madurai", "Bangalore"].map(
                   (loc) => (
                     <button
                       key={loc}
@@ -334,7 +334,7 @@ export const BusinessNavbar: React.FC = () => {
         </div>
 
         {/* Center: Search Bar (Exact Absolute Center matching Top Nav Center Container Width) */}
-        <div 
+        <div
           className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
           style={{ width: "386px" }}
         >
