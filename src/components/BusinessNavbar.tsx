@@ -327,7 +327,7 @@ export const BusinessNavbar: React.FC = () => {
             type="button"
             onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
             aria-label="All Categories"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-800 font-semibold transition cursor-pointer select-none text-xs sm:text-[13px] border border-slate-200 shadow-2xs hover:border-slate-300 active:scale-[0.98]"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-800 font-bold transition cursor-pointer select-none text-xs sm:text-[13px] border border-slate-200 shadow-2xs hover:border-slate-300 active:scale-[0.98]"
           >
 
             <span>Categories</span>
