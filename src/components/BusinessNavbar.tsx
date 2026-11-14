@@ -40,25 +40,29 @@ export const BusinessNavbar: React.FC = () => {
   // Categories Dropdown in Subnav
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const categoriesRef = useRef<HTMLDivElement>(null);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
 
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
       if (
         searchContainerRef.current &&
-        !searchContainerRef.current.contains(e.target as Node)
+        !searchContainerRef.current.contains(target)
       ) {
         setIsSearchOpen(false);
       }
       if (
         profileMenuRef.current &&
-        !profileMenuRef.current.contains(e.target as Node)
+        !profileMenuRef.current.contains(target)
       ) {
         setIsProfileMenuOpen(false);
       }
       if (
         categoriesRef.current &&
-        !categoriesRef.current.contains(e.target as Node)
+        !categoriesRef.current.contains(target) &&
+        megaMenuRef.current &&
+        !megaMenuRef.current.contains(target)
       ) {
         setIsCategoriesOpen(false);
       }
@@ -378,10 +382,12 @@ export const BusinessNavbar: React.FC = () => {
       </div>
 
       {/* Categories Slide Carousel Container (3 Slides x 15 Cards = 45 Categories) */}
-      <CategoriesCarouselMegaMenu
-        isOpen={isCategoriesOpen}
-        onClose={() => setIsCategoriesOpen(false)}
-      />
+      <div ref={megaMenuRef}>
+        <CategoriesCarouselMegaMenu
+          isOpen={isCategoriesOpen}
+          onClose={() => setIsCategoriesOpen(false)}
+        />
+      </div>
     </header>
   );
 };
