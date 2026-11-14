@@ -6,12 +6,38 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   MapPin,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Search,
   Bell,
   Heart,
   User,
   PlusCircle,
+  Headset,
+  Settings,
 } from "lucide-react";
+
+const SUB_NAV_LINKS = [
+  { label: "Bestsellers", href: "/products" },
+  { label: "Today Deals", href: "/products" },
+  { label: "Coupons", href: "/products" },
+  { label: "New Release", href: "/products" },
+  { label: "Buy Again", href: "/products" },
+  { label: "Electronics", href: "/products" },
+  { label: "Mobiles & Accessories", href: "/products" },
+  { label: "Home & Kitchen", href: "/products" },
+  { label: "Grocery", href: "/products" },
+  { label: "Men's Fashion", href: "/products" },
+  { label: "Women's Fashion", href: "/products" },
+  { label: "Kids & Baby", href: "/products" },
+  { label: "Toys", href: "/products" },
+  { label: "Sports & Outdoors", href: "/products" },
+  { label: "Books", href: "/products" },
+  { label: "Beauty & Personal Care", href: "/products" },
+  { label: "Computers & Laptops", href: "/products" },
+  { label: "Home Improvement", href: "/products" },
+  { label: "Pet Supplies", href: "/products" },
+];
 
 export const BusinessNavbar: React.FC = () => {
   const pathname = usePathname();
@@ -29,6 +55,16 @@ export const BusinessNavbar: React.FC = () => {
   // Profile Dropdown
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Subnav Horizontal Scroll Ref
+  const subnavScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollSubnav = (direction: "left" | "right") => {
+    if (subnavScrollRef.current) {
+      const scrollAmount = direction === "left" ? -280 : 280;
+      subnavScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -65,11 +101,12 @@ export const BusinessNavbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full select-none text-xs font-sans shadow-xs">
-      {/* Top Navbar Tier matching exact 1PLACEE-FE AmazonNavbar styling */}
+      {/* ========================================================================= */}
+      {/* TIER 1: Main Top Navbar (60px height) */}
+      {/* ========================================================================= */}
       <div className="bg-[#e9f4ff] pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[60px] sm:h-[60px] border-b border-[#cde2f8] relative">
         {/* Left Group: 1PLACEE Logo + Location Pill with Name */}
         <div className="flex items-center gap-3.5 sm:gap-4 shrink-0 z-10">
-          {/* Exact 1PLACEE-FE Logo Image & Height */}
           <Link
             href="/"
             className="flex items-center hover:opacity-90 transition select-none py-0.5"
@@ -166,7 +203,7 @@ export const BusinessNavbar: React.FC = () => {
 
         {/* Right Group: Search Box + Sell Product + Bell Notification + Wishlist + Cart + Profile + Bittool */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
-          {/* 1. Search Box (Collapsible / Expandable) */}
+          {/* 1. Search Box */}
           <div ref={searchContainerRef} className="relative flex items-center">
             {isSearchOpen ? (
               <form
@@ -319,6 +356,80 @@ export const BusinessNavbar: React.FC = () => {
               alt="Bittool"
               className="w-5 h-5 object-contain transition-all duration-200 group-hover:brightness-0 group-hover:invert"
             />
+          </button>
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* TIER 2: Subnav Ribbon (Exact 44px height matching reference image) */}
+      {/* Left side has scrollable category links, Right side has Help&Support + Settings */}
+      {/* ========================================================================= */}
+      <div className="bg-white pl-2 sm:pl-4 pr-3 sm:pr-4 py-1 flex items-center justify-between text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
+        {/* Middle/Left Scrollable Links Track with Left & Right Arrow Buttons */}
+        <div className="flex-1 flex items-center min-w-0 mr-2 sm:mr-3 relative overflow-hidden">
+          {/* Scroll Left Arrow Button */}
+          <button
+            type="button"
+            onClick={() => scrollSubnav("left")}
+            aria-label="Scroll left"
+            className="w-6.5 h-6.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 flex items-center justify-center shrink-0 shadow-xs transition cursor-pointer z-10 mr-1.5"
+          >
+            <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+          </button>
+
+          {/* Scrollable Links Track */}
+          <div className="flex-1 overflow-hidden min-w-0">
+            <div
+              ref={subnavScrollRef}
+              className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth h-full py-0"
+            >
+              {SUB_NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="relative flex items-center h-[42px] px-2.5 text-gray-600 font-semibold text-[13px] hover:text-[#1559ac] transition-colors shrink-0 select-none group"
+                >
+                  <span className="text-gray-600 group-hover:text-[#1559ac] font-medium transition-colors">
+                    {link.label}
+                  </span>
+                  {/* Clean bottom line indicator on hover */}
+                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#1559ac] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Scroll Right Arrow Button */}
+          <button
+            type="button"
+            onClick={() => scrollSubnav("right")}
+            aria-label="Scroll right"
+            className="w-6.5 h-6.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 flex items-center justify-center shrink-0 shadow-xs transition cursor-pointer z-10 ml-1.5"
+          >
+            <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+          </button>
+        </div>
+
+        {/* Right Fixed Group: Help&Support + Settings (Right side as requested) */}
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 pl-1 z-10">
+          {/* Help & Support Customer Care Headset Button with Word */}
+          <button
+            type="button"
+            aria-label="Help & Support"
+            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2.5 py-1 rounded-full text-xs sm:text-[13px] font-medium transition cursor-pointer select-none"
+          >
+            <Headset className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2.2]" />
+            <span className="hidden sm:inline">Help&Support</span>
+          </button>
+
+          {/* Settings Button with Word */}
+          <button
+            type="button"
+            aria-label="Settings"
+            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2.5 py-1 rounded-full text-xs sm:text-[13px] font-medium transition cursor-pointer select-none"
+          >
+            <Settings className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2]" />
+            <span className="hidden sm:inline">Settings</span>
           </button>
         </div>
       </div>
