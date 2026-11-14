@@ -58,100 +58,48 @@ export const BusinessNavbar: React.FC = () => {
     }
   };
 
-  const navButtons = [
-    { label: "Home", href: "/", active: pathname === "/" },
-    { label: "B2B", href: "/b2b", active: pathname.startsWith("/b2b") },
-    { label: "B2C", href: "/b2c-gst", active: pathname.startsWith("/b2c-gst") },
-    { label: "Orders", href: "/orders", active: pathname.startsWith("/orders") },
-  ];
+  const isHomeActive = pathname === "/";
+  const isB2bActive = pathname.startsWith("/b2b");
+  const isB2cActive = pathname.startsWith("/b2c-gst");
+  const isOrdersActive = pathname.startsWith("/orders");
 
   return (
-    <header
-      style={{
-        backgroundColor: "#e9f4ff",
-        borderBottom: "1px solid #c8e2fb",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        userSelect: "none",
-        width: "100%",
-        height: "60px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "1440px",
-          margin: "0 auto",
-          padding: "0 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "12px",
-        }}
-      >
-        {/* Left Section: 1placee B3 Logo + Location Pill */}
-        <div style={{ display: "flex", alignItems: "center", gap: "14px", flexShrink: 0 }}>
-          {/* Logo with B3 Symbol - Perfectly Sized */}
-          <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+    <header className="sticky top-0 z-50 w-full select-none text-xs font-sans shadow-xs">
+      {/* Top Navbar Tier matching exact 1PLACEE-FE AmazonNavbar styling */}
+      <div className="bg-[#e9f4ff] pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[60px] sm:h-[60px] border-b border-[#cde2f8] relative">
+        {/* Left Group: 1PLACEE Logo + Location Pill with Name */}
+        <div className="flex items-center gap-3.5 sm:gap-4 shrink-0 z-10">
+          {/* Exact 1PLACEE-FE Logo Image & Height */}
+          <Link
+            href="/"
+            className="flex items-center hover:opacity-90 transition select-none py-0.5"
+          >
             <img
-              src="/logo-1placee-b3.png"
-              alt="1placee B3 Business Logo"
-              style={{
-                height: "36px",
-                width: "auto",
-                objectFit: "contain",
-                display: "block",
-              }}
+              src="/logo.png?v=2"
+              alt="1Placee"
+              className="h-24 sm:h-26 w-auto object-contain drop-shadow-xs"
             />
           </Link>
 
-          {/* Location Selector Pill */}
-          <div style={{ position: "relative" }}>
+          {/* Location Pill Button */}
+          <div className="relative">
             <button
               type="button"
               onClick={() => setIsLocationOpen(!isLocationOpen)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "6px 14px",
-                borderRadius: "9999px",
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
-                border: "1px solid #b8dcfa",
-                color: "#1559ac",
-                fontSize: "12px",
-                fontWeight: 700,
-                cursor: "pointer",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-              }}
+              aria-label="Location"
+              className="group flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#1559ac] hover:text-white"
             >
-              <MapPin style={{ width: "14px", height: "14px", color: "#1559ac" }} />
-              <span style={{ color: "#1e293b", maxWidth: "120px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {selectedLocation}
-              </span>
-              <ChevronDown style={{ width: "13px", height: "13px", color: "#1559ac" }} />
+              <MapPin className="w-4.5 h-4 text-[#1559ac] group-hover:text-white stroke-[2.2] shrink-0 transition-colors" />
+              <div className="flex flex-col text-left leading-tight">
+                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white truncate max-w-[130px] transition-colors">
+                  {selectedLocation}
+                </span>
+              </div>
+              <ChevronDown className="w-4 h-4.5 text-[#1559ac] group-hover:text-white shrink-0 ml-0.5 transition-colors" />
             </button>
 
             {isLocationOpen && (
-              <div
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  top: "100%",
-                  marginTop: "6px",
-                  width: "170px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "12px",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
-                  padding: "6px 0",
-                  border: "1px solid #e2e8f0",
-                  zIndex: 60,
-                  fontSize: "12px",
-                }}
-              >
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 border border-slate-200 z-50 text-xs">
                 {["Chennai, TN", "Bengaluru, KA", "Mumbai, MH", "Delhi, DL", "Hyderabad, TS"].map(
                   (loc) => (
                     <button
@@ -161,18 +109,7 @@ export const BusinessNavbar: React.FC = () => {
                         setSelectedLocation(loc);
                         setIsLocationOpen(false);
                       }}
-                      style={{
-                        width: "100%",
-                        textAlign: "left",
-                        padding: "8px 14px",
-                        fontWeight: 700,
-                        color: "#334155",
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#eff6ff")}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                      className="w-full text-left px-4 py-2 hover:bg-blue-50 font-bold text-slate-700 hover:text-[#1559ac] transition"
                     >
                       {loc}
                     </button>
@@ -183,197 +120,123 @@ export const BusinessNavbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Center Container: [Home] [B2B] [B2C] [Orders] */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            backgroundColor: "#d6ecff",
-            borderRadius: "9999px",
-            padding: "4px",
-            border: "1px solid #b8dcfa",
-            flexShrink: 0,
-          }}
-        >
-          {navButtons.map((btn) => (
-            <Link
-              key={btn.label}
-              href={btn.href}
-              style={{
-                padding: "6px 18px",
-                borderRadius: "9999px",
-                fontWeight: 700,
-                fontSize: "13px",
-                textDecoration: "none",
-                transition: "all 0.2s",
-                color: btn.active ? "#ffffff" : "#1559ac",
-                backgroundColor: btn.active ? "#1559ac" : "transparent",
-                boxShadow: btn.active ? "0 1px 3px rgba(21, 89, 172, 0.4)" : "none",
-              }}
-            >
-              {btn.label}
-            </Link>
-          ))}
+        {/* Center Group: Eclipse Container with Four Buttons: Home, B2B, B2C, Orders */}
+        <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-[#d7ebfc] p-1.5 rounded-full border border-[#b8dcfa] shadow-2xs z-10 pointer-events-auto">
+          <Link
+            href="/"
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
+              isHomeActive
+                ? "bg-[#1559ac] text-white shadow-sm"
+                : "text-[#1559ac] hover:bg-white"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/b2b"
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
+              isB2bActive
+                ? "bg-[#1559ac] text-white shadow-sm"
+                : "text-[#1559ac] hover:bg-white"
+            }`}
+          >
+            B2B
+          </Link>
+          <Link
+            href="/b2c-gst"
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
+              isB2cActive
+                ? "bg-[#1559ac] text-white shadow-sm"
+                : "text-[#1559ac] hover:bg-white"
+            }`}
+          >
+            B2C
+          </Link>
+          <Link
+            href="/orders"
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
+              isOrdersActive
+                ? "bg-[#1559ac] text-white shadow-sm"
+                : "text-[#1559ac] hover:bg-white"
+            }`}
+          >
+            Orders
+          </Link>
         </div>
 
-        {/* Right Section: Search, Sell Product, Notification, Wishlist, Cart, Profile, Bittool */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-          {/* 1. Search Box */}
-          <div ref={searchContainerRef} style={{ position: "relative", display: "flex", alignItems: "center" }}>
+        {/* Right Group: Search Box + Sell Product + Bell Notification + Wishlist + Cart + Profile + Bittool */}
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
+          {/* 1. Search Box (Collapsible / Expandable) */}
+          <div ref={searchContainerRef} className="relative flex items-center">
             {isSearchOpen ? (
               <form
                 onSubmit={handleSearchSubmit}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "9999px",
-                  padding: "5px 12px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                  width: "220px",
-                  border: "1px solid #b8dcfa",
-                }}
+                className="flex items-center bg-white rounded-full px-3.5 py-1.5 shadow-md w-44 sm:w-60 md:w-64 border border-[#b8dcfa] animate-in fade-in zoom-in-95 duration-200"
               >
-                <Search style={{ width: "15px", height: "15px", color: "#1559ac", marginRight: "6px", flexShrink: 0 }} />
+                <Search className="w-4.5 h-4.5 text-[#1559ac] mr-2 shrink-0 stroke-[2.2]" />
                 <input
                   type="text"
-                  placeholder="Search products..."
+                  placeholder="Search wholesale & retail..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
-                  style={{
-                    width: "100%",
-                    fontSize: "12px",
-                    color: "#0f172a",
-                    outline: "none",
-                    border: "none",
-                    background: "transparent",
-                  }}
+                  className="w-full text-xs sm:text-[13px] text-gray-900 outline-none placeholder:text-gray-400 bg-transparent"
                 />
               </form>
             ) : (
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                title="Search"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "9999px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "rgba(255, 255, 255, 0.95)",
-                  border: "1px solid #b8dcfa",
-                  color: "#1559ac",
-                  cursor: "pointer",
-                  boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-                }}
+                aria-label="Open Search"
+                title="Search products..."
+                className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer"
               >
-                <Search style={{ width: "16px", height: "16px" }} />
+                <Search className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] transition-colors" />
               </button>
             )}
           </div>
 
-          {/* 2. Sell Product Button */}
+          {/* 2. Sell Product Button (Distinct Gold Badge CTA) */}
           <Link
             href="/sell"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              padding: "6px 14px",
-              borderRadius: "9999px",
-              backgroundColor: "#fbbf24",
-              color: "#0f172a",
-              fontWeight: 900,
-              fontSize: "12px",
-              textDecoration: "none",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-              cursor: "pointer",
-            }}
+            aria-label="Sell Product"
+            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-[13px] shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer select-none"
           >
-            <PlusCircle style={{ width: "14px", height: "14px", color: "#0f172a" }} />
+            <PlusCircle className="w-4 h-4 text-slate-950 stroke-[2.5]" />
             <span>Sell Product</span>
           </Link>
 
-          {/* 3. Notification */}
+          {/* 3. Notification Bell */}
           <button
             type="button"
+            aria-label="Notifications"
             title="Notifications"
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "9999px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              border: "1px solid #b8dcfa",
-              color: "#1559ac",
-              cursor: "pointer",
-              position: "relative",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-            }}
+            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
           >
-            <Bell style={{ width: "16px", height: "16px" }} />
-            <span
-              style={{
-                position: "absolute",
-                top: "6px",
-                right: "6px",
-                width: "8px",
-                height: "8px",
-                borderRadius: "9999px",
-                backgroundColor: "#ff9900",
-                border: "2px solid #ffffff",
-              }}
-            />
+            <Bell className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] transition-colors" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff9900] ring-2 ring-white group-hover:ring-[#1559ac] transition-all" />
           </button>
 
-          {/* 4. Wishlist */}
+          {/* 4. Wishlist Button */}
           <Link
             href="/wishlist"
+            aria-label="Wishlist"
             title="Wishlist"
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "9999px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              border: "1px solid #b8dcfa",
-              color: "#1559ac",
-              cursor: "pointer",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-            }}
+            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
           >
-            <Heart style={{ width: "16px", height: "16px" }} />
+            <Heart className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] fill-transparent group-hover:fill-white transition-all" />
           </Link>
 
-          {/* 5. Cart with Badge */}
+          {/* 5. Cart Button with Badge */}
           <Link
             href="/products"
+            aria-label="Cart"
             title="Cart"
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "9999px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              border: "1px solid #b8dcfa",
-              color: "#1559ac",
-              cursor: "pointer",
-              position: "relative",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-            }}
+            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
           >
             <svg
               viewBox="0 0 24 24"
-              style={{ width: "17px", height: "17px" }}
+              className="w-5 h-5 text-[#1559ac] group-hover:text-white transition-colors"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -387,101 +250,53 @@ export const BusinessNavbar: React.FC = () => {
               <circle cx="8.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
               <circle cx="17.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
             </svg>
-            <span
-              style={{
-                position: "absolute",
-                top: "-4px",
-                right: "-4px",
-                backgroundColor: "#ff9900",
-                color: "#000000",
-                fontWeight: 900,
-                fontSize: "10px",
-                width: "16px",
-                height: "16px",
-                borderRadius: "9999px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
-              }}
-            >
+            <span className="absolute -top-1 -right-1 bg-[#ff9900] text-black font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow">
               1
             </span>
           </Link>
 
-          {/* 6. User Profile Dropdown */}
-          <div ref={profileMenuRef} style={{ position: "relative" }}>
+          {/* 6. Profile with Icon + Name + Dropdown */}
+          <div ref={profileMenuRef} className="relative">
             <button
               type="button"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "4px 12px 4px 6px",
-                borderRadius: "9999px",
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
-                border: "1px solid #b8dcfa",
-                color: "#1e293b",
-                cursor: "pointer",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-              }}
+              aria-label="Profile"
+              className="group flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1e293b] hover:text-white transition-all duration-200 cursor-pointer select-none"
             >
-              <div
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  borderRadius: "9999px",
-                  backgroundColor: "#1559ac",
-                  color: "#ffffff",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                }}
-              >
-                <User style={{ width: "13px", height: "13px" }} />
+              <div className="w-6 h-6 rounded-full bg-[#1559ac] group-hover:bg-white text-white group-hover:text-[#1559ac] flex items-center justify-center font-bold text-xs shadow-xs transition-colors">
+                <User className="w-3.5 h-3.5" />
               </div>
-              <span style={{ fontWeight: 700, fontSize: "12px", color: "#1e293b", maxWidth: "90px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                Vinothkumar
-              </span>
-              <ChevronDown style={{ width: "13px", height: "13px", color: "#1559ac" }} />
+              <div className="flex flex-col text-left leading-tight hidden sm:flex">
+                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white max-w-[85px] transition-colors truncate">
+                  Vinothkumar
+                </span>
+              </div>
+              <ChevronDown className="w-3.5 h-3.5 text-[#1559ac] group-hover:text-white transition-all duration-200" />
             </button>
 
             {isProfileMenuOpen && (
-              <div
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  top: "100%",
-                  marginTop: "6px",
-                  width: "200px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "12px",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
-                  padding: "6px 0",
-                  border: "1px solid #e2e8f0",
-                  zIndex: 60,
-                  fontSize: "12px",
-                }}
-              >
-                <div style={{ padding: "8px 14px", borderBottom: "1px solid #f1f5f9", backgroundColor: "#f8fafc" }}>
-                  <p style={{ margin: 0, fontSize: "10px", color: "#94a3b8", fontWeight: 700, textTransform: "uppercase" }}>
-                    Business Account
-                  </p>
-                  <p style={{ margin: 0, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                    vinothkumar@1place.in
-                  </p>
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl py-2 border border-gray-100 z-50 text-gray-800 animate-in fade-in zoom-in-95 duration-150">
+                <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50/70">
+                  <p className="text-[11px] text-gray-500 font-medium">Business Account</p>
+                  <p className="text-xs font-bold text-gray-900 truncate">vinothkumar@1place.in</p>
                 </div>
-                <div style={{ padding: "4px 0" }}>
-                  <Link href="/orders" style={{ display: "block", padding: "6px 14px", color: "#334155", textDecoration: "none", fontWeight: 600 }}>
+                <div className="py-1">
+                  <Link
+                    href="/orders"
+                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#1559ac] transition"
+                  >
                     Your Orders
                   </Link>
-                  <Link href="/contracts" style={{ display: "block", padding: "6px 14px", color: "#334155", textDecoration: "none", fontWeight: 600 }}>
+                  <Link
+                    href="/contracts"
+                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#1559ac] transition"
+                  >
                     Vendor Contracts
                   </Link>
-                  <Link href="/sell" style={{ display: "block", padding: "6px 14px", color: "#b45309", textDecoration: "none", fontWeight: 700 }}>
+                  <Link
+                    href="/sell"
+                    className="flex items-center px-4 py-2 text-xs font-bold text-amber-600 hover:bg-amber-50 transition"
+                  >
                     Seller Portal
                   </Link>
                 </div>
@@ -489,30 +304,20 @@ export const BusinessNavbar: React.FC = () => {
             )}
           </div>
 
-          {/* Divider */}
-          <div style={{ width: "1.5px", height: "20px", backgroundColor: "#b8dcfa", margin: "0 2px" }} />
+          {/* Vertical Divider Line */}
+          <div className="h-6 w-[1.5px] bg-[#b8dcfa] ml-0.5 mr-1" />
 
-          {/* 7. Bittool (Equalizer / Preferences Icon Button) */}
+          {/* 7. Bittool / Equalizer Control Sliders Icon Button */}
           <button
             type="button"
-            title="Bittool / Preferences"
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "9999px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              border: "1px solid #b8dcfa",
-              cursor: "pointer",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-            }}
+            aria-label="Preferences & Bittool"
+            title="Preferences & Bittool"
+            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
           >
             <img
               src="/equalizer-icon.png"
               alt="Bittool"
-              style={{ width: "16px", height: "16px", objectFit: "contain", display: "block" }}
+              className="w-5 h-5 object-contain transition-all duration-200 group-hover:brightness-0 group-hover:invert"
             />
           </button>
         </div>
