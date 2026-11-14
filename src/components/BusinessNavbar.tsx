@@ -183,7 +183,7 @@ export const BusinessNavbar: React.FC = () => {
           <Link
             href="/sell"
             aria-label="Sell Product"
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-[13px] shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer select-none"
+            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-[13px] shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer select-none"
           >
             <PlusCircle className="w-4 h-4 text-slate-950 stroke-[2.5]" />
             <span>Sell Product</span>
@@ -358,8 +358,8 @@ export const BusinessNavbar: React.FC = () => {
           )}
         </div>
 
-        {/* Center: Search Bar (Rounded Pill Container Matching Image) */}
-        <div className="flex-1 max-w-[260px] sm:max-w-[300px] md:max-w-[320px] mx-auto px-1 sm:px-2">
+        {/* Center: Search Bar (Rounded Pill Container Matching Image - Exact Width) */}
+        <div className="w-[300px] max-w-[320px] mx-auto px-1 sm:px-2" style={{ maxWidth: "320px" }}>
           <form
             onSubmit={handleSearchSubmit}
             className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#1559ac] pl-3 pr-2 py-1 transition-all shadow-2xs h-[32px]"
