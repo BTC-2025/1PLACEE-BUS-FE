@@ -182,17 +182,19 @@ export const BusinessNavbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right Group: Sell Store Icon + Bell Notification + Wishlist + Cart + Profile + Bittool */}
+        {/* Right Group: Sell Store Pill + Bell Notification + Wishlist + Cart + Profile + Bittool */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
-          {/* 1. Sell Button (Image Based: Shop / Store Icon + 'Sell' Label) */}
+          {/* 1. Sell Button (Pill layout matching User Profile: Circle Icon on Left + 'Sell' on Right) */}
           <Link
             href="/sell"
             aria-label="Sell"
             title="Sell on 1PLACEE"
-            className="group flex flex-col items-center justify-center px-2 py-0.5 rounded-lg hover:bg-white/80 transition-all cursor-pointer select-none text-slate-700 hover:text-[#1559ac]"
+            className="group flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1e293b] hover:text-white transition-all duration-200 cursor-pointer select-none"
           >
-            <Store className="w-5 h-5 text-slate-700 group-hover:text-[#1559ac] stroke-[1.9] transition-colors" />
-            <span className="text-[11px] sm:text-[11.5px] font-bold tracking-tight leading-tight mt-0.5 text-slate-700 group-hover:text-[#1559ac] transition-colors">
+            <div className="w-6 h-6 rounded-full bg-[#1559ac] group-hover:bg-white text-white group-hover:text-[#1559ac] flex items-center justify-center font-bold text-xs shadow-xs transition-colors shrink-0">
+              <Store className="w-3.5 h-3.5 stroke-[2.2]" />
+            </div>
+            <span className="font-bold text-xs sm:text-[13px] text-[#1e293b] group-hover:text-white transition-colors leading-tight">
               Sell
             </span>
           </Link>
