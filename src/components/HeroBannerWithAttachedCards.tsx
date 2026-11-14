@@ -49,7 +49,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
       {/* 1. HERO BANNER FULL-VIEW CAROUSEL (Hero Banner Top Half with Arrow Controls) */}
       {/* ========================================================================= */}
       <div className="relative w-full overflow-hidden">
-        {/* Banner track displaying full banner height without cropping content */}
+        {/* Banner track displaying cropped top half banner so text and products are at the top */}
         <div
           className="flex transition-transform duration-700 ease-in-out w-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -64,7 +64,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
                 <img
                   src={banner.image}
                   alt={banner.alt}
-                  className="w-full h-auto min-h-[260px] sm:min-h-[320px] md:min-h-[380px] max-h-[500px] object-cover sm:object-contain object-top block mx-auto"
+                  className="w-full h-auto min-h-[200px] sm:min-h-[250px] md:min-h-[300px] max-h-[420px] object-cover sm:object-contain object-top block mx-auto"
                   loading={idx === 0 ? "eager" : "lazy"}
                 />
               </Link>
@@ -77,7 +77,7 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           type="button"
           onClick={handlePrev}
           aria-label="Previous Slide"
-          className="absolute left-2 sm:left-4 top-1/3 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
         >
           <ChevronLeft className="w-6 h-6 stroke-[2.5]" />
         </button>
@@ -87,19 +87,16 @@ export const HeroBannerWithAttachedCards: React.FC = () => {
           type="button"
           onClick={handleNext}
           aria-label="Next Slide"
-          className="absolute right-2 sm:right-4 top-1/3 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs border border-slate-100"
         >
           <ChevronRight className="w-6 h-6 stroke-[2.5]" />
         </button>
-
-        {/* Bottom subtle gradient shadow for Amazon-like depth transition */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#eaeded] via-[#eaeded]/40 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. OVERLAPPING 4 CARDS (Bottom Overlap - Hero Banner headline & text 100% visible) */}
+      {/* 2. OVERLAPPING 4 CARDS (Floating Amazon/Mercado style overlapping bottom of banner) */}
       {/* ========================================================================= */}
-      <div className="relative -mt-14 sm:-mt-20 md:-mt-24 max-w-[1530px] mx-auto px-3 sm:px-6 z-30">
+      <div className="relative -mt-16 sm:-mt-24 md:-mt-32 max-w-[1530px] mx-auto px-3 sm:px-6 z-30">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
           {/* ---------------- CARD 1: Top discounts for you ---------------- */}
           <div className="bg-white rounded-xl p-3.5 sm:p-4 shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between cursor-pointer border border-slate-100/90 group min-h-[285px]">

@@ -17,18 +17,18 @@ export interface OverlappingCard {
 
 export const HERO_WIDE_BANNERS: HeroWideBanner[] = [
   {
-    id: "mercado-first-purchase",
-    image: "/banner-mercado.jpg",
-    alt: "Sua primeira compra com ofertas exclusivas - Até 60% OFF - Frete Grátis",
-    href: "/products?deals=first-purchase",
-    bgFallback: "#f3f8d6"
-  },
-  {
     id: "black-friday-tech",
-    image: "/banner-blackfriday.jpg",
+    image: "/banner-blackfriday-top.jpg",
     alt: "Black Friday Tecnologia No Modo Black - Até 45% OFF - Asus & Galaxy",
     href: "/products?deals=black-friday",
     bgFallback: "#ffdf00"
+  },
+  {
+    id: "mercado-first-purchase",
+    image: "/banner-mercado-top.jpg",
+    alt: "Sua primeira compra com ofertas exclusivas - Até 60% OFF - Frete Grátis",
+    href: "/products?deals=first-purchase",
+    bgFallback: "#f3f8d6"
   }
 ];
 
