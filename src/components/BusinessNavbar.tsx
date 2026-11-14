@@ -6,8 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   MapPin,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Search,
   Bell,
   Heart,
@@ -16,28 +14,6 @@ import {
   Headset,
   Settings,
 } from "lucide-react";
-
-const SUB_NAV_LINKS = [
-  { label: "Bestsellers", href: "/products" },
-  { label: "Today Deals", href: "/products" },
-  { label: "Coupons", href: "/products" },
-  { label: "New Release", href: "/products" },
-  { label: "Buy Again", href: "/products" },
-  { label: "Electronics", href: "/products" },
-  { label: "Mobiles & Accessories", href: "/products" },
-  { label: "Home & Kitchen", href: "/products" },
-  { label: "Grocery", href: "/products" },
-  { label: "Men's Fashion", href: "/products" },
-  { label: "Women's Fashion", href: "/products" },
-  { label: "Kids & Baby", href: "/products" },
-  { label: "Toys", href: "/products" },
-  { label: "Sports & Outdoors", href: "/products" },
-  { label: "Books", href: "/products" },
-  { label: "Beauty & Personal Care", href: "/products" },
-  { label: "Computers & Laptops", href: "/products" },
-  { label: "Home Improvement", href: "/products" },
-  { label: "Pet Supplies", href: "/products" },
-];
 
 export const BusinessNavbar: React.FC = () => {
   const pathname = usePathname();
@@ -55,16 +31,6 @@ export const BusinessNavbar: React.FC = () => {
   // Profile Dropdown
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
-
-  // Subnav Horizontal Scroll Ref
-  const subnavScrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollSubnav = (direction: "left" | "right") => {
-    if (subnavScrollRef.current) {
-      const scrollAmount = direction === "left" ? -280 : 280;
-      subnavScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -233,7 +199,7 @@ export const BusinessNavbar: React.FC = () => {
             )}
           </div>
 
-          {/* 2. Sell Product Button (Distinct Gold Badge CTA) */}
+          {/* 2. Sell Product Button */}
           <Link
             href="/sell"
             aria-label="Sell Product"
@@ -361,58 +327,12 @@ export const BusinessNavbar: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* TIER 2: Subnav Ribbon (Exact 44px height matching reference image) */}
-      {/* Left side has scrollable category links, Right side has Help&Support + Settings */}
+      {/* TIER 2: Subnav Ribbon (Exact 44px height) */}
+      {/* Scroll removed, category links removed. Only Help&Support & Settings on right */}
       {/* ========================================================================= */}
-      <div className="bg-white pl-2 sm:pl-4 pr-3 sm:pr-4 py-1 flex items-center justify-between text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
-        {/* Middle/Left Scrollable Links Track with Left & Right Arrow Buttons */}
-        <div className="flex-1 flex items-center min-w-0 mr-2 sm:mr-3 relative overflow-hidden">
-          {/* Scroll Left Arrow Button */}
-          <button
-            type="button"
-            onClick={() => scrollSubnav("left")}
-            aria-label="Scroll left"
-            className="w-6.5 h-6.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 flex items-center justify-center shrink-0 shadow-xs transition cursor-pointer z-10 mr-1.5"
-          >
-            <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
-          </button>
-
-          {/* Scrollable Links Track */}
-          <div className="flex-1 overflow-hidden min-w-0">
-            <div
-              ref={subnavScrollRef}
-              className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth h-full py-0"
-            >
-              {SUB_NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="relative flex items-center h-[42px] px-2.5 text-gray-600 font-semibold text-[13px] hover:text-[#1559ac] transition-colors shrink-0 select-none group"
-                >
-                  <span className="text-gray-600 group-hover:text-[#1559ac] font-medium transition-colors">
-                    {link.label}
-                  </span>
-                  {/* Clean bottom line indicator on hover */}
-                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#1559ac] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Scroll Right Arrow Button */}
-          <button
-            type="button"
-            onClick={() => scrollSubnav("right")}
-            aria-label="Scroll right"
-            className="w-6.5 h-6.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 flex items-center justify-center shrink-0 shadow-xs transition cursor-pointer z-10 ml-1.5"
-          >
-            <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-          </button>
-        </div>
-
-        {/* Right Fixed Group: Help&Support + Settings (Right side as requested) */}
+      <div className="bg-white pl-4 pr-3 sm:pr-4 py-1 flex items-center justify-end text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
+        {/* Right Fixed Group: Help&Support + Settings */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 pl-1 z-10">
-          {/* Help & Support Customer Care Headset Button with Word */}
           <button
             type="button"
             aria-label="Help & Support"
@@ -422,7 +342,6 @@ export const BusinessNavbar: React.FC = () => {
             <span className="hidden sm:inline">Help&Support</span>
           </button>
 
-          {/* Settings Button with Word */}
           <button
             type="button"
             aria-label="Settings"
