@@ -250,7 +250,7 @@ export const BusinessNavbar: React.FC = () => {
                 <User className="w-3.5 h-3.5" />
               </div>
               <div className="flex flex-col text-left leading-tight hidden sm:flex">
-                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white max-w-[85px] transition-colors truncate">
+                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white max-w-[85px] transition-colors ">
                   Vinothkumar
                 </span>
               </div>
@@ -358,18 +358,18 @@ export const BusinessNavbar: React.FC = () => {
           )}
         </div>
 
-        {/* Center: Search Bar (Rounded Pill + Input + Camera Icon + Orange Search Pill) */}
-        <div className="w-full max-w-[420px] sm:max-w-[460px] mx-auto px-2">
+        {/* Center: Search Bar (Rounded Pill Container Matching Image) */}
+        <div className="flex-1 max-w-[260px] sm:max-w-[300px] md:max-w-[320px] mx-auto px-1 sm:px-2">
           <form
             onSubmit={handleSearchSubmit}
-            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#ff5a00] focus-within:ring-2 focus-within:ring-[#ff5a00]/20 pl-3 sm:pl-3.5 pr-1 py-0.5 transition-all shadow-2xs"
+            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#1559ac] pl-3 pr-2 py-1 transition-all shadow-2xs h-[32px]"
           >
             <input
               type="text"
               placeholder="What are you looking for?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
+              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[12.5px] outline-none font-normal"
             />
 
             {/* Camera / Visual Search Icon */}
@@ -377,19 +377,9 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               aria-label="Search by image"
               title="Image Search"
-              className="p-1 text-slate-500 hover:text-[#ff5a00] hover:bg-orange-50 rounded-full transition shrink-0 cursor-pointer mr-1 relative group"
+              className="p-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
             >
-              <Camera className="w-4 h-4 stroke-[1.8]" />
-              <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2.5 h-[2px] bg-[#ff5a00] rounded-full" />
-            </button>
-
-            {/* Orange Search Action Button */}
-            <button
-              type="submit"
-              className="flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-[#ff5a00] hover:bg-[#e04f00] text-white font-bold text-xs sm:text-[12.5px] transition shadow-xs cursor-pointer shrink-0 active:scale-95"
-            >
-              <Search className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>Search</span>
+              <Camera className="w-3.5 h-3.5 stroke-[1.8]" />
             </button>
           </form>
         </div>
