@@ -372,12 +372,12 @@ export const BusinessNavbar: React.FC = () => {
           <Link
             href="/rfq"
             aria-label="Post My RFQ"
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-rose-50/70 text-[#e11d48] font-bold text-xs sm:text-[12.5px] transition cursor-pointer select-none group"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-rose-50/70 text-[#1559ac] font-bold text-xs sm:text-[12.5px] transition cursor-pointer select-none group"
           >
             <div className="relative flex items-center justify-center">
-              <Target className="w-4 h-4 text-[#e11d48] group-hover:scale-110 transition-transform stroke-[2.2]" />
+              <Target className="w-4 h-4 text-[#1559ac] group-hover:scale-110 transition-transform stroke-[2.2]" />
             </div>
-            <span>Post My RFQ</span>
+            <span>RFQ</span>
           </Link>
 
           {/* 2. Messages Button (Image Based: Envelope Icon + 'Messages' text) */}

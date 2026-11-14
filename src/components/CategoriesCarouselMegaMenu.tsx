@@ -55,35 +55,35 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
 
   return (
     <div
-      className="absolute left-0 right-0 top-[100%] w-full bg-slate-900/50 backdrop-blur-xs z-50 animate-in fade-in duration-200"
+      className="absolute left-0 right-0 top-[100%] w-full bg-black/40 backdrop-blur-xs z-50 animate-in fade-in duration-200"
       onClick={onClose}
     >
-      {/* Outer Blue Gradient Container matching user's Image 1 */}
+      {/* Outer Container with Pure Solid White Background matching user requirement */}
       <div
-        className="w-full bg-gradient-to-r from-[#4b58e7] via-[#5b68f5] to-[#4b58e7] px-6 sm:px-12 py-5 shadow-2xl relative select-none"
+        className="w-full bg-white border-b border-t border-slate-200 px-4 sm:px-10 py-5 shadow-2xl relative select-none"
         onClick={(e) => e.stopPropagation()}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="max-w-7xl mx-auto relative">
-          {/* Header Row: Title & Slide indicator */}
-          <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/20">
+        <div className="max-w-[1530px] mx-auto relative">
+          {/* Header Row: Title & Slide indicator in Dark Slate Theme */}
+          <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-100">
             <div className="flex items-center gap-3">
-              <span className="text-white font-black text-sm sm:text-base tracking-wide uppercase">
+              <span className="text-slate-900 font-extrabold text-sm sm:text-base tracking-wide uppercase">
                 Explore Wholesale Categories
               </span>
-              <span className="bg-white/20 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+              <span className="bg-[#eef2ff] text-[#1559ac] text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">
                 Slide {currentSlide + 1} of {totalSlides} (45 Categories in 3 Slides)
               </span>
             </div>
-            <span className="text-white/70 text-[11px] font-medium hidden sm:inline">
+            <span className="text-slate-400 text-[11px] font-medium hidden sm:inline">
               {isHovered ? "Auto-slide paused (Hovering)" : "Auto-sliding active"}
             </span>
           </div>
 
           {/* Carousel Slide Area: Multi-slide Track with Smooth Transition */}
-          <div className="relative py-2 px-6 sm:px-8 overflow-hidden">
-            {/* Sliding Track containing all 3 slides */}
+          <div className="relative py-1 px-8 sm:px-12 overflow-hidden">
+            {/* Sliding Track containing all 3 slides (15 cards per slide) */}
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -98,10 +98,10 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                       key={item.id}
                       href={item.href}
                       onClick={onClose}
-                      className="bg-white rounded-xl p-3 sm:p-4 flex flex-col items-center justify-between text-center shadow-xs hover:shadow-lg hover:scale-[1.02] transition-all duration-150 group min-h-[96px] sm:min-h-[105px] border border-white/80"
+                      className="bg-white hover:bg-slate-50/90 rounded-xl p-3 sm:p-3.5 flex flex-col items-center justify-between text-center shadow-xs hover:shadow-md hover:scale-[1.02] transition-all duration-150 group min-h-[100px] sm:min-h-[110px] border border-slate-200/90"
                     >
                       {/* Photo container */}
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 mb-2 flex items-center justify-center overflow-hidden rounded-full bg-slate-50 group-hover:ring-2 group-hover:ring-[#4b58e7]/30 transition shrink-0">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 mb-2 flex items-center justify-center overflow-hidden rounded-full bg-slate-100 group-hover:ring-2 group-hover:ring-[#1559ac]/30 transition shrink-0 border border-slate-100">
                         <img
                           src={item.img}
                           alt={item.name}
@@ -115,7 +115,7 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                       </div>
 
                       {/* Card Title */}
-                      <span className="text-[12px] sm:text-[13px] font-bold text-slate-900 group-hover:text-[#4b58e7] leading-tight line-clamp-2 transition-colors">
+                      <span className="text-[12px] sm:text-[12.5px] font-bold text-slate-800 group-hover:text-[#1559ac] leading-tight line-clamp-2 transition-colors">
                         {item.name}
                       </span>
                     </Link>
@@ -124,29 +124,29 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
               ))}
             </div>
 
-            {/* Left Slide Arrow (Always clearly visible & clickable on top) */}
+            {/* Left Slide Arrow */}
             <button
               type="button"
               onClick={goToPrev}
               aria-label="Previous Slide"
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-900 flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-90 cursor-pointer border border-slate-200"
+              className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-100 text-slate-800 flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
             >
-              <ChevronLeft className="w-7 h-7 stroke-[3] text-slate-900" />
+              <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 stroke-[2.8] text-slate-800" />
             </button>
 
-            {/* Right Slide Arrow (Always clearly visible & clickable on top) */}
+            {/* Right Slide Arrow */}
             <button
               type="button"
               onClick={goToNext}
               aria-label="Next Slide"
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-900 flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-90 cursor-pointer border border-slate-200"
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-100 text-slate-800 flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
             >
-              <ChevronRight className="w-7 h-7 stroke-[3] text-slate-900" />
+              <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 stroke-[2.8] text-slate-800" />
             </button>
           </div>
 
-          {/* Carousel Dots Pagination Indicator (Clickable to jump directly to any slide) */}
-          <div className="flex items-center justify-center gap-2.5 pt-3">
+          {/* Carousel Dots Pagination Indicator */}
+          <div className="flex items-center justify-center gap-2 pt-3">
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
                 key={idx}
@@ -156,8 +156,8 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                   setCurrentSlide(idx);
                 }}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentSlide === idx ? "w-9 bg-white shadow-xs" : "w-2.5 bg-white/40 hover:bg-white/80"
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentSlide === idx ? "w-8 bg-[#1559ac]" : "w-2 bg-slate-300 hover:bg-slate-400"
                 }`}
               />
             ))}
