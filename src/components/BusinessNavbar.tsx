@@ -329,7 +329,7 @@ export const BusinessNavbar: React.FC = () => {
             aria-label="All Categories"
             className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-800 font-semibold transition cursor-pointer select-none text-xs sm:text-[13px] border border-slate-200 shadow-2xs hover:border-slate-300 active:scale-[0.98]"
           >
-            <Menu className="w-4 h-4 text-[#1559ac] stroke-[2.2]" />
+
             <span>Categories</span>
             <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isCategoriesOpen ? "rotate-180 text-[#1559ac]" : ""}`} />
           </button>
@@ -349,7 +349,7 @@ export const BusinessNavbar: React.FC = () => {
               placeholder="What are you looking for?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
+              className="w-full pl-1 bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
             />
 
             {/* Camera / Visual Search Icon */}
