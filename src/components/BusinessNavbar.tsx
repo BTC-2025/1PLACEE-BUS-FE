@@ -11,12 +11,12 @@ import {
   Bell,
   Heart,
   User,
-  PlusCircle,
   Headset,
   Settings,
   Menu,
   Layers,
   Camera,
+  Store,
 } from "lucide-react";
 import { CategoriesCarouselMegaMenu } from "./CategoriesCarouselMegaMenu";
 
@@ -182,16 +182,19 @@ export const BusinessNavbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right Group: Sell Product + Bell Notification + Wishlist + Cart + Profile + Bittool */}
+        {/* Right Group: Sell Store Icon + Bell Notification + Wishlist + Cart + Profile + Bittool */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
-          {/* 1. Sell Product Button */}
+          {/* 1. Sell Button (Image Based: Shop / Store Icon + 'Sell' Label) */}
           <Link
             href="/sell"
-            aria-label="Sell Product"
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white hover:bg-[#1559ac] text-slate-950 font-black text-xs sm:text-[13px] shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer select-none"
+            aria-label="Sell"
+            title="Sell on 1PLACEE"
+            className="group flex flex-col items-center justify-center px-2 py-0.5 rounded-lg hover:bg-white/80 transition-all cursor-pointer select-none text-slate-700 hover:text-[#1559ac]"
           >
-            <PlusCircle className="w-4 h-4 text-slate-950 stroke-[2.5]" />
-            <span>Sell Product</span>
+            <Store className="w-5 h-5 text-slate-700 group-hover:text-[#1559ac] stroke-[1.9] transition-colors" />
+            <span className="text-[11px] sm:text-[11.5px] font-bold tracking-tight leading-tight mt-0.5 text-slate-700 group-hover:text-[#1559ac] transition-colors">
+              Sell
+            </span>
           </Link>
 
           {/* 3. Notification Bell */}
