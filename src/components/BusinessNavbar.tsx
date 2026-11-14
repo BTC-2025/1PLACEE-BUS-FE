@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   MapPin,
   ChevronDown,
+  ChevronRight,
   Search,
   Bell,
   Heart,
@@ -13,6 +14,8 @@ import {
   PlusCircle,
   Headset,
   Settings,
+  Menu,
+  Layers,
 } from "lucide-react";
 
 export const BusinessNavbar: React.FC = () => {
@@ -32,6 +35,10 @@ export const BusinessNavbar: React.FC = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
+  // Categories Dropdown in Subnav
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -46,6 +53,12 @@ export const BusinessNavbar: React.FC = () => {
         !profileMenuRef.current.contains(e.target as Node)
       ) {
         setIsProfileMenuOpen(false);
+      }
+      if (
+        categoriesRef.current &&
+        !categoriesRef.current.contains(e.target as Node)
+      ) {
+        setIsCategoriesOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -328,9 +341,56 @@ export const BusinessNavbar: React.FC = () => {
 
       {/* ========================================================================= */}
       {/* TIER 2: Subnav Ribbon (Exact 44px height) */}
-      {/* Scroll removed, category links removed. Only Help&Support & Settings on right */}
+      {/* Left side: Categories button; Right side: Help&Support & Settings */}
       {/* ========================================================================= */}
-      <div className="bg-white pl-4 pr-3 sm:pr-4 py-1 flex items-center justify-end text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
+      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
+        {/* Left Side: Categories Button */}
+        <div className="relative" ref={categoriesRef}>
+          <button
+            type="button"
+            onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
+            aria-label="All Categories"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-800 font-semibold transition cursor-pointer select-none text-xs sm:text-[13px] border border-slate-200 shadow-2xs hover:border-slate-300 active:scale-[0.98]"
+          >
+            <Menu className="w-4 h-4 text-[#1559ac] stroke-[2.2]" />
+            <span>Categories</span>
+            <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isCategoriesOpen ? "rotate-180 text-[#1559ac]" : ""}`} />
+          </button>
+
+          {/* Categories Dropdown Menu */}
+          {isCategoriesOpen && (
+            <div className="absolute left-0 top-[110%] w-72 bg-white rounded-lg shadow-xl border border-slate-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1">
+                Wholesale Categories
+              </div>
+              <div className="max-h-[380px] overflow-y-auto divide-y divide-slate-50">
+                {[
+                  { name: "Machinery & Industrial Equipment", href: "/products?cat=machinery" },
+                  { name: "Agriculture & Food", href: "/category/agriculture-food" },
+                  { name: "Consumer Electronics & Smart Home", href: "/products?cat=electronics" },
+                  { name: "Electrical & Electronic Components", href: "/products?cat=electrical" },
+                  { name: "Chemicals, Raw Polymers & Resins", href: "/products?cat=chemicals" },
+                  { name: "Construction, Stone & Real Estate", href: "/products?cat=construction" },
+                  { name: "Auto, Motorcycle Parts & Accessories", href: "/products?cat=auto" },
+                  { name: "Apparel & Accessories", href: "/products?cat=apparel" },
+                  { name: "Lights & Lighting", href: "/products?cat=lighting" },
+                  { name: "Packaging & Printing", href: "/products?cat=packaging" },
+                ].map((cat, idx) => (
+                  <Link
+                    key={idx}
+                    href={cat.href}
+                    onClick={() => setIsCategoriesOpen(false)}
+                    className="flex items-center justify-between px-3.5 py-2 text-xs font-medium text-slate-700 hover:text-[#1559ac] hover:bg-sky-50/60 transition group"
+                  >
+                    <span className="truncate">{cat.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-[#1559ac] group-hover:translate-x-0.5 transition" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Right Fixed Group: Help&Support + Settings */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 pl-1 z-10">
           <button
