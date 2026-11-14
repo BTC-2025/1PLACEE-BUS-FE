@@ -141,41 +141,37 @@ export const BusinessNavbar: React.FC = () => {
         <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-[#d7ebfc] p-1.5 rounded-full border border-[#b8dcfa] shadow-2xs z-10 pointer-events-auto">
           <Link
             href="/"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
-              isHomeActive
-                ? "bg-[#1559ac] text-white shadow-sm"
-                : "text-[#1559ac] hover:bg-white"
-            }`}
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isHomeActive
+              ? "bg-[#1559ac] text-white shadow-sm"
+              : "text-[#1559ac] hover:bg-white"
+              }`}
           >
             Home
           </Link>
           <Link
             href="/b2b"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
-              isB2bActive
-                ? "bg-[#1559ac] text-white shadow-sm"
-                : "text-[#1559ac] hover:bg-white"
-            }`}
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2bActive
+              ? "bg-[#1559ac] text-white shadow-sm"
+              : "text-[#1559ac] hover:bg-white"
+              }`}
           >
             B2B
           </Link>
           <Link
             href="/b2c-gst"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
-              isB2cActive
-                ? "bg-[#1559ac] text-white shadow-sm"
-                : "text-[#1559ac] hover:bg-white"
-            }`}
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2cActive
+              ? "bg-[#1559ac] text-white shadow-sm"
+              : "text-[#1559ac] hover:bg-white"
+              }`}
           >
             B2C
           </Link>
           <Link
             href="/orders"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${
-              isOrdersActive
-                ? "bg-[#1559ac] text-white shadow-sm"
-                : "text-[#1559ac] hover:bg-white"
-            }`}
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isOrdersActive
+              ? "bg-[#1559ac] text-white shadow-sm"
+              : "text-[#1559ac] hover:bg-white"
+              }`}
           >
             Orders
           </Link>
@@ -362,18 +358,18 @@ export const BusinessNavbar: React.FC = () => {
           )}
         </div>
 
-        {/* Center: Big Search Bar (Image Based: Rounded Pill + Input + Camera Icon + Orange Search Pill) */}
-        <div className="flex-1 max-w-[680px] mx-auto px-1 sm:px-3">
+        {/* Center: Search Bar (Rounded Pill + Input + Camera Icon + Orange Search Pill) */}
+        <div className="w-full max-w-[420px] sm:max-w-[460px] mx-auto px-2">
           <form
             onSubmit={handleSearchSubmit}
-            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#ff5a00] focus-within:ring-2 focus-within:ring-[#ff5a00]/20 pl-4 pr-1 py-0.5 transition-all shadow-2xs"
+            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#ff5a00] focus-within:ring-2 focus-within:ring-[#ff5a00]/20 pl-3 sm:pl-3.5 pr-1 py-0.5 transition-all shadow-2xs"
           >
             <input
               type="text"
               placeholder="What are you looking for?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13.5px] outline-none font-normal"
+              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
             />
 
             {/* Camera / Visual Search Icon */}
@@ -381,7 +377,7 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               aria-label="Search by image"
               title="Image Search"
-              className="p-1.5 text-slate-500 hover:text-[#ff5a00] hover:bg-orange-50 rounded-full transition shrink-0 cursor-pointer mr-1 relative group"
+              className="p-1 text-slate-500 hover:text-[#ff5a00] hover:bg-orange-50 rounded-full transition shrink-0 cursor-pointer mr-1 relative group"
             >
               <Camera className="w-4 h-4 stroke-[1.8]" />
               <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2.5 h-[2px] bg-[#ff5a00] rounded-full" />
@@ -390,7 +386,7 @@ export const BusinessNavbar: React.FC = () => {
             {/* Orange Search Action Button */}
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-4 sm:px-5 py-1.5 rounded-full bg-[#ff5a00] hover:bg-[#e04f00] text-white font-bold text-xs sm:text-[13px] transition shadow-xs cursor-pointer shrink-0 active:scale-95"
+              className="flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-[#ff5a00] hover:bg-[#e04f00] text-white font-bold text-xs sm:text-[12.5px] transition shadow-xs cursor-pointer shrink-0 active:scale-95"
             >
               <Search className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Search</span>
