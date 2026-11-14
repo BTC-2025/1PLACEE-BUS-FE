@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./tailwind.css";
 
 export const metadata: Metadata = {
-  title: "B2BMarket - Global Wholesale & Manufacturers",
-  description: "Source millions of products from verified suppliers worldwide. High quality, low MOQ, factory prices.",
+  title: "1PLACEE Business - Universal Multi-Vendor B2B & B2C Marketplace",
+  description: "Wholesale bulk hub with volume price slabs, verified GST tax invoicing, Input Tax Credit (ITC) & verified merchant selling.",
 };
 
 export default function RootLayout({
