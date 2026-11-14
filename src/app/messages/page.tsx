@@ -173,7 +173,7 @@ export default function MessagesChatPage() {
                   <h2 className="text-sm font-black text-slate-900 flex items-center gap-1.5">
                     <span>{activeChat.name}</span>
                     {activeChat.verified && (
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" title="Verified OEM Partner" />
+                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
                     )}
                   </h2>
                   <span className="text-xs text-slate-500 font-semibold">
