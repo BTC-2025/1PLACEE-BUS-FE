@@ -358,18 +358,21 @@ export const BusinessNavbar: React.FC = () => {
           )}
         </div>
 
-        {/* Center: Search Bar (Exact Absolute Center matching Top Nav Center Container) */}
-        <div className="absolute left-1/2 -translate-x-1/2 w-[340px] sm:w-[370px] z-10 pointer-events-auto">
+        {/* Center: Search Bar (Exact Absolute Center matching Top Nav Center Container Width) */}
+        <div 
+          className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
+          style={{ width: "386px" }}
+        >
           <form
             onSubmit={handleSearchSubmit}
-            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#1559ac] pl-3.5 pr-2 py-1 transition-all shadow-2xs h-[32px]"
+            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#1559ac] pl-4 pr-3 py-1 transition-all shadow-2xs h-[34px]"
           >
             <input
               type="text"
               placeholder="What are you looking for?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[12.5px] outline-none font-normal"
+              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
             />
 
             {/* Camera / Visual Search Icon */}
@@ -379,7 +382,7 @@ export const BusinessNavbar: React.FC = () => {
               title="Image Search"
               className="p-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
             >
-              <Camera className="w-3.5 h-3.5 stroke-[1.8]" />
+              <Camera className="w-4 h-4 stroke-[1.8]" />
             </button>
           </form>
         </div>
