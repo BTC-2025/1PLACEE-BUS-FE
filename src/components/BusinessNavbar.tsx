@@ -16,6 +16,7 @@ import {
   Settings,
   Menu,
   Layers,
+  Camera,
 } from "lucide-react";
 
 export const BusinessNavbar: React.FC = () => {
@@ -180,39 +181,9 @@ export const BusinessNavbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right Group: Search Box + Sell Product + Bell Notification + Wishlist + Cart + Profile + Bittool */}
+        {/* Right Group: Sell Product + Bell Notification + Wishlist + Cart + Profile + Bittool */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
-          {/* 1. Search Box */}
-          <div ref={searchContainerRef} className="relative flex items-center">
-            {isSearchOpen ? (
-              <form
-                onSubmit={handleSearchSubmit}
-                className="flex items-center bg-white rounded-full px-3.5 py-1.5 shadow-md w-44 sm:w-60 md:w-64 border border-[#b8dcfa] animate-in fade-in zoom-in-95 duration-200"
-              >
-                <Search className="w-4.5 h-4.5 text-[#1559ac] mr-2 shrink-0 stroke-[2.2]" />
-                <input
-                  type="text"
-                  placeholder="Search wholesale & retail..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="w-full text-xs sm:text-[13px] text-gray-900 outline-none placeholder:text-gray-400 bg-transparent"
-                />
-              </form>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(true)}
-                aria-label="Open Search"
-                title="Search products..."
-                className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer"
-              >
-                <Search className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] transition-colors" />
-              </button>
-            )}
-          </div>
-
-          {/* 2. Sell Product Button */}
+          {/* 1. Sell Product Button */}
           <Link
             href="/sell"
             aria-label="Sell Product"
@@ -340,12 +311,12 @@ export const BusinessNavbar: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* TIER 2: Subnav Ribbon (Exact 44px height) */}
-      {/* Left side: Categories button; Right side: Help&Support & Settings */}
+      {/* TIER 2: Subnav Ribbon (44px height) */}
+      {/* Left: Categories button; Center: Big Search Bar; Right: Help&Support & Settings */}
       {/* ========================================================================= */}
-      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
+      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
         {/* Left Side: Categories Button */}
-        <div className="relative" ref={categoriesRef}>
+        <div className="relative shrink-0" ref={categoriesRef}>
           <button
             type="button"
             onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
@@ -389,6 +360,42 @@ export const BusinessNavbar: React.FC = () => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Center: Big Search Bar (Image Based: Rounded Pill + Input + Camera Icon + Orange Search Pill) */}
+        <div className="flex-1 max-w-[680px] mx-auto px-1 sm:px-3">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#ff5a00] focus-within:ring-2 focus-within:ring-[#ff5a00]/20 pl-4 pr-1 py-0.5 transition-all shadow-2xs"
+          >
+            <input
+              type="text"
+              placeholder="What are you looking for?"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13.5px] outline-none font-normal"
+            />
+
+            {/* Camera / Visual Search Icon */}
+            <button
+              type="button"
+              aria-label="Search by image"
+              title="Image Search"
+              className="p-1.5 text-slate-500 hover:text-[#ff5a00] hover:bg-orange-50 rounded-full transition shrink-0 cursor-pointer mr-1 relative group"
+            >
+              <Camera className="w-4 h-4 stroke-[1.8]" />
+              <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2.5 h-[2px] bg-[#ff5a00] rounded-full" />
+            </button>
+
+            {/* Orange Search Action Button */}
+            <button
+              type="submit"
+              className="flex items-center gap-1.5 px-4 sm:px-5 py-1.5 rounded-full bg-[#ff5a00] hover:bg-[#e04f00] text-white font-bold text-xs sm:text-[13px] transition shadow-xs cursor-pointer shrink-0 active:scale-95"
+            >
+              <Search className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>Search</span>
+            </button>
+          </form>
         </div>
 
         {/* Right Fixed Group: Help&Support + Settings */}
