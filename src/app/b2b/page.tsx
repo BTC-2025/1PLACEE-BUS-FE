@@ -9,7 +9,8 @@ export default function B2BPage() {
     <div className="min-h-screen bg-[#f5f6f9] text-slate-800 font-sans">
       <BusinessNavbar />
       <main className="w-full">
-        {/* Clean canvas */}
+        {/* Subnav Below: Hero Banner Carousel based on uploaded images 2 & 3 */}
+        <HeroBannerWithAttachedCards />
       </main>
     </div>
   );
