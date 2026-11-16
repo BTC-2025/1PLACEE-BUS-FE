@@ -290,7 +290,7 @@ export const B2BHeroSection: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* BEST SELLERS ORANGE CONTAINER ROW (Matching User's Uploaded Image) */}
+        {/* BEST SELLERS ORANGE CONTAINER ROW (Matching Image: 6 Cards in Single Row) */}
         {/* ========================================================================= */}
         <B2BBestSellersRow />
       </div>
