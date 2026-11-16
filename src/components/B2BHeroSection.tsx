@@ -31,6 +31,7 @@ import {
 } from "../data/b2bHeroSectionData";
 import { B2BBestSellersRow } from "./B2BBestSellersRow";
 import { TrendingCategoriesSection } from "./TrendingCategoriesSection";
+import { AgricultureFoodSection } from "./AgricultureFoodSection";
 
 // Dynamic Icon Map for Top Categories
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -299,6 +300,11 @@ export const B2BHeroSection: React.FC = () => {
         {/* TRENDING CATEGORIES ROW (Matching Image: Clean White Box with Carousel) */}
         {/* ========================================================================= */}
         <TrendingCategoriesSection />
+
+        {/* ========================================================================= */}
+        {/* AGRICULTURE & FOOD CATEGORIES ROW (Matching Image: Left Feature + 8 Categories) */}
+        {/* ========================================================================= */}
+        <AgricultureFoodSection />
       </div>
     </section>
   );
