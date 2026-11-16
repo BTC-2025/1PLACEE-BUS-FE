@@ -68,17 +68,7 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
         <div className="max-w-[1530px] mx-auto relative">
           {/* Header Row: Title & Slide indicator in Dark Slate Theme */}
           <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-100">
-            <div className="flex items-center gap-3">
-              <span className="text-slate-900 font-extrabold text-sm sm:text-base tracking-wide uppercase">
-                Explore Wholesale Categories
-              </span>
-              <span className="bg-[#eef2ff] text-[#1559ac] text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-100">
-                Slide {currentSlide + 1} of {totalSlides} (45 Categories in 3 Slides)
-              </span>
-            </div>
-            <span className="text-slate-400 text-[11px] font-medium hidden sm:inline">
-              {isHovered ? "Auto-slide paused (Hovering)" : "Auto-sliding active"}
-            </span>
+
           </div>
 
           {/* Carousel Slide Area: Multi-slide Track with Smooth Transition */}
@@ -156,9 +146,8 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                   setCurrentSlide(idx);
                 }}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentSlide === idx ? "w-8 bg-[#1559ac]" : "w-2 bg-slate-300 hover:bg-slate-400"
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentSlide === idx ? "w-8 bg-[#1559ac]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
               />
             ))}
           </div>
