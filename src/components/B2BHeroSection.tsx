@@ -86,11 +86,11 @@ export const B2BHeroSection: React.FC = () => {
     <section className="w-full bg-[#f4f7f9] py-4 sm:py-6 select-none">
       <div className="max-w-[1530px] mx-auto px-3 sm:px-6">
         {/* ========================================================================= */}
-        {/* 3-COLUMN MAIN HERO LAYOUT (Left Categories + Center Carousel + Right 2 Cards) */}
+        {/* 3-COLUMN MAIN HERO LAYOUT (Left Categories + Center Wide Carousel + Right 2 Cards) */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-4 items-stretch">
-          {/* ---------------- 1. LEFT SIDE: TOP CATEGORIES LIST ---------------- */}
-          <div className="lg:col-span-3 xl:col-span-2 bg-white rounded-xl border border-slate-200/90 shadow-xs flex flex-col justify-between p-3.5 sm:p-4">
+        <div className="flex flex-col lg:flex-row gap-3.5 sm:gap-4 items-stretch">
+          {/* ---------------- 1. LEFT SIDE: TOP CATEGORIES LIST (Compact Width: 230px) ---------------- */}
+          <div className="w-full lg:w-[230px] shrink-0 bg-white rounded-xl border border-slate-200/90 shadow-xs flex flex-col justify-between p-3.5 sm:p-4">
             <div>
               <h3 className="font-extrabold text-slate-900 text-sm sm:text-[15px] mb-2.5 pb-2 border-b border-slate-100 flex items-center justify-between">
                 <span>Top Categories</span>
@@ -126,9 +126,9 @@ export const B2BHeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* ---------------- 2. CENTER: CAROUSEL HERO BANNER ---------------- */}
+          {/* ---------------- 2. CENTER: CAROUSEL HERO BANNER (Expanded Width: flex-1) ---------------- */}
           <div
-            className="lg:col-span-6 xl:col-span-7 relative rounded-xl overflow-hidden border border-slate-200/90 shadow-md bg-white min-h-[380px] flex flex-col"
+            className="flex-1 min-w-0 relative rounded-xl overflow-hidden border border-slate-200/90 shadow-md bg-white min-h-[380px] flex flex-col"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -226,8 +226,8 @@ export const B2BHeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* ---------------- 3. RIGHT SIDE: TWO PROMO CARDS ---------------- */}
-          <div className="lg:col-span-3 xl:col-span-3 flex flex-col justify-between gap-3.5">
+          {/* ---------------- 3. RIGHT SIDE: TWO PROMO CARDS (Fixed Compact Width: 260px) ---------------- */}
+          <div className="w-full lg:w-[260px] shrink-0 flex flex-col justify-between gap-3.5">
             {/* CARD 1: Looking for a Product -> Post Buy Requirement (Amber/Yellow Gradient) */}
             <div className="rounded-xl border border-amber-200/80 bg-gradient-to-br from-[#fff7e6] via-[#fffaee] to-[#ffeed0] p-4.5 sm:p-5 shadow-xs flex flex-col justify-between flex-1 group hover:shadow-md transition-all">
               <div className="flex items-start justify-between gap-2">
