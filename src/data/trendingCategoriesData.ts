@@ -58,3 +58,4 @@ export const TRENDING_CATEGORIES_DATA: TrendingCategoryItem[] = [
     href: "/products?cat=valves"
   }
 ];
+

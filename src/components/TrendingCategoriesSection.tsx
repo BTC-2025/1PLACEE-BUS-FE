@@ -75,31 +75,28 @@ export const TrendingCategoriesSection: React.FC = () => {
             ))}
           </div>
 
-          {/* Left Arrow Button (Visible when scrolled) */}
-          {canScrollLeft && (
-            <button
-              type="button"
-              onClick={() => handleScroll("left")}
-              aria-label="Previous Categories"
-              className="absolute -left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-slate-800 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-            >
-              <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
-            </button>
-          )}
+          {/* Left Arrow Button (Always clearly visible on left edge) */}
+          <button
+            type="button"
+            onClick={() => handleScroll("left")}
+            aria-label="Previous Categories"
+            className="absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+          >
+            <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+          </button>
 
-          {/* Right Arrow Button matching the Circular Arrow in User's Image */}
-          {canScrollRight && (
-            <button
-              type="button"
-              onClick={() => handleScroll("right")}
-              aria-label="Next Categories"
-              className="absolute -right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-            >
-              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-            </button>
-          )}
+          {/* Right Arrow Button (Always clearly visible on right edge) */}
+          <button
+            type="button"
+            onClick={() => handleScroll("right")}
+            aria-label="Next Categories"
+            className="absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+          >
+            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+          </button>
         </div>
       </div>
     </section>
   );
 };
+

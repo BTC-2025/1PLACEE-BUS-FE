@@ -16,3 +16,4 @@ export const AGRICULTURE_FOOD_CATEGORIES: AgricultureCategoryItem[] = [
   { id: "beverage", name: "Beverage", href: "/products?cat=beverage" },
   { id: "confectionery", name: "Confectionery", href: "/products?cat=confectionery" }
 ];
+

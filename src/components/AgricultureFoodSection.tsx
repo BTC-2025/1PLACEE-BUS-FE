@@ -53,3 +53,4 @@ export const AgricultureFoodSection: React.FC = () => {
     </section>
   );
 };
+
