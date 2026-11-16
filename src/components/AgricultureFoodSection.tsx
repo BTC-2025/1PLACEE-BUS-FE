@@ -2,55 +2,76 @@
 
 import React from "react";
 import Link from "next/link";
-import { AGRICULTURE_FOOD_CATEGORIES } from "../data/agricultureFoodData";
+import { AGRICULTURE_CATEGORY_CARDS } from "../data/agricultureFoodData";
 
 export const AgricultureFoodSection: React.FC = () => {
   return (
     <section className="w-full mt-6 select-none">
       {/* 
-        Container matching the exact aspect ratio, rounded corners, and clean white border 
-        of the user uploaded image (1024x279).
-        Left Hero Feature: Agriculture & Food + "Source Now" button + fresh produce bag graphic
-        Right 8 Categories: 2 Rows x 4 Columns (Feed, Canned Food, Ginger, Greenhouse, Chicken Cage, Frozen Seafood, Beverage, Confectionery)
+        Full Real Pure UI Container (No Screenshot Texts, No Artifacts, 100% Real Code & Typography):
+        - Left Pillar: Pastel Sage Green (#dbe6d8) with Real Typography, Interactive "Source Now" Button, and Fresh Produce Graphic
+        - Right Section: 2 Rows x 4 Columns Clean White Cards with Real Text and Isolated Product Photos
       */}
-      <div className="w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200/90 bg-white relative group">
-        <img
-          src="/categories/agriculture-food-banner.jpg"
-          alt="Agriculture & Food - Source Now and 8 Categories"
-          className="w-full h-auto object-cover block"
-          loading="lazy"
-        />
-
+      <div className="w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200/90 bg-white flex flex-col lg:flex-row">
         {/* ========================================================================= */}
-        {/* INTERACTIVE CLICKABLE HOTSPOTS */}
+        {/* 1. LEFT FEATURE PILLAR (Pure Native UI & Interactive Button) */}
         {/* ========================================================================= */}
-        <div className="absolute inset-0 w-full h-full">
-          {/* 1. Left Feature Area Hotspot (Left ~21% width) */}
-          <Link
-            href="/products?cat=agriculture-food"
-            className="absolute left-0 top-0 w-[21%] h-full z-10 cursor-pointer"
-            aria-label="Agriculture & Food - Source Now"
-            title="Agriculture & Food - Source Now"
-          >
-            {/* Hover highlight on 'Source Now' button */}
-            <span className="sr-only">Source Now</span>
-          </Link>
+        <div className="w-full lg:w-[230px] xl:w-[245px] shrink-0 bg-[#dbe6d8] p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+          {/* Real Text Header & Button */}
+          <div className="relative z-10">
+            <h3 className="font-extrabold text-slate-900 text-lg sm:text-xl tracking-tight leading-snug">
+              Agriculture & Food
+            </h3>
 
-          {/* 2. Right 8 Categories Hotspots (2 Rows x 4 Columns starting at ~21% to 100%) */}
-          <div className="absolute left-[21%] right-0 top-0 bottom-0 grid grid-cols-4 grid-rows-2 z-10">
-            {AGRICULTURE_FOOD_CATEGORIES.map((item) => (
+            <div className="mt-3">
               <Link
-                key={item.id}
-                href={item.href}
-                className="w-full h-full hover:bg-slate-900/[0.02] transition-colors cursor-pointer relative"
-                aria-label={item.name}
-                title={item.name}
-              />
-            ))}
+                href="/products?cat=agriculture-food"
+                className="inline-block px-4 py-1.5 rounded-full border border-slate-700/80 bg-white/90 hover:bg-white text-slate-900 text-xs font-semibold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
+              >
+                Source Now
+              </Link>
+            </div>
           </div>
+
+          {/* Fresh Produce Paper Bag Graphic */}
+          <div className="mt-4 pt-2 flex items-end justify-center relative z-10">
+            <img
+              src="/categories/agriculture/produce-bag.png"
+              alt="Fresh Agriculture Produce"
+              className="max-h-[160px] sm:max-h-[175px] object-contain block drop-shadow-sm"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 2. RIGHT 8 CATEGORIES GRID (2 Rows x 4 Columns Pure Native UI) */}
+        {/* ========================================================================= */}
+        <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 grid-rows-2 divide-x divide-y divide-slate-100 bg-white">
+          {AGRICULTURE_CATEGORY_CARDS.map((item) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className="p-3.5 sm:p-4 flex flex-col justify-between hover:bg-slate-50/70 transition-colors group cursor-pointer min-h-[135px]"
+            >
+              {/* Category Real Name */}
+              <span className="text-[12.5px] sm:text-[13px] font-medium text-slate-700 group-hover:text-[#1559ac] transition-colors line-clamp-1">
+                {item.name}
+              </span>
+
+              {/* Real Isolated Product Image */}
+              <div className="w-full h-[85px] sm:h-[90px] flex items-center justify-end p-1">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="max-h-full max-w-[85%] object-contain group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
