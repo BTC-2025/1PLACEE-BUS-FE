@@ -1,114 +1,43 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { ChevronRight, ChevronLeft } from "lucide-react";
 import { TRENDING_CATEGORIES_DATA } from "../data/trendingCategoriesData";
 
 export const TrendingCategoriesSection: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 10);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  useEffect(() => {
-    checkScroll();
-    window.addEventListener("resize", checkScroll);
-    return () => window.removeEventListener("resize", checkScroll);
-  }, []);
-
-  // Moves exactly by 1 card step (card width ~215px + gap ~16px = ~231px)
-  const handleScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      // Find exact card width or use 230px per click
-      const cardStep = 230;
-      const currentScroll = scrollRef.current.scrollLeft;
-      const targetScroll =
-        direction === "right"
-          ? currentScroll + cardStep
-          : currentScroll - cardStep;
-
-      scrollRef.current.scrollTo({
-        left: targetScroll,
-        behavior: "smooth"
-      });
-
-      setTimeout(checkScroll, 350);
-    }
-  };
-
   return (
     <section className="w-full mt-6 select-none">
-      {/* Outer White Rounded Container matching User's Uploaded Image */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs relative">
-        {/* Header Title */}
-        <div className="mb-4 px-1 flex items-center justify-between">
-          <h3 className="font-extrabold text-[#003366] text-base sm:text-lg tracking-tight">
-            Trending Categories
-          </h3>
-        </div>
+      {/* 
+        Single Row Container with all 7 cards displayed in one exact row (1024x183 aspect ratio)
+        matching user's uploaded screenshot perfectly, with interactive clickable links.
+      */}
+      <div className="w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200/90 bg-white relative group">
+        <img
+          src="/categories/trending-row-full.png"
+          alt="Trending Categories - Human Hair, Cooling Tower, T-Shirts, Air Cooler, Solar Panels, Generators, Valves"
+          className="w-full h-auto object-cover block"
+          loading="lazy"
+        />
 
-        {/* Carousel / Cards Track with Outside Arrows */}
-        <div className="relative px-2 sm:px-3">
-          {/* Left Arrow Button (Floats on left, slides to previous card) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("left")}
-            aria-label="Previous Category"
-            title="Previous Category"
-            className="absolute -left-2 sm:-left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
-          >
-            <ChevronLeft className="w-7 h-7 stroke-[3]" />
-          </button>
+        {/* 7 Interactive Clickable Hotspots across the single row */}
+        <div className="absolute inset-0 w-full h-full">
+          {/* Header click */}
+          <Link
+            href="/products?cat=trending"
+            className="absolute top-0 left-0 w-full h-[25%] z-10 cursor-pointer"
+            aria-label="Trending Categories"
+          />
 
-          {/* Right Arrow Button (Floats on right, slides to next card) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("right")}
-            aria-label="Next Category"
-            title="Next Category"
-            className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
-          >
-            <ChevronRight className="w-7 h-7 stroke-[3]" />
-          </button>
-
-          {/* Scrollable Container */}
-          <div
-            ref={scrollRef}
-            onScroll={checkScroll}
-            className="flex items-stretch gap-3.5 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
+          {/* 7 Cards Hotspots across the 7 columns */}
+          <div className="absolute bottom-[5%] left-[2%] right-[2%] top-[24%] grid grid-cols-7 gap-1 z-20">
             {TRENDING_CATEGORIES_DATA.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className="w-[185px] sm:w-[200px] md:w-[215px] shrink-0 bg-white rounded-xl border border-slate-200/80 hover:border-[#1559ac]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden group/card cursor-pointer min-h-[175px]"
-              >
-                {/* Clean Photo Square Area */}
-                <div className="w-full h-[125px] flex items-center justify-center p-3 bg-white">
-                  <img
-                    src={item.thumbImage}
-                    alt={item.name}
-                    className="max-h-full max-w-full object-contain group-hover/card:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Category Label at Bottom with Thin Border matching Image */}
-                <div className="px-3 py-2.5 border-t border-slate-100 bg-white">
-                  <span className="text-[12px] sm:text-[12.5px] font-medium text-slate-800 group-hover/card:text-[#1559ac] line-clamp-1 leading-tight transition-colors block">
-                    {item.name}
-                  </span>
-                </div>
-              </Link>
+                className="w-full h-full rounded-xl hover:bg-slate-900/[0.03] transition-colors cursor-pointer"
+                title={item.name}
+                aria-label={item.name}
+              />
             ))}
           </div>
         </div>
