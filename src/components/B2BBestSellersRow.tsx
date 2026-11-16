@@ -31,50 +31,20 @@ export const B2BBestSellersRow: React.FC = () => {
           </Link>
         </div>
 
-        {/* Single Row 6 Cards Grid (1 Row x 6 Cards) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5 relative z-10">
+        {/* Single Row 6 Cards Grid (Exact 1 Row x 6 Cards matching original image proportions) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5 relative z-10">
           {B2B_BEST_SELLERS.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className="bg-white rounded-xl p-3 sm:p-3.5 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-200 group border border-white/80 cursor-pointer min-h-[265px]"
+              className="bg-white rounded-xl overflow-hidden shadow-xs hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 group border border-white/80 cursor-pointer block"
             >
-              <div>
-                {/* Product Image Square Container with Platinum Badge if present */}
-                <div className="w-full aspect-[4/3] rounded-lg bg-slate-50 border border-slate-100/90 relative overflow-hidden flex items-center justify-center p-1.5 mb-2.5">
-                  {/* Platinum Seller Badge matching Image */}
-                  {item.badge && (
-                    <div className="absolute top-1 left-1 bg-gradient-to-r from-[#4a154b] to-[#6b21a8] text-white text-[8.5px] font-black px-1.5 py-0.5 rounded shadow-xs flex items-center gap-0.5 z-10">
-                      <Award className="w-2.5 h-2.5 text-amber-300 fill-amber-300" />
-                      <span>{item.badge}</span>
-                    </div>
-                  )}
-
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Product Title */}
-                <h4 className="text-[12px] sm:text-[12.5px] font-bold text-slate-900 group-hover:text-[#1559ac] line-clamp-2 leading-tight transition-colors mb-1.5">
-                  {item.title}
-                </h4>
-
-                {/* Price */}
-                <div className="text-[13px] sm:text-[13.5px] font-extrabold text-slate-900 leading-tight">
-                  {item.price}
-                </div>
-              </div>
-
-              {/* Supplier Info Footer */}
-              <div className="pt-2 mt-2 border-t border-slate-100">
-                <p className="text-[10px] sm:text-[10.5px] text-slate-400 group-hover:text-slate-600 line-clamp-2 leading-tight transition-colors">
-                  {item.supplier}
-                </p>
-              </div>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-auto object-contain block group-hover:scale-[1.02] transition-transform duration-200"
+                loading="lazy"
+              />
             </Link>
           ))}
         </div>
@@ -82,3 +52,4 @@ export const B2BBestSellersRow: React.FC = () => {
     </section>
   );
 };
+

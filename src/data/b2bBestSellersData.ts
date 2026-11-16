@@ -11,7 +11,7 @@ export interface B2BBestSellerItem {
 export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   {
     id: "ss-fasteners",
-    image: "/products/bestsellers/thumb-1.jpg",
+    image: "/products/bestsellers/fullcard-1.png",
     title: "SS Fasteners",
     price: "5 INR/Piece",
     supplier: "By: NIKO STEEL AND ENGINEERING LLP",
@@ -20,7 +20,7 @@ export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   },
   {
     id: "backhoe-loaders",
-    image: "/products/bestsellers/thumb-2.jpg",
+    image: "/products/bestsellers/fullcard-2.png",
     title: "AX 130 Backhoe Loaders",
     price: "2300000 INR/ Unit",
     supplier: "By: ACTION CONSTRUCTION EQUIPMENT LTD.",
@@ -28,7 +28,7 @@ export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   },
   {
     id: "lauryl-alcohol",
-    image: "/products/bestsellers/thumb-3.jpg",
+    image: "/products/bestsellers/fullcard-3.png",
     title: "Lauryl Alcohol Ethoxylate",
     price: "240.0 INR/Kilograms",
     supplier: "By: SHIV SHAKTI INDIA",
@@ -36,7 +36,7 @@ export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   },
   {
     id: "rubber-gloves",
-    image: "/products/bestsellers/thumb-4.jpg",
+    image: "/products/bestsellers/fullcard-4.png",
     title: "Industrial Rubber Hand Gloves",
     price: "170 INR/Pair",
     supplier: "By: VICTOR IMPORTS",
@@ -44,7 +44,7 @@ export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   },
   {
     id: "aluminum-ingots",
-    image: "/products/bestsellers/thumb-5.jpg",
+    image: "/products/bestsellers/fullcard-5.png",
     title: "Aluminum Ingots",
     price: "195.00 INR / Kilograms",
     supplier: "By: PHOOLCHAND BHAGATSINGH",
@@ -52,10 +52,11 @@ export const B2B_BEST_SELLERS: B2BBestSellerItem[] = [
   },
   {
     id: "tomato-puree",
-    image: "/products/bestsellers/thumb-6.jpg",
+    image: "/products/bestsellers/fullcard-6.png",
     title: "Tomato Puree-Double Concentration",
     price: "4.4 USD / Carton",
     supplier: "By: HEBEI TOMATO INDUSTRY CO LTD.",
     href: "/products?item=tomato-puree"
   }
 ];
+
