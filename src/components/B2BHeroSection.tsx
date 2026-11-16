@@ -33,6 +33,7 @@ import { B2BBestSellersRow } from "./B2BBestSellersRow";
 import { TrendingCategoriesSection } from "./TrendingCategoriesSection";
 import { AgricultureFoodSection } from "./AgricultureFoodSection";
 import { ManufacturingMachinerySection } from "./ManufacturingMachinerySection";
+import { SewingShowcaseSection } from "./SewingShowcaseSection";
 
 // Dynamic Icon Map for Top Categories
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -311,6 +312,11 @@ export const B2BHeroSection: React.FC = () => {
         {/* MANUFACTURING & PROCESSING MACHINERY ROW (Matching Image: Left Lavender Feature + 8 Categories) */}
         {/* ========================================================================= */}
         <ManufacturingMachinerySection />
+
+        {/* ========================================================================= */}
+        {/* INDUSTRIAL SEWING & APPAREL PRODUCTS ROW (Matching Uploaded Image: 6 Cards Single Row) */}
+        {/* ========================================================================= */}
+        <SewingShowcaseSection />
       </div>
     </section>
   );
