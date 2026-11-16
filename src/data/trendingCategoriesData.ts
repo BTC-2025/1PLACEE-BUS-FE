@@ -9,8 +9,8 @@ export interface TrendingCategoryItem {
 export const TRENDING_CATEGORIES_DATA: TrendingCategoryItem[] = [
   {
     id: "human-hair",
-    cardImage: "/categories/trending/trending-1-clean.png",
-    thumbImage: "/categories/trending/thumb-1-clean.png",
+    cardImage: "/categories/trending/trending-1-final.png",
+    thumbImage: "/categories/trending/thumb-1-final.png",
     name: "Human Hair & Accessories",
     href: "/products?cat=human-hair"
   },

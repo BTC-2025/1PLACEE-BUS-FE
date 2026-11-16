@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { TRENDING_CATEGORIES_DATA } from "../data/trendingCategoriesData";
@@ -18,14 +18,21 @@ export const TrendingCategoriesSection: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, []);
+
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 300;
+      // Scroll by 2 full card widths
+      const scrollAmount = 400;
       scrollRef.current.scrollBy({
         left: direction === "right" ? scrollAmount : -scrollAmount,
         behavior: "smooth"
       });
-      setTimeout(checkScroll, 350);
+      setTimeout(checkScroll, 400);
     }
   };
 
@@ -40,13 +47,39 @@ export const TrendingCategoriesSection: React.FC = () => {
           </h3>
         </div>
 
-        {/* Carousel / Cards Track */}
-        <div className="relative group">
+        {/* Carousel / Cards Track with Outside Arrows */}
+        <div className="relative px-2">
+          {/* Left Arrow Button (Floats on left, visible after scrolling right) */}
+          {canScrollLeft && (
+            <button
+              type="button"
+              onClick={() => handleScroll("left")}
+              aria-label="Previous Slide"
+              title="Previous Categories"
+              className="absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+            >
+              <ChevronLeft className="w-6 h-6 stroke-[3]" />
+            </button>
+          )}
+
+          {/* Right Arrow Button (Floats on right side to slide next cards) */}
+          {canScrollRight && (
+            <button
+              type="button"
+              onClick={() => handleScroll("right")}
+              aria-label="Next Slide"
+              title="Next Categories"
+              className="absolute -right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+            >
+              <ChevronRight className="w-6 h-6 stroke-[3]" />
+            </button>
+          )}
+
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
             onScroll={checkScroll}
-            className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-1"
+            className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {TRENDING_CATEGORIES_DATA.map((item) => (
@@ -74,29 +107,8 @@ export const TrendingCategoriesSection: React.FC = () => {
               </Link>
             ))}
           </div>
-
-          {/* Left Arrow Button (Always clearly visible on left edge) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("left")}
-            aria-label="Previous Categories"
-            className="absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-          >
-            <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
-          </button>
-
-          {/* Right Arrow Button (Always clearly visible on right edge) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("right")}
-            aria-label="Next Categories"
-            className="absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-          >
-            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-          </button>
         </div>
       </div>
     </section>
   );
 };
-
