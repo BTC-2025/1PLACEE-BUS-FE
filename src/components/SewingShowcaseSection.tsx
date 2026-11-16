@@ -9,13 +9,13 @@ export const SewingShowcaseSection: React.FC = () => {
   return (
     <section className="w-full mt-6 select-none">
       {/* 
-        Single Row Clean 6 Product Cards Grid Matching User Uploaded Image 
-        - Strict Single Row (grid-cols-6)
+        Strict Single Row 6 Cards Grid on All Screen Sizes (grid-cols-6):
+        - Exactly 6 cards per row with horizontal scroll safeguard on very narrow screens
         - Clean White Cards with Rounded Borders
         - Reorder Rate Badges, CE Badges, Real Pricing, MOQ, Sold Counts and Verified Supplier Info
       */}
       <div className="w-full overflow-x-auto pb-1">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5 min-w-[760px] lg:min-w-0">
+        <div className="grid grid-cols-6 gap-2.5 sm:gap-3 md:gap-3.5 min-w-[900px] lg:min-w-0">
           {SEWING_SHOWCASE_PRODUCTS.map((product) => (
             <Link
               key={product.id}
@@ -105,3 +105,4 @@ export const SewingShowcaseSection: React.FC = () => {
     </section>
   );
 };
+

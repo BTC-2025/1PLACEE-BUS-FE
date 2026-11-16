@@ -75,3 +75,4 @@ export const ManufacturingMachinerySection: React.FC = () => {
     </section>
   );
 };
+

@@ -87,3 +87,4 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     href: "/products?item=kite-flying-thread"
   }
 ];
+
