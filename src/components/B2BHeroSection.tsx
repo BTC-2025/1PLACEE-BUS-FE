@@ -29,6 +29,7 @@ import {
   B2B_HERO_SLIDES,
   B2B_VALUE_ADDS
 } from "../data/b2bHeroSectionData";
+import { B2BBestSellersRow } from "./B2BBestSellersRow";
 
 // Dynamic Icon Map for Top Categories
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -287,6 +288,11 @@ export const B2BHeroSection: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* ========================================================================= */}
+        {/* BEST SELLERS ORANGE CONTAINER ROW (Matching User's Uploaded Image) */}
+        {/* ========================================================================= */}
+        <B2BBestSellersRow />
       </div>
     </section>
   );
