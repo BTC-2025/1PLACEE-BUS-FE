@@ -13,8 +13,8 @@ export const TrendingCategoriesSection: React.FC = () => {
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 15);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
   };
 
@@ -24,15 +24,23 @@ export const TrendingCategoriesSection: React.FC = () => {
     return () => window.removeEventListener("resize", checkScroll);
   }, []);
 
+  // Moves exactly by 1 card step (card width ~215px + gap ~16px = ~231px)
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      // Scroll by width of 3 cards (~600px) smoothly to show Cast iron Flanged Valves
-      const scrollAmount = 600;
-      scrollRef.current.scrollBy({
-        left: direction === "right" ? scrollAmount : -scrollAmount,
+      // Find exact card width or use 230px per click
+      const cardStep = 230;
+      const currentScroll = scrollRef.current.scrollLeft;
+      const targetScroll =
+        direction === "right"
+          ? currentScroll + cardStep
+          : currentScroll - cardStep;
+
+      scrollRef.current.scrollTo({
+        left: targetScroll,
         behavior: "smooth"
       });
-      setTimeout(checkScroll, 400);
+
+      setTimeout(checkScroll, 350);
     }
   };
 
@@ -47,26 +55,26 @@ export const TrendingCategoriesSection: React.FC = () => {
           </h3>
         </div>
 
-        {/* Carousel / Cards Track with Fixed Visible Outside Arrows */}
-        <div className="relative">
-          {/* Left Arrow Button (Always explicitly rendered & visible on left edge) */}
+        {/* Carousel / Cards Track with Outside Arrows */}
+        <div className="relative px-2 sm:px-3">
+          {/* Left Arrow Button (Floats on left, slides to previous card) */}
           <button
             type="button"
             onClick={() => handleScroll("left")}
-            aria-label="Previous Slide"
-            title="Slide Left"
-            className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
+            aria-label="Previous Category"
+            title="Previous Category"
+            className="absolute -left-2 sm:-left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
           >
             <ChevronLeft className="w-7 h-7 stroke-[3]" />
           </button>
 
-          {/* Right Arrow Button (Always explicitly rendered & visible on right edge) */}
+          {/* Right Arrow Button (Floats on right, slides to next card) */}
           <button
             type="button"
             onClick={() => handleScroll("right")}
-            aria-label="Next Slide"
-            title="Slide Right"
-            className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
+            aria-label="Next Category"
+            title="Next Category"
+            className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
           >
             <ChevronRight className="w-7 h-7 stroke-[3]" />
           </button>
@@ -75,7 +83,7 @@ export const TrendingCategoriesSection: React.FC = () => {
           <div
             ref={scrollRef}
             onScroll={checkScroll}
-            className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1"
+            className="flex items-stretch gap-3.5 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {TRENDING_CATEGORIES_DATA.map((item) => (
