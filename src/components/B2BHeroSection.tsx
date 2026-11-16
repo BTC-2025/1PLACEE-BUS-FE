@@ -226,64 +226,31 @@ export const B2BHeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* ---------------- 3. RIGHT SIDE: TWO PROMO CARDS (Fixed Compact Width: 260px) ---------------- */}
-          <div className="w-full lg:w-[260px] shrink-0 flex flex-col justify-between gap-3.5">
-            {/* CARD 1: Looking for a Product -> Post Buy Requirement (Amber/Yellow Gradient) */}
-            <div className="rounded-xl border border-amber-200/80 bg-gradient-to-br from-[#fff7e6] via-[#fffaee] to-[#ffeed0] p-4.5 sm:p-5 shadow-xs flex flex-col justify-between flex-1 group hover:shadow-md transition-all">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-xs font-semibold text-slate-600">Looking</span>
-                  <h4 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
-                    for a <span className="text-[#1559ac]">Product</span>
-                  </h4>
-                </div>
-                {/* Shopping Bag Icon with Question Badge */}
-                <div className="w-12 h-12 rounded-2xl bg-amber-100/90 border border-amber-300/60 flex items-center justify-center text-amber-700 shadow-xs shrink-0 relative group-hover:scale-105 transition-transform">
-                  <ShoppingBag className="w-6 h-6 stroke-[2]" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-black flex items-center justify-center">
-                    ?
-                  </span>
-                </div>
-              </div>
+          {/* ---------------- 3. RIGHT SIDE: TWO PROMO CARDS (Direct Real Image Based) ---------------- */}
+          <div className="w-full lg:w-[260px] xl:w-[270px] shrink-0 flex flex-col justify-between gap-3 sm:gap-3.5">
+            {/* CARD 1: Looking for a Product -> Post Buy Requirement */}
+            <Link
+              href="/rfq"
+              className="rounded-xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-200 border border-amber-200/60 block group relative flex-1 cursor-pointer bg-[#fff4de]"
+            >
+              <img
+                src="/b2b-card-requirement-real.jpg"
+                alt="Looking for a Product - Post Buy Requirement"
+                className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300 block"
+              />
+            </Link>
 
-              <div className="mt-4 pt-3 border-t border-amber-200/60">
-                <Link
-                  href="/rfq"
-                  className="w-full block text-center py-2.5 px-3 rounded-lg border border-slate-900/80 bg-transparent hover:bg-slate-900 hover:text-white text-slate-900 text-xs sm:text-[13px] font-bold transition-all shadow-2xs active:scale-95 cursor-pointer"
-                >
-                  Post Buy <span className="font-extrabold">Requirement</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* CARD 2: Want to grow your business 10x faster -> Sell on 1PLACEE (Red/Coral Gradient) */}
-            <div className="rounded-xl border border-red-200/80 bg-gradient-to-br from-[#df4638] via-[#cb3629] to-[#b72c20] p-4.5 sm:p-5 shadow-xs flex flex-col justify-between flex-1 text-white group hover:shadow-md transition-all">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-xs font-medium text-white/80">Want to grow your</span>
-                  <h4 className="text-base sm:text-lg font-black leading-tight text-white">
-                    business 10x <span className="text-amber-300">faster</span>
-                  </h4>
-                </div>
-                {/* Store Icon with Check Badge */}
-                <div className="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-white shadow-xs shrink-0 relative group-hover:scale-105 transition-transform">
-                  <Store className="w-6 h-6 stroke-[2]" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 text-slate-900 text-[9px] font-black flex items-center justify-center">
-                    ✓
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-white/20">
-                <Link
-                  href="/sell"
-                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg border border-white/80 bg-white/10 hover:bg-white hover:text-rose-700 text-white text-xs sm:text-[13px] font-bold transition-all shadow-2xs active:scale-95 cursor-pointer"
-                >
-                  <span>Sell on 1PLACEE</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
+            {/* CARD 2: Want to grow your business 10x faster -> Sell on 1PLACEE */}
+            <Link
+              href="/sell"
+              className="rounded-xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-200 border border-red-200/60 block group relative flex-1 cursor-pointer bg-[#c73228]"
+            >
+              <img
+                src="/b2b-card-sell-real.jpg"
+                alt="Want to grow your business 10x faster - Sell on TradeIndia / 1PLACEE"
+                className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300 block"
+              />
+            </Link>
           </div>
         </div>
 
