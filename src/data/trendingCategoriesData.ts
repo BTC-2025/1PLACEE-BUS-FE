@@ -45,15 +45,15 @@ export const TRENDING_CATEGORIES_DATA: TrendingCategoryItem[] = [
   // Additional trending items for continuous smooth carousel
   {
     id: "diesel-generators",
-    cardImage: "/categories/trending/trending-2.png",
-    thumbImage: "/categories/trending/thumb-2.png",
+    cardImage: "/categories/trending/generator.png",
+    thumbImage: "/categories/trending/generator.png",
     name: "Silent Diesel Generators",
     href: "/products?cat=generators"
   },
   {
     id: "industrial-valves",
-    cardImage: "/categories/trending/trending-2.png",
-    thumbImage: "/categories/trending/thumb-2.png",
+    cardImage: "/categories/trending/cast-iron-valve.png",
+    thumbImage: "/categories/trending/cast-iron-valve.png",
     name: "Cast Iron Flanged Valves",
     href: "/products?cat=valves"
   }

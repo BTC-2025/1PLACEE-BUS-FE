@@ -13,8 +13,8 @@ export const TrendingCategoriesSection: React.FC = () => {
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 10);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      setCanScrollLeft(scrollLeft > 15);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
     }
   };
 
@@ -26,8 +26,8 @@ export const TrendingCategoriesSection: React.FC = () => {
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      // Scroll by 2 full card widths
-      const scrollAmount = 400;
+      // Scroll by width of 3 cards (~600px) smoothly to show Cast iron Flanged Valves
+      const scrollAmount = 600;
       scrollRef.current.scrollBy({
         left: direction === "right" ? scrollAmount : -scrollAmount,
         behavior: "smooth"
@@ -48,28 +48,36 @@ export const TrendingCategoriesSection: React.FC = () => {
         </div>
 
         {/* Carousel / Cards Track with Outside Arrows */}
-        <div className="relative px-2">
-          {/* Left Arrow Button (Floats on left, visible after scrolling right) */}
+        <div className="relative">
+          {/* 
+            Left Arrow Button:
+            Placed cleanly outside the first card at the left edge.
+            Visible when user has scrolled to the right, to smoothly slide back to Human Hair.
+          */}
           {canScrollLeft && (
             <button
               type="button"
               onClick={() => handleScroll("left")}
               aria-label="Previous Slide"
-              title="Previous Categories"
-              className="absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+              title="Slide to Human Hair"
+              className="absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
             >
               <ChevronLeft className="w-6 h-6 stroke-[3]" />
             </button>
           )}
 
-          {/* Right Arrow Button (Floats on right side to slide next cards) */}
+          {/* 
+            Right Arrow Button:
+            Placed on the right edge so clicking it slides the carousel directly 
+            to reveal "Silent Diesel Generators" and "Cast Iron Flanged Valves".
+          */}
           {canScrollRight && (
             <button
               type="button"
               onClick={() => handleScroll("right")}
               aria-label="Next Slide"
-              title="Next Categories"
-              className="absolute -right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
+              title="Slide to Cast Iron Flanged Valves"
+              className="absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
             >
               <ChevronRight className="w-6 h-6 stroke-[3]" />
             </button>
@@ -79,14 +87,14 @@ export const TrendingCategoriesSection: React.FC = () => {
           <div
             ref={scrollRef}
             onScroll={checkScroll}
-            className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1"
+            className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {TRENDING_CATEGORIES_DATA.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className="w-[180px] sm:w-[195px] md:w-[210px] shrink-0 bg-white rounded-xl border border-slate-200/80 hover:border-[#1559ac]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden group/card cursor-pointer min-h-[175px]"
+                className="w-[185px] sm:w-[200px] md:w-[215px] shrink-0 bg-white rounded-xl border border-slate-200/80 hover:border-[#1559ac]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden group/card cursor-pointer min-h-[175px]"
               >
                 {/* Clean Photo Square Area */}
                 <div className="w-full h-[125px] flex items-center justify-center p-3 bg-white">
