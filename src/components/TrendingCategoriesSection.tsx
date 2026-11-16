@@ -47,41 +47,29 @@ export const TrendingCategoriesSection: React.FC = () => {
           </h3>
         </div>
 
-        {/* Carousel / Cards Track with Outside Arrows */}
+        {/* Carousel / Cards Track with Fixed Visible Outside Arrows */}
         <div className="relative">
-          {/* 
-            Left Arrow Button:
-            Placed cleanly outside the first card at the left edge.
-            Visible when user has scrolled to the right, to smoothly slide back to Human Hair.
-          */}
-          {canScrollLeft && (
-            <button
-              type="button"
-              onClick={() => handleScroll("left")}
-              aria-label="Previous Slide"
-              title="Slide to Human Hair"
-              className="absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-            >
-              <ChevronLeft className="w-6 h-6 stroke-[3]" />
-            </button>
-          )}
+          {/* Left Arrow Button (Always explicitly rendered & visible on left edge) */}
+          <button
+            type="button"
+            onClick={() => handleScroll("left")}
+            aria-label="Previous Slide"
+            title="Slide Left"
+            className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
+          >
+            <ChevronLeft className="w-7 h-7 stroke-[3]" />
+          </button>
 
-          {/* 
-            Right Arrow Button:
-            Placed on the right edge so clicking it slides the carousel directly 
-            to reveal "Silent Diesel Generators" and "Cast Iron Flanged Valves".
-          */}
-          {canScrollRight && (
-            <button
-              type="button"
-              onClick={() => handleScroll("right")}
-              aria-label="Next Slide"
-              title="Slide to Cast Iron Flanged Valves"
-              className="absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer border border-slate-200"
-            >
-              <ChevronRight className="w-6 h-6 stroke-[3]" />
-            </button>
-          )}
+          {/* Right Arrow Button (Always explicitly rendered & visible on right edge) */}
+          <button
+            type="button"
+            onClick={() => handleScroll("right")}
+            aria-label="Next Slide"
+            title="Slide Right"
+            className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
+          >
+            <ChevronRight className="w-7 h-7 stroke-[3]" />
+          </button>
 
           {/* Scrollable Container */}
           <div
