@@ -20,7 +20,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹28.85-30.78",
     moq: "MOQ: 100 pieces",
     reorderRate: "Reorder rate 22%",
-    supplierYears: "2 yrs · CN",
+    supplierYears: "2 yrs · IN",
     href: "/products?item=wired-on-ear-earbuds",
   },
   {
@@ -30,7 +30,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹21.16",
     moq: "MOQ: 500 pieces",
     deliveryDate: "Delivery by 30 Dec",
-    supplierYears: "2 yrs · CN",
+    supplierYears: "2 yrs · IN",
     href: "/products?item=cheap-earphones-jl-chipset",
   },
   {
@@ -40,7 +40,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹60.59-62.51",
     moq: "MOQ: 5000 pieces",
     reorderRate: "Reorder rate 22%",
-    supplierYears: "7 yrs · CN",
+    supplierYears: "7 yrs · IN",
     href: "/products?item=universal-wired-earphone",
   },
   {
@@ -51,7 +51,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     moq: "MOQ: 500 bags",
     soldCount: "1 sold",
     isVerified: true,
-    supplierYears: "8 yrs · CN",
+    supplierYears: "8 yrs · IN",
     href: "/products?item=organ-sewing-needles",
   },
   {
@@ -62,7 +62,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     moq: "MOQ: 200 pieces",
     soldCount: "900 sold",
     isVerified: true,
-    supplierYears: "7 yrs · CN",
+    supplierYears: "7 yrs · IN",
     href: "/products?item=clothes-soft-tape-measure",
   },
   {
@@ -72,7 +72,7 @@ export const ELECTRONICS_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹269.27-432.75",
     moq: "MOQ: 5 pieces",
     reorderRate: "Reorder rate 28%",
-    supplierYears: "15 yrs · CN",
+    supplierYears: "15 yrs · IN",
     href: "/products?item=heat-resistant-magnet-preheating",
   },
 ];

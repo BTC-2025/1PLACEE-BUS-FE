@@ -21,7 +21,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹66.36-95.21",
     moq: "MOQ: 100 pieces",
     badgeTag: "Dropshipping",
-    supplierYears: "6 yrs · CN",
+    supplierYears: "6 yrs · IN",
     href: "/products?item=dropshipping-hoodie-embroidery",
   },
   {
@@ -32,7 +32,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     discountBadge: "10% off ₹96,000",
     moq: "MOQ: 1000 pieces",
     isVerified: true,
-    supplierYears: "11 yrs · CN",
+    supplierYears: "11 yrs · IN",
     href: "/products?item=in-ear-wired-earbuds-cheap",
   },
   {
@@ -45,7 +45,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     badgeTag: "MID",
     reorderRate: "Reorder rate 16%",
     isVerified: true,
-    supplierYears: "6 yrs · CN",
+    supplierYears: "6 yrs · IN",
     href: "/products?item=dual-sided-body-tape",
   },
   {
@@ -56,7 +56,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     moq: "MOQ: 1 set",
     reorderRate: "Reorder rate 34%",
     isVerified: true,
-    supplierYears: "12 yrs · CN",
+    supplierYears: "12 yrs · IN",
     href: "/products?item=direct-drive-single-needle",
   },
   {
@@ -67,7 +67,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     moq: "MOQ: 5 pieces",
     soldCount: "82 sold",
     reorderRate: "Reorder rate 16%",
-    supplierYears: "1 yr · CN",
+    supplierYears: "1 yr · IN",
     href: "/products?item=mens-summer-tshirt-plus",
   },
   {
@@ -77,7 +77,7 @@ export const CUSTOM_SHOWCASE_PRODUCTS: ProductCardItem[] = [
     price: "₹15.39-28.85",
     moq: "MOQ: 100 pieces",
     isVerified: true,
-    supplierYears: "4 yrs · CN",
+    supplierYears: "4 yrs · IN",
     href: "/products?item=300cm-soft-tape-measure",
   },
 ];

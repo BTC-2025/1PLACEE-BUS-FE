@@ -22,7 +22,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹96.39",
     moq: "MOQ: 1 piece",
     supplierYears: "6 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 15%",
     href: "/products/xl-industrial-stickers"
   },
@@ -33,7 +33,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹33.74",
     moq: "MOQ: 1 piece",
     supplierYears: "3 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     href: "/products/universal-hemmer-foot"
   },
   {
@@ -44,7 +44,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 399 pieces",
     soldCount: "28 sold",
     supplierYears: "4 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     href: "/products/cotton-kite-thread"
   },
@@ -55,7 +55,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹86.75-96.39",
     moq: "MOQ: 1 piece",
     supplierYears: "10 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 23%",
     href: "/products/double-needle-attachment"
   },
@@ -66,7 +66,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹11,180.17-11,854.84",
     moq: "MOQ: 1 piece",
     supplierYears: "8 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     href: "/products/leather-belt-embossing"
   },
   {
@@ -76,7 +76,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹12,047.60",
     moq: "MOQ: 20 pieces",
     supplierYears: "4 yrs",
-    supplierCountry: "HK",
+    supplierCountry: "IN",
     href: "/products/used-335-sewing-machine"
   },
 
@@ -88,7 +88,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹9,541.70",
     moq: "MOQ: 1 piece",
     supplierYears: "2 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 18%",
     href: "/products/anduuk-grinding-machine"
   },
@@ -100,7 +100,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 1 piece",
     soldCount: "22 sold",
     supplierYears: "1 yr",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 16%",
     href: "/products/style-8700-flatbed"
   },
@@ -112,7 +112,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 10 pieces",
     soldCount: "55 sold",
     supplierYears: "5 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     reorderRate: "Reorder rate 23%",
     href: "/products/jinzen-spring-clamp"
@@ -124,7 +124,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹86.75-96.39",
     moq: "MOQ: 1 piece",
     supplierYears: "10 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 23%",
     href: "/products/plastic-iron-shoe"
   },
@@ -136,7 +136,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 1 piece",
     soldCount: "11 sold",
     supplierYears: "4 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     deliveryDate: "Delivery by 28 Dec",
     href: "/products/998-automatic-cutter"
   },
@@ -148,7 +148,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 30 sets",
     soldCount: "8 sold",
     supplierYears: "14 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     reorderRate: "Reorder rate 21%",
     href: "/products/high-speed-lockstitch"
@@ -163,7 +163,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 1 piece",
     soldCount: "3 sold",
     supplierYears: "6 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     deliveryDate: "Delivery by 01 Jan",
     href: "/products/atom-round-knife"
   },
@@ -175,7 +175,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 1 set",
     soldCount: "2 sold",
     supplierYears: "7 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     href: "/products/dt400-double-drive"
   },
@@ -186,7 +186,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹6,158.73",
     moq: "MOQ: 1 set",
     supplierYears: "1 yr",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     href: "/products/manual-leather-shoe-cobbler"
   },
   {
@@ -196,7 +196,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     price: "₹11,565.69",
     moq: "MOQ: 1 set",
     supplierYears: "11 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     reorderRate: "Reorder rate 17%",
     href: "/products/hk-500-blind-stitch"
@@ -219,7 +219,7 @@ export const MACHINERY_PRODUCTS: MachineryProductItem[] = [
     moq: "MOQ: 1 piece",
     soldCount: "14 sold",
     supplierYears: "12 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     href: "/products/mc-0303-walking-foot"
   }

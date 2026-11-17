@@ -22,7 +22,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     moq: "MOQ: 1 unit",
     soldCount: "7 sold",
     supplierYears: "11 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     reorderRate: "Reorder rate 17%",
     badgeCe: true,
@@ -36,7 +36,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     moq: "MOQ: 1 piece",
     soldCount: "106 sold",
     supplierYears: "12 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     badgeCe: true,
     href: "/products?item=mc-c1-direct-drive"
@@ -48,7 +48,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     price: "₹33.81",
     moq: "MOQ: 1 piece",
     supplierYears: "3 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     href: "/products?item=universal-presser-foot"
   },
   {
@@ -59,7 +59,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     moq: "MOQ: 1 set",
     soldCount: "1,003 sold",
     supplierYears: "7 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     reorderRate: "Reorder rate 22%",
     href: "/products?item=elastic-frame-support"
   },
@@ -71,7 +71,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     moq: "MOQ: 1 set",
     soldCount: "4 sold",
     supplierYears: "3 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     href: "/products?item=jukky-industrial-sewing"
   },
   {
@@ -82,7 +82,7 @@ export const SEWING_SHOWCASE_PRODUCTS: SewingShowcaseItem[] = [
     moq: "MOQ: 399 pieces",
     soldCount: "28 sold",
     supplierYears: "4 yrs",
-    supplierCountry: "CN",
+    supplierCountry: "IN",
     isVerified: true,
     href: "/products?item=kite-flying-thread"
   }
