@@ -4,6 +4,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { HeroBannerWithRoundCategories } from "@/components/cards/HeroBannerWithRoundCategories";
+import { B2CHeroValueCarousel } from "@/components/cards/B2CHeroValueCarousel";
 import { ModernDealsGridSection } from "@/components/cards/ModernDealsGridSection";
 
 // Dynamically import lower B2C sections for instant performance (<500ms)
@@ -89,6 +90,9 @@ export default function B2CGstPage() {
 
         {/* 3. Main B2C Consumer Product Sections wrapped in responsive container */}
         <div className="w-full px-2 sm:px-3.5 max-w-[1500px] mx-auto space-y-4 mt-2">
+          {/* 5-Card Banner Carousel with Left/Right Arrows directly below Hero Banner */}
+          <B2CHeroValueCarousel />
+
           {/* Modern 3-Column Deals Grid */}
           <ModernDealsGridSection />
 
