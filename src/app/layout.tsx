@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   description: "Wholesale bulk hub with volume price slabs, verified GST tax invoicing, Input Tax Credit (ITC) & verified merchant selling.",
   icons: {
     icon: [
-      { url: "/favicon-32x32.png?v=4", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png?v=4", sizes: "16x16", type: "image/png" },
-      { url: "/favicon.png?v=4", type: "image/png" },
-      { url: "/icon.png?v=4", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
     ],
-    shortcut: "/favicon.png?v=4",
-    apple: "/icon-192.png?v=4",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
