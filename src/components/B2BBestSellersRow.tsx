@@ -8,39 +8,70 @@ export const B2BBestSellersRow: React.FC = () => {
   return (
     <section className="w-full mt-6 select-none">
       {/* 
-        Container matching the exact aspect ratio, rounded corners, and vibrant orange container 
-        of the user uploaded image (1024x331).
-        Users can click the whole banner or individual links.
+        Native HTML/CSS container matching the exact bright orange gradient, 
+        curved aesthetic, real fonts, crisp real text, and isolated product images.
       */}
-      <div className="w-full rounded-2xl overflow-hidden shadow-md border border-orange-400/30 group relative bg-[#e85d04]">
-        <img
-          src="/products/bestsellers/bestsellers-banner-full.jpg"
-          alt="Best Sellers - 6 Items Single Row"
-          className="w-full h-auto object-cover block"
-          loading="lazy"
-        />
-
-        {/* Interactive Clickable Hotspots for each of the 6 cards */}
-        <div className="absolute inset-y-0 left-0 w-full flex">
-          {/* Header area link (first 10%) */}
+      <div className="w-full rounded-2xl bg-gradient-to-r from-[#e85d04] via-[#f46a07] to-[#e85d04] p-4 sm:p-5 shadow-md border border-orange-500/20">
+        {/* Title */}
+        <div className="flex items-center justify-between mb-3 px-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+            Best Sellers
+          </h2>
           <Link
             href="/products?collection=bestsellers"
-            className="absolute top-0 left-0 w-full h-[25%] z-10 cursor-pointer"
-            aria-label="View All Best Sellers"
-          />
+            className="text-xs sm:text-sm font-semibold text-white/90 hover:text-white underline-offset-2 hover:underline transition-colors"
+          >
+            View All
+          </Link>
+        </div>
 
-          {/* 6 Product Hotspots across the card area (starts at 3.5% width, each approx 15.5% width) */}
-          <div className="absolute bottom-[8%] left-[3.5%] right-[3.5%] top-[24%] grid grid-cols-6 gap-2 z-20">
-            {B2B_BEST_SELLERS.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="w-full h-full rounded-xl hover:ring-2 hover:ring-white/80 transition-all cursor-pointer"
-                title={`${item.title} - ${item.price}`}
-                aria-label={item.title}
-              />
-            ))}
-          </div>
+        {/* 6 Native Cards Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5">
+          {B2B_BEST_SELLERS.map((item) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className="group flex flex-col justify-between bg-white rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-200 border border-transparent hover:border-orange-200 overflow-hidden relative cursor-pointer min-h-[220px]"
+            >
+              {/* Optional Platinum Badge */}
+              {item.badge && (
+                <div className="absolute top-0 left-0 z-10">
+                  <div className="bg-gradient-to-r from-purple-800 to-indigo-700 text-white text-[9px] font-bold px-2 py-0.5 rounded-br-md shadow flex items-center gap-1">
+                    <span>👑</span>
+                    <span className="uppercase tracking-wider">{item.badge.text}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Product Image Area */}
+              <div className="w-full h-28 sm:h-32 flex items-center justify-center p-1 relative overflow-hidden mt-1">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Real Native Text Content */}
+              <div className="mt-2 flex flex-col justify-end flex-grow pt-1">
+                {/* Title */}
+                <h3 className="text-[13px] font-semibold text-slate-800 line-clamp-1 group-hover:text-orange-600 transition-colors leading-tight">
+                  {item.title}
+                </h3>
+
+                {/* Price */}
+                <p className="text-[13px] font-bold text-slate-950 mt-1 leading-none">
+                  {item.price}
+                </p>
+
+                {/* Supplier */}
+                <p className="text-[10px] text-slate-400 font-medium line-clamp-1 mt-1.5 uppercase tracking-tight">
+                  {item.supplier}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

@@ -31,7 +31,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico?v=6" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" />
       </head>
-      <body className="min-h-screen bg-slate-50 text-slate-800 antialiased">
+      <body className="antialiased min-h-screen flex flex-col bg-[#fafafa] text-[#0F1111] overflow-x-hidden relative">
         {children}
       </body>
     </html>
