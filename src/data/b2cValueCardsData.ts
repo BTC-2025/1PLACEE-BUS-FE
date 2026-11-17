@@ -5,7 +5,6 @@ export interface B2CValueCardItem {
   image: string;
   actionText: string;
   href: string;
-  icon?: string;
 }
 
 export const B2C_VALUE_CARDS: B2CValueCardItem[] = [
@@ -16,14 +15,6 @@ export const B2C_VALUE_CARDS: B2CValueCardItem[] = [
     image: "/b2c/value-cards/card-1.png",
     actionText: "See more",
     href: "/products?deals=top-discounts",
-  },
-  {
-    id: "card-2",
-    title: "Join Prime at ₹99",
-    subtitle: "Prime Exclusive Offers and more at just ₹99 for 3 months!",
-    image: "/b2c/value-cards/card-2.png",
-    actionText: "Join Prime Now",
-    href: "/prime",
   },
   {
     id: "card-3",
