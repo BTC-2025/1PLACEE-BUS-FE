@@ -2,41 +2,45 @@ export interface B2CValueCardItem {
   id: string;
   title: string;
   subtitle?: string;
-  image: string;
+  graphic: string;
+  graphicType: "double-img" | "circle-feature";
   actionText: string;
   href: string;
 }
 
 export const B2C_VALUE_CARDS: B2CValueCardItem[] = [
   {
-    id: "card-1",
+    id: "card-discounts",
     title: "Top discounts for you",
-    subtitle: "Up to 70% off on refurbished & new desktop PCs",
-    image: "/b2c/value-cards/card-1.png",
+    graphic: "/b2c/value-cards/graphic-computers.png",
+    graphicType: "double-img",
     actionText: "See more",
     href: "/products?deals=top-discounts",
   },
   {
-    id: "card-3",
+    id: "card-gst",
     title: "Get GST* benefits",
-    subtitle: "Save up to 18% with GST* invoice on Groceries + Guaranteed cashback*",
-    image: "/b2c/value-cards/card-3.png",
+    subtitle: "Save up to 18% with GST* invoice now on Groceries + Guaranteed cashback*",
+    graphic: "/b2c/value-cards/graphic-gst.png",
+    graphicType: "circle-feature",
     actionText: "Shop Now",
     href: "/products?deals=gst-benefits",
   },
   {
-    id: "card-4",
+    id: "card-essentials",
     title: "Business Essentials",
     subtitle: "Get everything you need for your business!",
-    image: "/b2c/value-cards/card-4.png",
+    graphic: "/b2c/value-cards/graphic-business.png",
+    graphicType: "circle-feature",
     actionText: "Shop Now",
     href: "/products?cat=business-essentials",
   },
   {
-    id: "card-5",
+    id: "card-accessories",
     title: "Computers & Accessories",
     subtitle: "Get never before offers on Laptops, Tablets, Monitors & more.",
-    image: "/b2c/value-cards/card-5.png",
+    graphic: "/b2c/value-cards/graphic-accessories.png",
+    graphicType: "circle-feature",
     actionText: "See all deals",
     href: "/products?cat=computers-accessories",
   },
