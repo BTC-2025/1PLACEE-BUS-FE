@@ -46,8 +46,8 @@ export const MANUFACTURING_MACHINERY_CARDS: ManufacturingMachineryCard[] = [
     href: "/products?cat=laser-machine"
   },
   {
-    id: "china-machinery",
-    name: "China Machinery",
+    id: "machinery",
+    name: "Machinery",
     image: "/categories/machinery/china-machinery.png",
     href: "/products?cat=china-machinery"
   },

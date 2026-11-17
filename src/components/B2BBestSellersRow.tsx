@@ -12,7 +12,7 @@ export const B2BBestSellersRow: React.FC = () => {
         deep navy brand heading (#003366), rounded corners, subtle border,
         and 6 white cards in a strict horizontal row.
       */}
-      <div className="w-full rounded-2xl bg-[#E9F4FF] p-4 sm:p-5 shadow-sm border border-sky-100">
+      <div className="w-full rounded-2xl bg-[#1559ac] p-4 sm:p-5 shadow-sm border border-sky-100">
         {/* Title & View All */}
         <div className="flex items-center justify-between mb-3 px-1">
           <h2 className="text-xl sm:text-2xl font-bold text-[#003366] tracking-wide">
