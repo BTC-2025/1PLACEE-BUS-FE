@@ -97,7 +97,28 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
     product.category.toLowerCase().includes("sunglass") ||
     slug.includes("sunglass") ||
     slug.includes("prada") ||
-    slug.includes("tommy");
+    slug.includes("tommy") ||
+    slug.includes("lacoste") ||
+    slug.includes("rayban");
+
+  const isSkincare =
+    product.category.toLowerCase().includes("skincare") ||
+    product.category.toLowerCase().includes("skin") ||
+    slug.includes("acm") ||
+    slug.includes("anua") ||
+    slug.includes("medicube") ||
+    slug.includes("sol-de-janeiro");
+
+  const isOutdoor =
+    product.category.toLowerCase().includes("outdoor") ||
+    product.category.toLowerCase().includes("bicycle") ||
+    slug.includes("vaux") ||
+    slug.includes("mogoo");
+
+  const isBaby =
+    product.category.toLowerCase().includes("baby") ||
+    slug.includes("neobreez") ||
+    slug.includes("ingenuity");
 
   // Gallery
   const gallery =
@@ -113,9 +134,35 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
       ? "Deep Granite Black"
       : isPerfume
       ? "Standard Flacon"
+      : isEyewear
+      ? "Matte Black Frame"
+      : isSkincare
+      ? "Standard Kit"
+      : isOutdoor
+      ? "Midnight Blue"
+      : isBaby
+      ? "Charcoal Grey"
       : "Desert Titanium"
   );
-  const [selectedStorage, setSelectedStorage] = useState("256 GB");
+  const [selectedStorage, setSelectedStorage] = useState(
+    isMobile
+      ? "256 GB"
+      : isCookware
+      ? "4.5 L"
+      : isWatch
+      ? "42 mm"
+      : isPerfume
+      ? "100 ml"
+      : isEyewear
+      ? "Standard Fit"
+      : isSkincare
+      ? "Full Size Kit"
+      : isOutdoor
+      ? "18 Inch Alloy"
+      : isBaby
+      ? "Single Stroller"
+      : "Standard"
+  );
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [selectedWarranty, setSelectedWarranty] = useState<string | null>(null);
@@ -144,6 +191,31 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
         { name: "Granite Black", hex: "#111827", bg: "bg-gray-900" },
         { name: "Copper Brown", hex: "#b45309", bg: "bg-amber-700" },
       ]
+    : isPerfume
+    ? [
+        { name: "Standard Flacon", hex: "#3b82f6", bg: "bg-blue-500" },
+        { name: "Limited Gift Flacon", hex: "#a855f7", bg: "bg-purple-500" },
+      ]
+    : isEyewear
+    ? [
+        { name: "Matte Black", hex: "#111827", bg: "bg-gray-900" },
+        { name: "Tortoise Shell", hex: "#78350f", bg: "bg-amber-900" },
+      ]
+    : isSkincare
+    ? [
+        { name: "Standard Pack", hex: "#059669", bg: "bg-emerald-600" },
+        { name: "Duo Treatment", hex: "#0284c7", bg: "bg-sky-600" },
+      ]
+    : isOutdoor
+    ? [
+        { name: "Midnight Blue", hex: "#1e3a8a", bg: "bg-blue-900" },
+        { name: "Racing Red", hex: "#dc2626", bg: "bg-red-600" },
+      ]
+    : isBaby
+    ? [
+        { name: "Charcoal Grey", hex: "#4b5563", bg: "bg-gray-600" },
+        { name: "Midnight Navy", hex: "#1e3a8a", bg: "bg-blue-900" },
+      ]
     : [
         { name: "Standard Edition", hex: "#3b82f6", bg: "bg-blue-500" },
         { name: "Collector's Pack", hex: "#a855f7", bg: "bg-purple-500" },
@@ -159,6 +231,12 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
     ? "Volume"
     : isEyewear
     ? "Frame Size"
+    : isSkincare
+    ? "Pack Size"
+    : isOutdoor
+    ? "Frame Size"
+    : isBaby
+    ? "Model Type"
     : "Size / Variant";
 
   const sizeOrStorageOptions = isMobile
@@ -169,6 +247,14 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
     ? ["38 mm", "40 mm", "42 mm", "45 mm"]
     : isPerfume
     ? ["50 ml", "100 ml", "200 ml"]
+    : isEyewear
+    ? ["Standard Fit", "Wide Fit"]
+    : isSkincare
+    ? ["Single Item", "Full Size Kit", "Duo Pack"]
+    : isOutdoor
+    ? ["16 Inch Alloy", "18 Inch Alloy", "21-Speed"]
+    : isBaby
+    ? ["Single Stroller", "Travel System"]
     : ["Standard Fit", "Wide Fit"];
 
   return (
