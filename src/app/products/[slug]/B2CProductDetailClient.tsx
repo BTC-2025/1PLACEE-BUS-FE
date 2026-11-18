@@ -514,3 +514,4 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
     </div>
   );
 }
+
