@@ -83,7 +83,7 @@ export const BusinessNavbar: React.FC = () => {
 
   const isHomeActive = pathname === "/";
   const isB2bActive = pathname.startsWith("/b2b");
-  const isB2cActive = pathname.startsWith("/b2c-gst");
+  const isB2cActive = pathname.startsWith("/b2c-gst") || pathname.startsWith("/products");
   const isOrdersActive = pathname.startsWith("/orders");
 
   return (
