@@ -23,6 +23,8 @@ import {
   FileText,
   BadgeCheck,
 } from "lucide-react";
+import { RelatedProductsCarousel } from "@/components/RelatedProductsCarousel";
+import { CustomerReviewsSection } from "@/components/CustomerReviewsSection";
 
 export function B2CProductDetailClient({ slug }: { slug: string }) {
   // Gallery images matching user screenshots
@@ -510,6 +512,16 @@ export function B2CProductDetailClient({ slug }: { slug: string }) {
             <span className="font-semibold text-slate-800">iOS 18 (Apple Intelligence Enabled)</span>
           </div>
         </div>
+      </div>
+
+      {/* Similar Flagship Smartphones Carousel */}
+      <div>
+        <RelatedProductsCarousel title="Similar Flagship Smartphones" />
+      </div>
+
+      {/* Flagship Mobile Customer Reviews */}
+      <div>
+        <CustomerReviewsSection />
       </div>
     </div>
   );
