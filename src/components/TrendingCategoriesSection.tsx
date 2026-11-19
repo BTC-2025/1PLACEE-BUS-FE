@@ -1,117 +1,49 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import { TRENDING_CATEGORIES_DATA } from "../data/trendingCategoriesData";
+import { TRENDING_PRODUCT_CATEGORIES } from "../data/trendingCategoriesData";
 
 export const TrendingCategoriesSection: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 10);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  useEffect(() => {
-    checkScroll();
-    window.addEventListener("resize", checkScroll);
-    return () => window.removeEventListener("resize", checkScroll);
-  }, []);
-
-  // Moves exactly by 1 card step (card width ~215px + gap ~16px = ~231px)
-  const handleScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      // Find exact card width or use 230px per click
-      const cardStep = 230;
-      const currentScroll = scrollRef.current.scrollLeft;
-      const targetScroll =
-        direction === "right"
-          ? currentScroll + cardStep
-          : currentScroll - cardStep;
-
-      scrollRef.current.scrollTo({
-        left: targetScroll,
-        behavior: "smooth"
-      });
-
-      setTimeout(checkScroll, 350);
-    }
-  };
-
   return (
-    <section className="w-full mt-6 select-none">
-      {/* Outer White Rounded Container matching User's Uploaded Image */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs relative">
-        {/* Header Title */}
-        <div className="mb-4 px-1 flex items-center justify-between">
-          <h3 className="font-extrabold text-[#003366] text-base sm:text-lg tracking-tight">
-            Trending Categories
+    <section className="w-full mt-2 select-none">
+      {/* Outer Clean White Container with Orange Indicator Bar */}
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs">
+
+        {/* Header Title with Orange Accent Line matching Image 2 */}
+        <div className="mb-6">
+          <h3 className="font-black text-slate-900 text-lg sm:text-xl tracking-tight">
+            Trending Products
           </h3>
+          <div className="w-12 h-1 bg-[#ea580c] rounded-full mt-2" />
         </div>
 
-        {/* Carousel / Cards Track with Outside Arrows */}
-        <div className="relative px-2 sm:px-3">
-          {/* Left Arrow Button (Floats on left, slides to previous card) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("left")}
-            aria-label="Previous Category"
-            title="Previous Category"
-            className="absolute -left-2 sm:-left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
-          >
-            <ChevronLeft className="w-7 h-7 stroke-[3]" />
-          </button>
+        {/* 2 Rows x 7 Cards Grid matching User Reference Image 2 */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-3.5">
+          {TRENDING_PRODUCT_CATEGORIES.map((cat) => (
+            <Link
+              key={cat.id}
+              href={cat.href}
+              className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#ea580c]/60 p-3 flex flex-col items-center justify-between text-center transition-all duration-300 hover:shadow-md group cursor-pointer min-h-[145px]"
+            >
+              {/* Product Thumbnail inside rounded light-blue container */}
+              <div className="w-full h-[88px] rounded-xl bg-[#f0f6ff]/70 flex items-center justify-center p-2 mb-2 group-hover:bg-[#f0f6ff] transition-colors">
+                <img
+                  src={cat.thumbImage}
+                  alt={cat.name}
+                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
 
-          {/* Right Arrow Button (Floats on right, slides to next card) */}
-          <button
-            type="button"
-            onClick={() => handleScroll("right")}
-            aria-label="Next Category"
-            title="Next Category"
-            className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white hover:bg-slate-50 text-[#003366] flex items-center justify-center shadow-2xl transition-all z-40 hover:scale-110 active:scale-95 cursor-pointer border border-slate-300"
-          >
-            <ChevronRight className="w-7 h-7 stroke-[3]" />
-          </button>
-
-          {/* Scrollable Container */}
-          <div
-            ref={scrollRef}
-            onScroll={checkScroll}
-            className="flex items-stretch gap-3.5 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth py-1 px-1"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {TRENDING_CATEGORIES_DATA.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="w-[185px] sm:w-[200px] md:w-[215px] shrink-0 bg-white rounded-xl border border-slate-200/80 hover:border-[#1559ac]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden group/card cursor-pointer min-h-[175px]"
-              >
-                {/* Clean Photo Square Area */}
-                <div className="w-full h-[125px] flex items-center justify-center p-3 bg-white">
-                  <img
-                    src={item.thumbImage}
-                    alt={item.name}
-                    className="max-h-full max-w-full object-contain group-hover/card:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Category Label at Bottom with Thin Border matching Image */}
-                <div className="px-3 py-2.5 border-t border-slate-100 bg-white">
-                  <span className="text-[12px] sm:text-[12.5px] font-medium text-slate-800 group-hover/card:text-[#1559ac] line-clamp-1 leading-tight transition-colors block">
-                    {item.name}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
+              {/* Title */}
+              <h4 className="text-[12px] sm:text-[12.5px] font-bold text-slate-800 group-hover:text-[#ea580c] transition-colors line-clamp-2 leading-tight">
+                {cat.name}
+              </h4>
+            </Link>
+          ))}
         </div>
+
       </div>
     </section>
   );

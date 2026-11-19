@@ -1,69 +1,96 @@
-export interface TrendingCategoryItem {
+export interface TrendingProductCategory {
   id: string;
-  cardImage: string;
-  thumbImage: string;
   name: string;
+  thumbImage: string;
   href: string;
 }
 
-export const TRENDING_CATEGORIES_DATA: TrendingCategoryItem[] = [
+export const TRENDING_PRODUCT_CATEGORIES: TrendingProductCategory[] = [
+  // ROW 1 (7 Categories)
   {
-    id: "human-hair",
-    cardImage: "/categories/trending/trending-1-final.png",
-    thumbImage: "/categories/trending/thumb-1-final.png",
-    name: "Human Hair & Accessories",
-    href: "/products?cat=human-hair"
+    id: "fresh-flowers",
+    name: "Fresh Flowers",
+    thumbImage: "/categories/trending-products/thumb-fresh-flowers.png",
+    href: "/products?cat=fresh-flowers",
   },
   {
-    id: "cooling-tower",
-    cardImage: "/categories/trending/trending-2.png",
-    thumbImage: "/categories/trending/thumb-2.png",
-    name: "Cooling Tower & Chilling Plants",
-    href: "/products?cat=cooling-tower"
+    id: "marigold-flowers",
+    name: "Marigold Flowers",
+    thumbImage: "/categories/trending-products/thumb-marigold-flowers.png",
+    href: "/products?cat=marigold-flowers",
   },
   {
-    id: "t-shirts",
-    cardImage: "/categories/trending/trending-3.png",
-    thumbImage: "/categories/trending/thumb-3.png",
-    name: "T-Shirts",
-    href: "/products?cat=t-shirts"
+    id: "disposable-leaf-plates",
+    name: "Disposable Leaf Plates",
+    thumbImage: "/categories/trending-products/thumb-leaf-plates.png",
+    href: "/products?cat=leaf-plates",
   },
   {
-    id: "air-cooler",
-    cardImage: "/categories/trending/trending-4.png",
-    thumbImage: "/categories/trending/thumb-4.png",
-    name: "Air Cooler",
-    href: "/products?cat=air-cooler"
+    id: "flower-garland",
+    name: "Flower Garland",
+    thumbImage: "/categories/trending-products/thumb-flower-garland.png",
+    href: "/products?cat=flower-garland",
   },
   {
-    id: "solar-panels",
-    cardImage: "/categories/trending/trending-5.png",
-    thumbImage: "/categories/trending/thumb-5-clean.png",
-    name: "Solar Panels",
-    href: "/products?cat=solar-panels"
-  },
-  // Additional trending items for continuous smooth carousel
-  {
-    id: "diesel-generators",
-    cardImage: "/categories/trending/generator.png",
-    thumbImage: "/categories/trending/generator.png",
-    name: "Silent Diesel Generators",
-    href: "/products?cat=generators"
+    id: "palm-leaf-bowls",
+    name: "Palm Leaf Bowls",
+    thumbImage: "/categories/trending-products/thumb-palm-leaf-bowls.png",
+    href: "/products?cat=palm-leaf-bowls",
   },
   {
-    id: "industrial-valves",
-    cardImage: "/categories/trending/cast-iron-valve.png",
-    thumbImage: "/categories/trending/cast-iron-valve.png",
-    name: "Cast Iron Flanged Valves",
-    href: "/products?cat=valves"
+    id: "bamboo-baskets",
+    name: "Bamboo Baskets",
+    thumbImage: "/categories/trending-products/thumb-bamboo-baskets.png",
+    href: "/products?cat=bamboo-baskets",
   },
-  // Added 8th category on right side
   {
-    id: "industrial-sewing-machines",
-    cardImage: "/categories/trending/industrial-sewing.png",
-    thumbImage: "/categories/trending/industrial-sewing.png",
-    name: "Industrial Sewing Machines",
-    href: "/products?cat=sewing-machines"
-  }
-];
+    id: "colored-diyas",
+    name: "Colored Diyas",
+    thumbImage: "/categories/trending-products/thumb-colored-diyas.png",
+    href: "/products?cat=colored-diyas",
+  },
 
+  // ROW 2 (7 Categories)
+  {
+    id: "brass-pooja-thalis",
+    name: "Brass Pooja Thalis",
+    thumbImage: "/categories/trending-products/thumb-brass-pooja-thalis.png",
+    href: "/products?cat=pooja-thalis",
+  },
+  {
+    id: "areca-nut",
+    name: "Areca Nut",
+    thumbImage: "/categories/trending-products/thumb-areca-nut.png",
+    href: "/products?cat=areca-nut",
+  },
+  {
+    id: "sugarcane",
+    name: "Sugarcane",
+    thumbImage: "/categories/trending-products/thumb-sugarcane.png",
+    href: "/products?cat=sugarcane",
+  },
+  {
+    id: "clay-diya",
+    name: "Clay Diya",
+    thumbImage: "/categories/trending-products/thumb-clay-diya.png",
+    href: "/products?cat=clay-diya",
+  },
+  {
+    id: "bananas",
+    name: "Bananas",
+    thumbImage: "/categories/trending-products/thumb-bananas.png",
+    href: "/products?cat=bananas",
+  },
+  {
+    id: "bamboo-tray",
+    name: "Bamboo Tray",
+    thumbImage: "/categories/trending-products/thumb-bamboo-tray.png",
+    href: "/products?cat=bamboo-tray",
+  },
+  {
+    id: "torans",
+    name: "Torans",
+    thumbImage: "/categories/trending-products/thumb-torans.png",
+    href: "/products?cat=torans",
+  },
+];

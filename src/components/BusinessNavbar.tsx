@@ -19,6 +19,8 @@ import {
   Store,
   Target,
   Mail,
+  Mic,
+  Sparkles,
 } from "lucide-react";
 import { CategoriesCarouselMegaMenu } from "./CategoriesCarouselMegaMenu";
 
@@ -44,6 +46,11 @@ export const BusinessNavbar: React.FC = () => {
   const categoriesRef = useRef<HTMLDivElement>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
 
+  // Search Type Dropdown ("Products", "Suppliers", "Audited Factory", "AI Mode")
+  const [searchType, setSearchType] = useState<"Products" | "Suppliers" | "Audited Factory" | "AI Mode">("Products");
+  const [isSearchTypeOpen, setIsSearchTypeOpen] = useState(false);
+  const searchTypeRef = useRef<HTMLDivElement>(null);
+
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -59,6 +66,12 @@ export const BusinessNavbar: React.FC = () => {
         !profileMenuRef.current.contains(target)
       ) {
         setIsProfileMenuOpen(false);
+      }
+      if (
+        searchTypeRef.current &&
+        !searchTypeRef.current.contains(target)
+      ) {
+        setIsSearchTypeOpen(false);
       }
       if (
         categoriesRef.current &&
@@ -329,39 +342,113 @@ export const BusinessNavbar: React.FC = () => {
             type="button"
             onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
             aria-label="All Categories"
-            className="flex items-center bg-[#e9f4ff]  gap-2 px-3 py-1.5 rounded-full hover:bg-slate-100 text-slate-800 font-bold transition cursor-pointer select-none text-xs sm:text-[15px] border border-slate-200 shadow-2xs hover:border-slate-300 active:scale-[0.98]"
+            className="flex items-center justify-center bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[15px] shadow-xs active:scale-[0.98]"
           >
-
             <span>Categories</span>
-            <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isCategoriesOpen ? "rotate-180 text-[#1559ac]" : ""}`} />
           </button>
         </div>
 
-        {/* Center: Search Bar (Exact Absolute Center matching Top Nav Center Container Width) */}
+        {/* Center: Search Bar (Exact Absolute Center matching Width 386px, First & Third Image based Blue Theme) */}
         <div
           className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
           style={{ width: "386px" }}
         >
           <form
             onSubmit={handleSearchSubmit}
-            className="w-full flex items-center bg-white rounded-full border border-gray-300 hover:border-gray-400 focus-within:border-[#1559ac] pl-4 pr-3 py-1 transition-all shadow-2xs h-[34px]"
+            className="w-full subnav-blue-search-container relative"
           >
+            {/* Left Search Type Dropdown trigger matching Image 1 & 3 */}
+            <div className="relative shrink-0 pl-1" ref={searchTypeRef}>
+              <button
+                type="button"
+                onClick={() => setIsSearchTypeOpen(!isSearchTypeOpen)}
+                className="flex items-center gap-1.5 pl-3 pr-2.5 py-1 text-slate-800 hover:text-[#2563eb] text-[13px] font-bold transition select-none cursor-pointer h-full"
+              >
+                <span className="truncate max-w-[75px]">{searchType}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isSearchTypeOpen ? "rotate-180 text-[#2563eb]" : ""}`} />
+              </button>
+
+              {/* Dropdown Menu matching Image 3 with AI Mode, Products, Suppliers, Audited Factory */}
+              {isSearchTypeOpen && (
+                <div className="absolute top-[44px] left-0 w-[170px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <button
+                    type="button"
+                    onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "AI Mode"
+                        ? "bg-blue-50 text-[#2563eb]"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      }`}
+                  >
+                    <Sparkles className="w-4 h-4 text-rose-500 fill-rose-500" />
+                    <span>AI Mode</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setSearchType("Products"); setIsSearchTypeOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Products"
+                        ? "bg-blue-50 text-[#2563eb]"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      }`}
+                  >
+                    <span>Products</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setSearchType("Suppliers"); setIsSearchTypeOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Suppliers"
+                        ? "bg-blue-50 text-[#2563eb]"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      }`}
+                  >
+                    <span>Suppliers</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setSearchType("Audited Factory"); setIsSearchTypeOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Audited Factory"
+                        ? "bg-blue-50 text-[#2563eb]"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      }`}
+                  >
+                    <span>Audited Factory</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Vertical Divider Line matching Image 2 */}
+            <div className="w-[1px] h-5 bg-slate-200 shrink-0" />
+
+            {/* Main Search Input */}
             <input
               type="text"
-              placeholder="What are you looking for?"
+              placeholder={searchType === "AI Mode" ? "Ask AI to find products..." : "Enter Product or Service to search."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-1 bg-transparent text-slate-800 placeholder:text-slate-400 text-xs sm:text-[13px] outline-none font-normal"
+              className="flex-1 min-w-0 pl-3 pr-2 bg-transparent text-slate-800 placeholder:text-slate-400 text-[13px] outline-none font-normal h-full"
             />
 
-            {/* Camera / Visual Search Icon */}
+            {/* Voice Search (Mic) Icon */}
             <button
               type="button"
-              aria-label="Search by image"
-              title="Image Search"
-              className="p-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
+              aria-label="Voice Search"
+              title="Search by voice"
+              className="p-1.5 mr-1 text-slate-400 hover:text-[#2563eb] transition shrink-0 cursor-pointer"
             >
-              <Camera className="w-4 h-4 stroke-[1.8]" />
+              <Mic className="w-4 h-4 stroke-[2]" />
+            </button>
+
+            {/* Right Solid Blue Pill Search Button with Full Height & Curved End (matching Image 2) */}
+            <button
+              type="submit"
+              aria-label="Search"
+              title="Search"
+              className="subnav-blue-search-btn shrink-0 cursor-pointer"
+            >
+              <Search className="w-4 h-4 text-white stroke-[2.5]" />
             </button>
           </form>
         </div>

@@ -46,38 +46,40 @@ export const B2B_TOP_CATEGORIES: B2BTopCategoryItem[] = [
 
 export const B2B_HERO_SLIDES: B2BBannerSlide[] = [
   {
-    id: "schneider-electric",
-    brand: "Schneider Electric",
-    title: "TeSys Tera\nMotor Management",
-    subtitle: "The all-in-one motor protection and monitoring, with PLC functionality.",
-    ctaText: "Explore the full range",
-    tagline: "Advancing Energy Tech",
-    bgColor: "#0d6832",
-    bgGradient: "from-[#0d6832] via-[#107c3e] to-[#0d6832]",
-    image: "/b2b-banner-schneider.jpg",
-    href: "/products?brand=schneider"
+    id: "global-business",
+    brand: "Global Trade",
+    title: "GROW YOUR BUSINESS IN ALL COUNTRIES",
+    subtitle: "Connect with verified global buyers, scale seamlessly across international markets with full export assistance.",
+    ctaText: "Start Exporting",
+    tagline: "Global Market Access",
+    bgColor: "#ffffff",
+    bgGradient: "from-[#1d4ed8] via-[#2563eb] to-[#1e40af]",
+    image: "/banners/b2b-carousel-slide1.jpg",
+    href: "/sell"
   },
   {
-    id: "siemens-industrial",
-    brand: "Siemens Automation",
-    title: "Next-Gen Smart\nIndustrial Drives",
-    subtitle: "High efficiency digitalized frequency converters and servo motor drives.",
-    ctaText: "Explore Industrial Drives",
-    tagline: "Ingenuity for Life",
-    bgColor: "#00646e",
-    bgGradient: "from-[#005f6b] via-[#007e8e] to-[#005f6b]",
-    href: "/products?brand=siemens"
+    id: "list-products",
+    brand: "Dial Export Mart",
+    title: "LIST YOUR PRODUCTS ON EXPORT MART",
+    subtitle: "Sell directly to verified business buyers. Increase visibility across multiple business categories from one dashboard.",
+    ctaText: "Start Selling Today",
+    tagline: "Verified Business Buyers",
+    bgColor: "#1a1f2c",
+    bgGradient: "from-[#0f172a] via-[#1e293b] to-[#0f172a]",
+    image: "/banners/b2b-carousel-slide2.jpg",
+    href: "/sell"
   },
   {
-    id: "havells-commercial",
-    brand: "Havells Commercial",
-    title: "Heavy Duty Commercial\nSwitchgear & Cables",
-    subtitle: "Engineered for maximum reliability in high-capacity manufacturing plants.",
-    ctaText: "View Wholesale Catalog",
-    tagline: "Building Future India",
-    bgColor: "#a31d1d",
-    bgGradient: "from-[#8b1414] via-[#b82222] to-[#8b1414]",
-    href: "/products?brand=havells"
+    id: "top-categories",
+    brand: "Quality Guaranteed",
+    title: "EXPLORE OUR TOP CATEGORY PRODUCTS",
+    subtitle: "Source directly from premier manufacturers with competitive wholesale pricing and verified quality.",
+    ctaText: "Explore Categories",
+    tagline: "Quality Guaranteed",
+    bgColor: "#f5ece3",
+    bgGradient: "from-[#f5ece3] via-[#faefe6] to-[#f5ece3]",
+    image: "/banners/b2b-carousel-slide3.png",
+    href: "/products?cat=all"
   }
 ];
 
