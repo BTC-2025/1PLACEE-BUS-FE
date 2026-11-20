@@ -340,9 +340,12 @@ export const BusinessNavbar: React.FC = () => {
         <div className="relative shrink-0" ref={categoriesRef}>
           <button
             type="button"
-            onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsCategoriesOpen((prev) => !prev);
+            }}
             aria-label="All Categories"
-            className="flex items-center justify-center bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[15px] shadow-xs active:scale-[0.98]"
+            className="flex pt-1 bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[15px] shadow-xs active:scale-[0.98]"
           >
             <span>Categories</span>
           </button>
@@ -350,7 +353,7 @@ export const BusinessNavbar: React.FC = () => {
 
         {/* Center: Search Bar (Exact Absolute Center matching Width 386px, First & Third Image based Blue Theme) */}
         <div
-          className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
+          className="py-1 hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
           style={{ width: "386px" }}
         >
           <form
@@ -375,8 +378,8 @@ export const BusinessNavbar: React.FC = () => {
                     type="button"
                     onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
                     className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "AI Mode"
-                        ? "bg-blue-50 text-[#2563eb]"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      ? "bg-blue-50 text-[#2563eb]"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
                       }`}
                   >
                     <Sparkles className="w-4 h-4 text-rose-500 fill-rose-500" />
@@ -387,8 +390,8 @@ export const BusinessNavbar: React.FC = () => {
                     type="button"
                     onClick={() => { setSearchType("Products"); setIsSearchTypeOpen(false); }}
                     className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Products"
-                        ? "bg-blue-50 text-[#2563eb]"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      ? "bg-blue-50 text-[#2563eb]"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
                       }`}
                   >
                     <span>Products</span>
@@ -398,8 +401,8 @@ export const BusinessNavbar: React.FC = () => {
                     type="button"
                     onClick={() => { setSearchType("Suppliers"); setIsSearchTypeOpen(false); }}
                     className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Suppliers"
-                        ? "bg-blue-50 text-[#2563eb]"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      ? "bg-blue-50 text-[#2563eb]"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
                       }`}
                   >
                     <span>Suppliers</span>
@@ -409,8 +412,8 @@ export const BusinessNavbar: React.FC = () => {
                     type="button"
                     onClick={() => { setSearchType("Audited Factory"); setIsSearchTypeOpen(false); }}
                     className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Audited Factory"
-                        ? "bg-blue-50 text-[#2563eb]"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
+                      ? "bg-blue-50 text-[#2563eb]"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
                       }`}
                   >
                     <span>Audited Factory</span>
