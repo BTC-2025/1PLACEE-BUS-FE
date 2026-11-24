@@ -96,7 +96,7 @@ export const BusinessNavbar: React.FC = () => {
 
   const isHomeActive = pathname === "/";
   const isB2bActive = pathname.startsWith("/b2b");
-  const isB2cActive = pathname.startsWith("/b2c-gst") || pathname.startsWith("/products");
+  const isB2cActive = pathname.startsWith("/b2c-gst") || pathname.startsWith("/products") || pathname.startsWith("/categories");
   const isOrdersActive = pathname.startsWith("/orders");
 
   return (
@@ -104,17 +104,24 @@ export const BusinessNavbar: React.FC = () => {
       {/* ========================================================================= */}
       {/* TIER 1: Main Top Navbar (60px height) */}
       {/* ========================================================================= */}
-      <div className="bg-[#e9f4ff] pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[60px] sm:h-[60px] border-b border-[#cde2f8] relative">
+      <div
+        className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[60px] sm:h-[60px] border-b relative"
+        style={{
+          backgroundColor: "#0e0f89",
+          borderColor: "#0a0b6e",
+          color: "#0e0f89"
+        }}
+      >
         {/* Left Group: 1PLACEE Logo + Location Pill with Name */}
         <div className="flex items-center gap-3.5 sm:gap-4 shrink-0 z-10">
           <Link
             href="/"
-            className="flex items-center hover:opacity-90 transition select-none py-0.5"
+            className="flex items-center hover:opacity-90 transition select-none py-0.5 h-[50px] overflow-hidden"
           >
             <img
               src="/logo.png?v=2"
               alt="1Placee"
-              className="h-24 sm:h-26 w-auto object-contain drop-shadow-xs"
+              className="px-1 py-2 h-11 sm:h-8 w-auto bg-white rounded-2xl object-contain drop-shadow-xs"
             />
           </Link>
 
@@ -124,19 +131,19 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               onClick={() => setIsLocationOpen(!isLocationOpen)}
               aria-label="Location"
-              className="group flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#1559ac] hover:text-white"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none"
             >
-              <MapPin className="w-4.5 h-4 text-[#1559ac] group-hover:text-white stroke-[2.2] shrink-0 transition-colors" />
+              <MapPin className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
               <div className="flex flex-col text-left leading-tight">
-                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white truncate max-w-[130px] transition-colors">
+                <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] truncate max-w-[130px]">
                   {selectedLocation}
                 </span>
               </div>
-              <ChevronDown className="w-4 h-4.5 text-[#1559ac] group-hover:text-white shrink-0 ml-0.5 transition-colors" />
+              <ChevronDown className="w-4 h-4 text-[#0e0f89] shrink-0 ml-0.5" />
             </button>
 
             {isLocationOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 border border-slate-200 z-50 text-xs">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 border border-slate-200 z-50 text-xs text-slate-800">
                 {["Chennai, TN", "Vellore", "trichy", "Madurai", "Bangalore"].map(
                   (loc) => (
                     <button
@@ -146,7 +153,7 @@ export const BusinessNavbar: React.FC = () => {
                         setSelectedLocation(loc);
                         setIsLocationOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-blue-50 font-bold text-slate-700 hover:text-[#1559ac] transition"
+                      className="w-full text-left px-4 py-2 hover:bg-blue-50 font-bold text-slate-700 hover:text-[#0e0f89] transition"
                     >
                       {loc}
                     </button>
@@ -158,39 +165,39 @@ export const BusinessNavbar: React.FC = () => {
         </div>
 
         {/* Center Group: Eclipse Container with Four Buttons: Home, B2B, B2C, Orders */}
-        <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-[#d7ebfc] p-1.5 rounded-full border border-[#b8dcfa] shadow-2xs z-10 pointer-events-auto">
+        <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-white p-1 rounded-full border border-slate-200 shadow-xs z-10 pointer-events-auto">
           <Link
             href="/"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isHomeActive
-              ? "bg-[#1559ac] text-white shadow-sm"
-              : "text-[#1559ac] hover:bg-white"
+            className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isHomeActive
+              ? "bg-[#0e0f89] text-white shadow-sm"
+              : "text-[#0e0f89] hover:bg-slate-100"
               }`}
           >
             Home
           </Link>
           <Link
             href="/b2b"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2bActive
-              ? "bg-[#1559ac] text-white shadow-sm"
-              : "text-[#1559ac] hover:bg-white"
+            className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2bActive
+              ? "bg-[#0e0f89] text-white shadow-sm"
+              : "text-[#0e0f89] hover:bg-slate-100"
               }`}
           >
             B2B
           </Link>
           <Link
             href="/b2c-gst"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2cActive
-              ? "bg-[#1559ac] text-white shadow-sm"
-              : "text-[#1559ac] hover:bg-white"
+            className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2cActive
+              ? "bg-[#0e0f89] text-white shadow-sm"
+              : "text-[#0e0f89] hover:bg-slate-100"
               }`}
           >
             B2C
           </Link>
           <Link
             href="/orders"
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isOrdersActive
-              ? "bg-[#1559ac] text-white shadow-sm"
-              : "text-[#1559ac] hover:bg-white"
+            className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isOrdersActive
+              ? "bg-[#0e0f89] text-white shadow-sm"
+              : "text-[#0e0f89] hover:bg-slate-100"
               }`}
           >
             Orders
@@ -198,18 +205,16 @@ export const BusinessNavbar: React.FC = () => {
         </div>
 
         {/* Right Group: Sell Store Pill + Bell Notification + Wishlist + Cart + Profile + Bittool */}
-        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
-          {/* 1. Sell Button (Pill layout matching User Profile: Circle Icon on Left + 'Sell' on Right) */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 z-20">
+          {/* 1. Sell Button */}
           <Link
             href="/sell"
             aria-label="Sell"
             title="Sell on 1PLACEE"
-            className="group flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1e293b] hover:text-white transition-all duration-200 cursor-pointer select-none"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#0e0f89]"
           >
-            <div className="w-6 h-6 rounded-full bg-[#1559ac] group-hover:bg-white text-white group-hover:text-[#1559ac] flex items-center justify-center font-bold text-xs shadow-xs transition-colors shrink-0">
-              <Store className="w-3.5 h-3.5 stroke-[2.2]" />
-            </div>
-            <span className="font-bold text-xs sm:text-[13px] text-[#1e293b] group-hover:text-white transition-colors leading-tight">
+            <Store className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
+            <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] leading-tight">
               Sell
             </span>
           </Link>
@@ -219,10 +224,10 @@ export const BusinessNavbar: React.FC = () => {
             type="button"
             aria-label="Notifications"
             title="Notifications"
-            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
-            <Bell className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] transition-colors" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff9900] ring-2 ring-white group-hover:ring-[#1559ac] transition-all" />
+            <Bell className="w-4.5 h-4.5 text-[#0e0f89] stroke-[2.2]" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff9900] ring-2 ring-white" />
           </button>
 
           {/* 4. Wishlist Button */}
@@ -230,9 +235,9 @@ export const BusinessNavbar: React.FC = () => {
             href="/wishlist"
             aria-label="Wishlist"
             title="Wishlist"
-            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
-            <Heart className="w-5 h-5 text-[#1559ac] group-hover:text-white stroke-[2] fill-transparent group-hover:fill-white transition-all" />
+            <Heart className="w-4.5 h-4.5 text-[#0e0f89] stroke-[2.2] fill-transparent" />
           </Link>
 
           {/* 5. Cart Button with Badge */}
@@ -240,11 +245,11 @@ export const BusinessNavbar: React.FC = () => {
             href="/products"
             aria-label="Cart"
             title="Cart"
-            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1559ac] hover:text-white transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
             <svg
               viewBox="0 0 24 24"
-              className="w-5 h-5 text-[#1559ac] group-hover:text-white transition-colors"
+              className="w-4.5 h-4 text-[#0e0f89]"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -269,17 +274,15 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
               aria-label="Profile"
-              className="group flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs text-[#1e293b] hover:text-white transition-all duration-200 cursor-pointer select-none"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs text-[#0e0f89] transition-all duration-200 cursor-pointer select-none"
             >
-              <div className="w-6 h-6 rounded-full bg-[#1559ac] group-hover:bg-white text-white group-hover:text-[#1559ac] flex items-center justify-center font-bold text-xs shadow-xs transition-colors">
-                <User className="w-3.5 h-3.5" />
-              </div>
+              <User className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
               <div className="flex flex-col text-left leading-tight hidden sm:flex">
-                <span className="mt-[-1.5px] font-bold text-[10px] sm:text-sm text-[#1e293b] group-hover:text-white max-w-[85px] transition-colors ">
+                <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] max-w-[85px]">
                   Vinothkumar
                 </span>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-[#1559ac] group-hover:text-white transition-all duration-200" />
+              <ChevronDown className="w-3.5 h-3.5 text-[#0e0f89]" />
             </button>
 
             {isProfileMenuOpen && (
@@ -291,13 +294,13 @@ export const BusinessNavbar: React.FC = () => {
                 <div className="py-1">
                   <Link
                     href="/orders"
-                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#1559ac] transition"
+                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#0e0f89] transition"
                   >
                     Your Orders
                   </Link>
                   <Link
                     href="/contracts"
-                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#1559ac] transition"
+                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#0e0f89] transition"
                   >
                     Vendor Contracts
                   </Link>
@@ -313,20 +316,34 @@ export const BusinessNavbar: React.FC = () => {
           </div>
 
           {/* Vertical Divider Line */}
-          <div className="h-6 w-[1.5px] bg-[#b8dcfa] ml-0.5 mr-1" />
+          <div className="h-6 w-[1.5px] bg-slate-200 ml-0.5 mr-1" />
 
           {/* 7. Bittool / Equalizer Control Sliders Icon Button */}
           <button
             type="button"
             aria-label="Preferences & Bittool"
             title="Preferences & Bittool"
-            className="group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/90 hover:bg-[#1559ac] border border-[#b8dcfa] shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
+            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
           >
-            <img
-              src="/equalizer-icon.png"
-              alt="Bittool"
-              className="w-5 h-5 object-contain transition-all duration-200 group-hover:brightness-0 group-hover:invert"
-            />
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4.5 h-4.5 text-[#0e0f89]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="4" y1="21" x2="4" y2="14" />
+              <line x1="4" y1="10" x2="4" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12" y2="3" />
+              <line x1="20" y1="21" x2="20" y2="16" />
+              <line x1="20" y1="12" x2="20" y2="3" />
+              <line x1="1" y1="14" x2="7" y2="14" />
+              <line x1="9" y1="8" x2="15" y2="8" />
+              <line x1="17" y1="16" x2="23" y2="16" />
+            </svg>
           </button>
         </div>
       </div>
@@ -336,20 +353,43 @@ export const BusinessNavbar: React.FC = () => {
       {/* Left: Categories button; Center: Big Search Bar; Right: Help&Support & Settings */}
       {/* ========================================================================= */}
       <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
-        {/* Left Side: Categories Button */}
-        <div className="relative shrink-0" ref={categoriesRef}>
-          <button
-            type="button"
+        {/* Left Side: Categories Button (Hidden on Home page as requested) */}
+        {!isHomeActive ? (
+          <div
+            className="relative shrink-0"
+            ref={categoriesRef}
             onClick={(e) => {
-              e.stopPropagation();
-              setIsCategoriesOpen((prev) => !prev);
+              if (isB2cActive) {
+                // In B2C mode, navigate directly to 1PLACEE-FE Categories page
+                router.push("/categories");
+              } else {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsCategoriesOpen((prev) => !prev);
+              }
             }}
-            aria-label="All Categories"
-            className="flex pt-1 bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[15px] shadow-xs active:scale-[0.98]"
           >
-            <span>Categories</span>
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                if (isB2cActive) {
+                  // In B2C mode, navigate directly to 1PLACEE-FE Categories page
+                  router.push("/categories");
+                } else {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsCategoriesOpen((prev) => !prev);
+                }
+              }}
+              aria-label="All Categories"
+              className="flex bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[17px] shadow-xs active:scale-[0.98]"
+            >
+              <span className="pb-1 pointer-events-none">Categories</span>
+            </button>
+          </div>
+        ) : (
+          <div className="shrink-0 w-0" />
+        )}
 
         {/* Center: Search Bar (Exact Absolute Center matching Width 386px, First & Third Image based Blue Theme) */}
         <div
@@ -361,19 +401,19 @@ export const BusinessNavbar: React.FC = () => {
             className="w-full subnav-blue-search-container relative"
           >
             {/* Left Search Type Dropdown trigger matching Image 1 & 3 */}
-            <div className="relative shrink-0 pl-1" ref={searchTypeRef}>
+            <div className=" relative shrink-0 pl-1 h-9 " ref={searchTypeRef}>
               <button
                 type="button"
                 onClick={() => setIsSearchTypeOpen(!isSearchTypeOpen)}
-                className="flex items-center gap-1.5 pl-3 pr-2.5 py-1 text-slate-800 hover:text-[#2563eb] text-[13px] font-bold transition select-none cursor-pointer h-full"
+                className="flex items-center gap-1.5 pl-3 pr-2.5 py-1 text-slate-800 hover:text-[#1559ac] text-[13px] font-bold transition select-none cursor-pointer h-full"
               >
                 <span className="truncate max-w-[75px]">{searchType}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isSearchTypeOpen ? "rotate-180 text-[#2563eb]" : ""}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isSearchTypeOpen ? "rotate-180 text-[#1559ac]" : ""}`} />
               </button>
 
               {/* Dropdown Menu matching Image 3 with AI Mode, Products, Suppliers, Audited Factory */}
               {isSearchTypeOpen && (
-                <div className="absolute top-[44px] left-0 w-[170px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                <div className="absolute top-[44px] left-0 w-[170px] border border-[#1559ac] bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                   <button
                     type="button"
                     onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
@@ -439,7 +479,7 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               aria-label="Voice Search"
               title="Search by voice"
-              className="p-1.5 mr-1 text-slate-400 hover:text-[#2563eb] transition shrink-0 cursor-pointer"
+              className="p-1.5 mr-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
             >
               <Mic className="w-4 h-4 stroke-[2]" />
             </button>
@@ -458,8 +498,8 @@ export const BusinessNavbar: React.FC = () => {
 
         {/* Right Fixed Group: RFQ + Messages (Only in B2B/Wholesale modes) + Help&Support + Settings */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0 pl-1 z-10">
-          {/* RFQ & Messages: B2B/Wholesale specific, hidden in B2C mode as requested */}
-          {!isB2cActive && (
+          {/* RFQ & Messages: Only visible in B2B mode, removed on Home and B2C */}
+          {isB2bActive && (
             <>
               {/* 1. RFQ Button */}
               <Link

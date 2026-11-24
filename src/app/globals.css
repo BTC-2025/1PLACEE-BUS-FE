@@ -14,10 +14,10 @@ body {
 /* Subnav Blue Pill Search Bar matching Image 2 */
 .subnav-blue-search-container {
   height: 40px !important;
-  border: 1.5px solid #2563eb !important;
+  border: 1.5px solid #1559ac !important;
   background-color: #ffffff !important;
   border-radius: 9999px !important;
-  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(21, 89, 172, 0.1) !important;
   transition: all 0.2s ease !important;
   display: flex !important;
   align-items: center !important;
@@ -25,14 +25,14 @@ body {
 
 
 .subnav-blue-search-container:focus-within {
-  border-color: #1d4ed8 !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+  border-color: #0f468a !important;
+  box-shadow: 0 0 0 3px rgba(21, 89, 172, 0.2) !important;
 }
 
 .subnav-blue-search-btn {
   height: 100% !important;
   min-height: 100% !important;
-  background-color: #2563eb !important;
+  background-color: #1559ac !important;
   color: #ffffff !important;
   padding-left: 1.125rem !important;
   padding-right: 1.125rem !important;
@@ -45,11 +45,11 @@ body {
 }
 
 .subnav-blue-search-btn:hover {
-  background-color: #1d4ed8 !important;
+  background-color: #0f468a !important;
 }
 
 .subnav-blue-search-btn:active {
-  background-color: #1e40af !important;
+  background-color: #0b3466 !important;
 }
 
 /* Categories 8-Column Mega Menu Grid */
@@ -308,8 +308,3 @@ body {
     gap: 1.25rem;
   }
 }
-
-
-
-
-

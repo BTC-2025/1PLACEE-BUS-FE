@@ -387,7 +387,7 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-5 bg-[#1d72fe] rounded-full" />
                 <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
-                  Top Categories &amp; Industry Directories
+                  All Categories
                 </h3>
               </div>
 
