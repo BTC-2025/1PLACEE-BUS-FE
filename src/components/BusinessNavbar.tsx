@@ -28,6 +28,11 @@ export const BusinessNavbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Location Selector
   const [selectedLocation, setSelectedLocation] = useState("Chennai, TN");
   const [isLocationOpen, setIsLocationOpen] = useState(false);
@@ -100,12 +105,12 @@ export const BusinessNavbar: React.FC = () => {
   const isOrdersActive = pathname.startsWith("/orders");
 
   return (
-    <header className="sticky top-0 z-50 w-full select-none text-xs font-sans shadow-xs">
+    <header className="sticky top-0 z-50 w-full select-none text-xs font-sans shadow-xs" suppressHydrationWarning>
       {/* ========================================================================= */}
       {/* TIER 1: Main Top Navbar (60px height) */}
       {/* ========================================================================= */}
       <div
-        className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[60px] sm:h-[60px] border-b relative"
+        className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[64px] sm:h-[64px] border-b relative"
         style={{
           backgroundColor: "#0e0f89",
           borderColor: "#0a0b6e",
@@ -121,7 +126,7 @@ export const BusinessNavbar: React.FC = () => {
             <img
               src="/logo.png?v=2"
               alt="1Placee"
-              className="px-1 py-2 h-11 sm:h-8 w-auto bg-white rounded-2xl object-contain drop-shadow-xs"
+              className="px-4 py-1 h-10 sm:h-10 w-auto bg-white rounded-full object-contain drop-shadow-xs"
             />
           </Link>
 
@@ -131,11 +136,11 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               onClick={() => setIsLocationOpen(!isLocationOpen)}
               aria-label="Location"
-              className="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none"
+              className="h-10 group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none"
             >
-              <MapPin className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
+              <MapPin className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
               <div className="flex flex-col text-left leading-tight">
-                <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] truncate max-w-[130px]">
+                <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] truncate max-w-[130px]">
                   {selectedLocation}
                 </span>
               </div>
@@ -168,36 +173,40 @@ export const BusinessNavbar: React.FC = () => {
         <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-white p-1 rounded-full border border-slate-200 shadow-xs z-10 pointer-events-auto">
           <Link
             href="/"
+            style={isHomeActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isHomeActive
-              ? "bg-[#0e0f89] text-white shadow-sm"
-              : "text-[#0e0f89] hover:bg-slate-100"
+              ? "shadow-sm"
+              : "hover:bg-slate-100"
               }`}
           >
             Home
           </Link>
           <Link
             href="/b2b"
+            style={isB2bActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2bActive
-              ? "bg-[#0e0f89] text-white shadow-sm"
-              : "text-[#0e0f89] hover:bg-slate-100"
+              ? "shadow-sm"
+              : "hover:bg-slate-100"
               }`}
           >
             B2B
           </Link>
           <Link
             href="/b2c-gst"
+            style={isB2cActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2cActive
-              ? "bg-[#0e0f89] text-white shadow-sm"
-              : "text-[#0e0f89] hover:bg-slate-100"
+              ? "shadow-sm"
+              : "hover:bg-slate-100"
               }`}
           >
             B2C
           </Link>
           <Link
             href="/orders"
+            style={isOrdersActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isOrdersActive
-              ? "bg-[#0e0f89] text-white shadow-sm"
-              : "text-[#0e0f89] hover:bg-slate-100"
+              ? "shadow-sm"
+              : "hover:bg-slate-100"
               }`}
           >
             Orders
@@ -205,16 +214,16 @@ export const BusinessNavbar: React.FC = () => {
         </div>
 
         {/* Right Group: Sell Store Pill + Bell Notification + Wishlist + Cart + Profile + Bittool */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 z-20">
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 z-20">
           {/* 1. Sell Button */}
           <Link
             href="/sell"
             aria-label="Sell"
             title="Sell on 1PLACEE"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#0e0f89]"
+            className="h-10 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#0e0f89]"
           >
-            <Store className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
-            <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] leading-tight">
+            <Store className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
+            <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] leading-tight">
               Sell
             </span>
           </Link>
@@ -224,9 +233,9 @@ export const BusinessNavbar: React.FC = () => {
             type="button"
             aria-label="Notifications"
             title="Notifications"
-            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
-            <Bell className="w-4.5 h-4.5 text-[#0e0f89] stroke-[2.2]" />
+            <Bell className="w-5 h-5 text-[#0e0f89] stroke-[2] transition-colors" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff9900] ring-2 ring-white" />
           </button>
 
@@ -235,9 +244,9 @@ export const BusinessNavbar: React.FC = () => {
             href="/wishlist"
             aria-label="Wishlist"
             title="Wishlist"
-            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
-            <Heart className="w-4.5 h-4.5 text-[#0e0f89] stroke-[2.2] fill-transparent" />
+            <Heart className="w-5 h-5 text-[#0e0f89] stroke-[2] fill-transparent" />
           </Link>
 
           {/* 5. Cart Button with Badge */}
@@ -245,11 +254,11 @@ export const BusinessNavbar: React.FC = () => {
             href="/products"
             aria-label="Cart"
             title="Cart"
-            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
           >
             <svg
               viewBox="0 0 24 24"
-              className="w-4.5 h-4 text-[#0e0f89]"
+              className="w-5 h-5 text-[#0e0f89]"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -274,11 +283,11 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
               aria-label="Profile"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs text-[#0e0f89] transition-all duration-200 cursor-pointer select-none"
+              className="h-10 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs text-[#0e0f89] transition-all duration-200 cursor-pointer select-none"
             >
-              <User className="w-4 h-4 text-[#0e0f89] stroke-[2.2] shrink-0" />
+              <User className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
               <div className="flex flex-col text-left leading-tight hidden sm:flex">
-                <span className="font-bold text-xs sm:text-[13px] text-[#0e0f89] max-w-[85px]">
+                <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] max-w-[85px]">
                   Vinothkumar
                 </span>
               </div>
@@ -318,32 +327,18 @@ export const BusinessNavbar: React.FC = () => {
           {/* Vertical Divider Line */}
           <div className="h-6 w-[1.5px] bg-slate-200 ml-0.5 mr-1" />
 
-          {/* 7. Bittool / Equalizer Control Sliders Icon Button */}
+          {/* 7. Bittool / Preferences Icon Button */}
           <button
             type="button"
             aria-label="Preferences & Bittool"
             title="Preferences & Bittool"
-            className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="w-4.5 h-4.5 text-[#0e0f89]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="4" y1="21" x2="4" y2="14" />
-              <line x1="4" y1="10" x2="4" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="12" />
-              <line x1="12" y1="8" x2="12" y2="3" />
-              <line x1="20" y1="21" x2="20" y2="16" />
-              <line x1="20" y1="12" x2="20" y2="3" />
-              <line x1="1" y1="14" x2="7" y2="14" />
-              <line x1="9" y1="8" x2="15" y2="8" />
-              <line x1="17" y1="16" x2="23" y2="16" />
-            </svg>
+            <img
+              src="/bittool-icon.png"
+              alt="Bittool"
+              className="w-5 h-5 object-contain"
+            />
           </button>
         </div>
       </div>
@@ -352,25 +347,13 @@ export const BusinessNavbar: React.FC = () => {
       {/* TIER 2: Subnav Ribbon (44px height) */}
       {/* Left: Categories button; Center: Big Search Bar; Right: Help&Support & Settings */}
       {/* ========================================================================= */}
-      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[44px] border-b border-gray-200/80 shadow-2xs relative select-none">
-        {/* Left Side: Categories Button (Hidden on Home page as requested) */}
+      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[48px] border-b border-gray-200/80 shadow-2xs relative select-none">
+        {/* Left Side: Categories Button & Expandable Search Bar */}
         {!isHomeActive ? (
-          <div
-            className="relative shrink-0"
-            ref={categoriesRef}
-            onClick={(e) => {
-              if (isB2cActive) {
-                // In B2C mode, navigate directly to 1PLACEE-FE Categories page
-                router.push("/categories");
-              } else {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsCategoriesOpen((prev) => !prev);
-              }
-            }}
-          >
-            <button
-              type="button"
+          <div className="flex items-center gap-2 shrink-0 z-20">
+            <div
+              className="relative shrink-0"
+              ref={categoriesRef}
               onClick={(e) => {
                 if (isB2cActive) {
                   // In B2C mode, navigate directly to 1PLACEE-FE Categories page
@@ -381,120 +364,164 @@ export const BusinessNavbar: React.FC = () => {
                   setIsCategoriesOpen((prev) => !prev);
                 }
               }}
-              aria-label="All Categories"
-              className="flex bg-[#1559ac] hover:bg-[#1559ac] text-white font-bold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[17px] shadow-xs active:scale-[0.98]"
             >
-              <span className="pb-1 pointer-events-none">Categories</span>
-            </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  if (isB2cActive) {
+                    // In B2C mode, navigate directly to 1PLACEE-FE Categories page
+                    router.push("/categories");
+                  } else {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsCategoriesOpen((prev) => !prev);
+                  }
+                }}
+                aria-label="All Categories"
+                style={{
+                  backgroundColor: "#0e0f89",
+                  color: "#ffffff",
+                  fontSize: "16px"
+                }}
+                className="h-8 w-auto font-bold flex text-white px-5 py-1 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[17px] shadow-xs active:scale-[0.98]"
+              >
+                <span className="pb-1 pointer-events-none text-white">Categories</span>
+              </button>
+            </div>
+
+            {/* Expandable Search Bar right next to Categories */}
+            <div
+              ref={searchContainerRef}
+              className="relative flex items-center"
+              style={{ marginLeft: "6px" }}
+            >
+              {isSearchOpen ? (
+                <div
+                  className="flex items-center animate-in fade-in slide-in-from-left-2 duration-200"
+                  style={{ width: "386px", height: "32px" }}
+                >
+                  <form
+                    onSubmit={handleSearchSubmit}
+                    className="w-full h-8 subnav-blue-search-container relative"
+                    style={{ height: "32px" }}
+                  >
+                    {/* Left Search Type Dropdown trigger */}
+                    <div className="relative shrink-0 pl-1 h-8" ref={searchTypeRef}>
+                      <button
+                        type="button"
+                        onClick={() => setIsSearchTypeOpen(!isSearchTypeOpen)}
+                        className="flex items-center gap-1.5 pl-3 pr-2.5 py-1 text-slate-800 hover:text-[#0e0f89] text-[13px] font-bold transition select-none cursor-pointer h-full"
+                      >
+                        <span className="truncate max-w-[75px]">{searchType}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isSearchTypeOpen ? "rotate-180 text-[#0e0f89]" : ""}`} />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {isSearchTypeOpen && (
+                        <div className="absolute top-[48px] left-0 w-[170px] border border-[#0e0f89] bg-white rounded-2xl shadow-2xl border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                          <button
+                            type="button"
+                            onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
+                            className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "AI Mode"
+                              ? "bg-blue-50/70 text-[#0e0f89]"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-[#0e0f89]"
+                              }`}
+                          >
+                            <Sparkles className="w-4 h-4 text-rose-500 fill-rose-500" />
+                            <span>AI Mode</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => { setSearchType("Products"); setIsSearchTypeOpen(false); }}
+                            className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Products"
+                              ? "bg-blue-50/70 text-[#0e0f89]"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-[#0e0f89]"
+                              }`}
+                          >
+                            <span>Products</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => { setSearchType("Suppliers"); setIsSearchTypeOpen(false); }}
+                            className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Suppliers"
+                              ? "bg-blue-50/70 text-[#0e0f89]"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-[#0e0f89]"
+                              }`}
+                          >
+                            <span>Suppliers</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => { setSearchType("Audited Factory"); setIsSearchTypeOpen(false); }}
+                            className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Audited Factory"
+                              ? "bg-blue-50/70 text-[#0e0f89]"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-[#0e0f89]"
+                              }`}
+                          >
+                            <span>Audited Factory</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Vertical Divider Line */}
+                    <div className="w-[1px] h-5 bg-slate-200 shrink-0" />
+
+                    {/* Main Search Input */}
+                    <input
+                      type="text"
+                      autoFocus
+                      placeholder={searchType === "AI Mode" ? "Ask AI to find products..." : "Enter Product or Service to search."}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1 min-w-0 pl-3 pr-2 bg-transparent text-slate-800 placeholder:text-slate-400 text-[13px] outline-none font-normal h-full"
+                    />
+
+                    {/* Voice Search (Mic) Icon */}
+                    <button
+                      type="button"
+                      aria-label="Voice Search"
+                      title="Search by voice"
+                      className="p-1.5 mr-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
+                    >
+                      <Mic className="w-4 h-4 stroke-[2]" />
+                    </button>
+
+                    {/* Right Search Button */}
+                    <button
+                      type="submit"
+                      aria-label="Search"
+                      title="Search"
+                      className="subnav-blue-search-btn shrink-0 cursor-pointer"
+                    >
+                      <Search className="w-4 h-4 text-white stroke-[2.5]" />
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                /* Circle Search Icon Button */
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Open Search"
+                  title="Search"
+                  style={{
+                    backgroundColor: "#0e0f89",
+                    color: "#ffffff"
+                  }}
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200  transition-all duration-200 cursor-pointer shrink-0"
+                >
+                  <Search className="w-4 h-4 text-[#0e0f89] stroke-[2.2]" />
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           <div className="shrink-0 w-0" />
         )}
-
-        {/* Center: Search Bar (Exact Absolute Center matching Width 386px, First & Third Image based Blue Theme) */}
-        <div
-          className="py-1 hidden md:flex items-center absolute left-1/2 -translate-x-1/2 z-10 pointer-events-auto"
-          style={{ width: "386px" }}
-        >
-          <form
-            onSubmit={handleSearchSubmit}
-            className="w-full subnav-blue-search-container relative"
-          >
-            {/* Left Search Type Dropdown trigger matching Image 1 & 3 */}
-            <div className=" relative shrink-0 pl-1 h-9 " ref={searchTypeRef}>
-              <button
-                type="button"
-                onClick={() => setIsSearchTypeOpen(!isSearchTypeOpen)}
-                className="flex items-center gap-1.5 pl-3 pr-2.5 py-1 text-slate-800 hover:text-[#1559ac] text-[13px] font-bold transition select-none cursor-pointer h-full"
-              >
-                <span className="truncate max-w-[75px]">{searchType}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isSearchTypeOpen ? "rotate-180 text-[#1559ac]" : ""}`} />
-              </button>
-
-              {/* Dropdown Menu matching Image 3 with AI Mode, Products, Suppliers, Audited Factory */}
-              {isSearchTypeOpen && (
-                <div className="absolute top-[44px] left-0 w-[170px] border border-[#1559ac] bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <button
-                    type="button"
-                    onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "AI Mode"
-                      ? "bg-blue-50 text-[#2563eb]"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
-                      }`}
-                  >
-                    <Sparkles className="w-4 h-4 text-rose-500 fill-rose-500" />
-                    <span>AI Mode</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { setSearchType("Products"); setIsSearchTypeOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Products"
-                      ? "bg-blue-50 text-[#2563eb]"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
-                      }`}
-                  >
-                    <span>Products</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { setSearchType("Suppliers"); setIsSearchTypeOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Suppliers"
-                      ? "bg-blue-50 text-[#2563eb]"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
-                      }`}
-                  >
-                    <span>Suppliers</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { setSearchType("Audited Factory"); setIsSearchTypeOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "Audited Factory"
-                      ? "bg-blue-50 text-[#2563eb]"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-[#2563eb]"
-                      }`}
-                  >
-                    <span>Audited Factory</span>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Vertical Divider Line matching Image 2 */}
-            <div className="w-[1px] h-5 bg-slate-200 shrink-0" />
-
-            {/* Main Search Input */}
-            <input
-              type="text"
-              placeholder={searchType === "AI Mode" ? "Ask AI to find products..." : "Enter Product or Service to search."}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 min-w-0 pl-3 pr-2 bg-transparent text-slate-800 placeholder:text-slate-400 text-[13px] outline-none font-normal h-full"
-            />
-
-            {/* Voice Search (Mic) Icon */}
-            <button
-              type="button"
-              aria-label="Voice Search"
-              title="Search by voice"
-              className="p-1.5 mr-1 text-slate-400 hover:text-[#1559ac] transition shrink-0 cursor-pointer"
-            >
-              <Mic className="w-4 h-4 stroke-[2]" />
-            </button>
-
-            {/* Right Solid Blue Pill Search Button with Full Height & Curved End (matching Image 2) */}
-            <button
-              type="submit"
-              aria-label="Search"
-              title="Search"
-              className="subnav-blue-search-btn shrink-0 cursor-pointer"
-            >
-              <Search className="w-4 h-4 text-white stroke-[2.5]" />
-            </button>
-          </form>
-        </div>
 
         {/* Right Fixed Group: RFQ + Messages (Only in B2B/Wholesale modes) + Help&Support + Settings */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0 pl-1 z-10">
@@ -505,9 +532,10 @@ export const BusinessNavbar: React.FC = () => {
               <Link
                 href="/rfq"
                 aria-label="Post My RFQ"
-                className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none group"
+                style={{ color: "#0e0f89" }}
+                className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
               >
-                <Target className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2.2]" />
+                <Target className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
                 <span className="hidden sm:inline">RFQ</span>
               </Link>
 
@@ -515,9 +543,10 @@ export const BusinessNavbar: React.FC = () => {
               <Link
                 href="/messages"
                 aria-label="Messages"
-                className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none group"
+                style={{ color: "#0e0f89" }}
+                className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
               >
-                <Mail className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2.2]" />
+                <Mail className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
                 <span className="hidden sm:inline">Messages</span>
               </Link>
             </>
@@ -527,9 +556,10 @@ export const BusinessNavbar: React.FC = () => {
           <button
             type="button"
             aria-label="Help & Support"
-            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none group"
+            style={{ color: "#0e0f89" }}
+            className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
           >
-            <Headset className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2.2]" />
+            <Headset className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
             <span className="hidden sm:inline">Help&Support</span>
           </button>
 
@@ -537,9 +567,10 @@ export const BusinessNavbar: React.FC = () => {
           <button
             type="button"
             aria-label="Settings"
-            className="flex items-center gap-1.5 text-gray-600 hover:text-[#1559ac] hover:bg-gray-100 px-2 py-1 rounded-full text-xs sm:text-[12.5px] font-medium transition cursor-pointer select-none group"
+            style={{ color: "#0e0f89" }}
+            className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
           >
-            <Settings className="w-4 h-4 text-gray-600 group-hover:text-[#1559ac] stroke-[2]" />
+            <Settings className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
             <span className="hidden sm:inline">Settings</span>
           </button>
         </div>
