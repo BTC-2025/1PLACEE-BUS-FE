@@ -36,6 +36,7 @@ export const BusinessNavbar: React.FC = () => {
   // Location Selector
   const [selectedLocation, setSelectedLocation] = useState("Chennai, TN");
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const locationRef = useRef<HTMLDivElement>(null);
 
   // Search Expansion
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -86,6 +87,12 @@ export const BusinessNavbar: React.FC = () => {
       ) {
         setIsCategoriesOpen(false);
       }
+      if (
+        locationRef.current &&
+        !locationRef.current.contains(target)
+      ) {
+        setIsLocationOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -107,18 +114,19 @@ export const BusinessNavbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full select-none text-xs font-sans shadow-xs" suppressHydrationWarning>
       {/* ========================================================================= */}
-      {/* TIER 1: Main Top Navbar (60px height) */}
+      {/* TIER 1: Main Top Navbar (64px height) */}
       {/* ========================================================================= */}
       <div
-        className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[64px] sm:h-[64px] border-b relative"
+        className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[64px] sm:h-[64px] border-b relative z-30"
         style={{
-          backgroundColor: "#0e0f89",
+          height: "64px",
+          backgroundColor: "#26269cff",
           borderColor: "#0a0b6e",
           color: "#0e0f89"
         }}
       >
         {/* Left Group: 1PLACEE Logo + Location Pill with Name */}
-        <div className="flex items-center gap-3.5 sm:gap-4 shrink-0 z-10">
+        <div className="flex items-center gap-3.5 sm:gap-4 shrink-0 z-30">
           <Link
             href="/"
             className="flex items-center hover:opacity-90 transition select-none py-0.5 h-[50px] overflow-hidden"
@@ -131,24 +139,25 @@ export const BusinessNavbar: React.FC = () => {
           </Link>
 
           {/* Location Pill Button */}
-          <div className="relative">
+          <div className="relative" ref={locationRef}>
             <button
               type="button"
               onClick={() => setIsLocationOpen(!isLocationOpen)}
               aria-label="Location"
-              className="h-10 group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none"
+              style={{ height: "33.6px" }}
+              className={`topnav-glass-btn group flex items-center gap-2 px-3 py-1 rounded-full border shadow-sm cursor-pointer select-none ${isLocationOpen ? "is-active" : ""}`}
             >
-              <MapPin className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
+              <MapPin className="w-5 h-5 text-white stroke-[2] shrink-0" />
               <div className="flex flex-col text-left leading-tight">
-                <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] truncate max-w-[130px]">
+                <span className="font-bold text-sm sm:text-[15px] text-white truncate max-w-[130px]">
                   {selectedLocation}
                 </span>
               </div>
-              <ChevronDown className="w-4 h-4 text-[#0e0f89] shrink-0 ml-0.5" />
+              <ChevronDown className="w-4 h-4 text-white shrink-0 ml-0.5" />
             </button>
 
             {isLocationOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 border border-slate-200 z-50 text-xs text-slate-800">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-2xl py-2 border border-slate-200 z-50 text-xs text-slate-800 animate-in fade-in slide-in-from-top-1 duration-150">
                 {["Chennai, TN", "Vellore", "trichy", "Madurai", "Bangalore"].map(
                   (loc) => (
                     <button
@@ -158,9 +167,15 @@ export const BusinessNavbar: React.FC = () => {
                         setSelectedLocation(loc);
                         setIsLocationOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-blue-50 font-bold text-slate-700 hover:text-[#0e0f89] transition"
+                      className={`w-full text-left px-4 py-2 hover:bg-blue-50 font-bold transition flex items-center justify-between ${selectedLocation === loc
+                        ? "bg-blue-50/70 text-[#0e0f89]"
+                        : "text-slate-700 hover:text-[#0e0f89]"
+                        }`}
                     >
-                      {loc}
+                      <span>{loc}</span>
+                      {selectedLocation === loc && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0e0f89]" />
+                      )}
                     </button>
                   )
                 )}
@@ -170,43 +185,91 @@ export const BusinessNavbar: React.FC = () => {
         </div>
 
         {/* Center Group: Eclipse Container with Four Buttons: Home, B2B, B2C, Orders */}
-        <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 bg-white p-1 rounded-full border border-slate-200 shadow-xs z-10 pointer-events-auto">
+        <div
+          style={{
+            backgroundColor: "rgba(1, 1, 10, 0.14)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            borderColor: "rgba(255, 255, 255, 0.28)",
+          }}
+          className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 p-1 rounded-full border shadow-sm z-10 pointer-events-auto"
+        >
           <Link
             href="/"
-            style={isHomeActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
+            style={
+              isHomeActive
+                ? {
+                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                  color: "#ffffff",
+                }
+                : undefined
+            }
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isHomeActive
               ? "shadow-sm"
-              : "hover:bg-slate-100"
+              : "center-nav-inactive"
               }`}
           >
             Home
           </Link>
           <Link
             href="/b2b"
-            style={isB2bActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
+            style={
+              isB2bActive
+                ? {
+                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                  color: "#ffffff",
+                }
+                : undefined
+            }
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2bActive
               ? "shadow-sm"
-              : "hover:bg-slate-100"
+              : "center-nav-inactive"
               }`}
           >
             B2B
           </Link>
           <Link
             href="/b2c-gst"
-            style={isB2cActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
+            style={
+              isB2cActive
+                ? {
+                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                  color: "#ffffff",
+                }
+                : undefined
+            }
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isB2cActive
               ? "shadow-sm"
-              : "hover:bg-slate-100"
+              : "center-nav-inactive"
               }`}
           >
             B2C
           </Link>
           <Link
             href="/orders"
-            style={isOrdersActive ? { backgroundColor: "#0e0f89", color: "#ffffff" } : { color: "#0e0f89" }}
+            style={
+              isOrdersActive
+                ? {
+                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                  color: "#ffffff",
+                }
+                : undefined
+            }
             className={`px-4 sm:px-5 py-1.5 rounded-full font-bold text-[13px] sm:text-sm transition duration-200 cursor-pointer ${isOrdersActive
               ? "shadow-sm"
-              : "hover:bg-slate-100"
+              : "center-nav-inactive"
               }`}
           >
             Orders
@@ -220,10 +283,11 @@ export const BusinessNavbar: React.FC = () => {
             href="/sell"
             aria-label="Sell"
             title="Sell on 1PLACEE"
-            className="h-10 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer select-none text-[#0e0f89]"
+            style={{ height: "33.6px" }}
+            className={`topnav-glass-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border shadow-sm cursor-pointer select-none text-white ${pathname.startsWith("/sell") ? "is-active" : ""}`}
           >
-            <Store className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
-            <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] leading-tight">
+            <Store className="w-5 h-5 text-white stroke-[2] shrink-0" />
+            <span className="font-bold text-sm sm:text-[15px] text-white leading-tight">
               Sell
             </span>
           </Link>
@@ -233,10 +297,13 @@ export const BusinessNavbar: React.FC = () => {
             type="button"
             aria-label="Notifications"
             title="Notifications"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            style={{ height: "33.6px", width: "33.6px" }}
+            className="topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative"
           >
-            <Bell className="w-5 h-5 text-[#0e0f89] stroke-[2] transition-colors" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff9900] ring-2 ring-white" />
+            <Bell className="w-5 h-5 text-white stroke-[2] transition-colors" />
+            <span className="absolute -top-1 -right-1 bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
+              1
+            </span>
           </button>
 
           {/* 4. Wishlist Button */}
@@ -244,9 +311,13 @@ export const BusinessNavbar: React.FC = () => {
             href="/wishlist"
             aria-label="Wishlist"
             title="Wishlist"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            style={{ height: "33.6px", width: "33.6px" }}
+            className={`topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative ${pathname.startsWith("/wishlist") ? "is-active" : ""}`}
           >
-            <Heart className="w-5 h-5 text-[#0e0f89] stroke-[2] fill-transparent" />
+            <Heart className="w-5 h-5 text-white stroke-[2] fill-transparent" />
+            <span className="absolute -top-1 -right-1  bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
+              1
+            </span>
           </Link>
 
           {/* 5. Cart Button with Badge */}
@@ -254,11 +325,12 @@ export const BusinessNavbar: React.FC = () => {
             href="/products"
             aria-label="Cart"
             title="Cart"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer relative"
+            style={{ height: "33.6px", width: "33.6px" }}
+            className={`topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative ${pathname.startsWith("/products") ? "is-active" : ""}`}
           >
             <svg
               viewBox="0 0 24 24"
-              className="w-5 h-5 text-[#0e0f89]"
+              className="w-5 h-5 text-white"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -272,7 +344,7 @@ export const BusinessNavbar: React.FC = () => {
               <circle cx="8.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
               <circle cx="17.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
             </svg>
-            <span className="absolute -top-1 -right-1 bg-[#ff9900] text-black font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow">
+            <span className="absolute -top-1 -right-1  bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
               1
             </span>
           </Link>
@@ -283,15 +355,16 @@ export const BusinessNavbar: React.FC = () => {
               type="button"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
               aria-label="Profile"
-              className="h-10 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs text-[#0e0f89] transition-all duration-200 cursor-pointer select-none"
+              style={{ height: "33.6px" }}
+              className={`topnav-glass-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border shadow-sm text-white cursor-pointer select-none ${isProfileMenuOpen ? "is-active" : ""}`}
             >
-              <User className="w-5 h-5 text-[#0e0f89] stroke-[2] shrink-0" />
+              <User className="w-5 h-5 text-white stroke-[2] shrink-0" />
               <div className="flex flex-col text-left leading-tight hidden sm:flex">
-                <span className="font-bold text-sm sm:text-[15px] text-[#0e0f89] max-w-[85px]">
+                <span className="font-bold text-sm sm:text-[15px] text-white max-w-[85px]">
                   Vinothkumar
                 </span>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-[#0e0f89]" />
+              <ChevronDown className="w-3.5 h-3.5 text-white" />
             </button>
 
             {isProfileMenuOpen && (
@@ -325,18 +398,20 @@ export const BusinessNavbar: React.FC = () => {
           </div>
 
           {/* Vertical Divider Line */}
-          <div className="h-6 w-[1.5px] bg-slate-200 ml-0.5 mr-1" />
+          <div style={{ backgroundColor: "#364799ff" }} className="h-7 w-[1.5px] bg-[#b8dcfa] ml-0.5 mr-1" />
 
           {/* 7. Bittool / Preferences Icon Button */}
           <button
             type="button"
             aria-label="Preferences & Bittool"
             title="Preferences & Bittool"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-all duration-200 cursor-pointer overflow-hidden mr-0.5"
+            style={{ height: "33.6px", width: "33.6px" }}
+            className="topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer overflow-hidden mr-0.5"
           >
             <img
               src="/bittool-icon.png"
               alt="Bittool"
+              style={{ filter: "brightness(0) invert(1)" }}
               className="w-5 h-5 object-contain"
             />
           </button>
@@ -344,13 +419,19 @@ export const BusinessNavbar: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* TIER 2: Subnav Ribbon (44px height) */}
+      {/* TIER 2: Subnav Ribbon (48px height) */}
       {/* Left: Categories button; Center: Big Search Bar; Right: Help&Support & Settings */}
       {/* ========================================================================= */}
-      <div className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[48px] border-b border-gray-200/80 shadow-2xs relative select-none">
+      <div
+        style={{
+          height: "48px",
+          backgroundColor: "#f0f0fbff"
+        }}
+        className="bg-white pl-3 sm:pl-6 pr-3 sm:pr-4 py-1 flex items-center justify-between gap-3 text-[13px] h-[48px] border-b border-gray-200/80 shadow-2xs relative z-10 select-none"
+      >
         {/* Left Side: Categories Button & Expandable Search Bar */}
         {!isHomeActive ? (
-          <div className="flex items-center gap-2 shrink-0 z-20">
+          <div className="flex items-center gap-2 shrink-0 z-10">
             <div
               className="relative shrink-0"
               ref={categoriesRef}
@@ -378,14 +459,10 @@ export const BusinessNavbar: React.FC = () => {
                   }
                 }}
                 aria-label="All Categories"
-                style={{
-                  backgroundColor: "#0e0f89",
-                  color: "#ffffff",
-                  fontSize: "16px"
-                }}
-                className="h-8 w-auto font-bold flex text-white px-5 py-1 rounded-full transition-all duration-200 cursor-pointer select-none text-sm sm:text-[17px] shadow-xs active:scale-[0.98]"
+                style={{ fontSize: "14px" }}
+                className={`subnav-glass-btn h-8 w-auto font-bold flex px-5 py-1 rounded-full cursor-pointer select-none text-sm sm:text-[17px] shadow-xs active:scale-[0.98] ${isCategoriesOpen ? "is-active" : ""}`}
               >
-                <span className="pb-1 pointer-events-none text-white">Categories</span>
+                <span className="pb-1 pointer-events-none">Categories</span>
               </button>
             </div>
 
@@ -502,19 +579,16 @@ export const BusinessNavbar: React.FC = () => {
                   </form>
                 </div>
               ) : (
-                /* Circle Search Icon Button */
+                /* Search Pill Button (Icon + Search Text) */
                 <button
                   type="button"
                   onClick={() => setIsSearchOpen(true)}
                   aria-label="Open Search"
                   title="Search"
-                  style={{
-                    backgroundColor: "#0e0f89",
-                    color: "#ffffff"
-                  }}
-                  className="w-8 h-8 rounded-full flex items-center justify-center bg-white hover:bg-slate-50 border border-slate-200  transition-all duration-200 cursor-pointer shrink-0"
+                  className="subnav-glass-btn h-8 px-3.5 rounded-full flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold cursor-pointer shrink-0"
                 >
-                  <Search className="w-4 h-4 text-[#0e0f89] stroke-[2.2]" />
+                  <Search className="w-4 h-4 stroke-[2.2]" />
+                  <span>Search</span>
                 </button>
               )}
             </div>
@@ -532,10 +606,9 @@ export const BusinessNavbar: React.FC = () => {
               <Link
                 href="/rfq"
                 aria-label="Post My RFQ"
-                style={{ color: "#0e0f89" }}
-                className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
+                className={`subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group ${pathname.startsWith("/rfq") ? "is-active" : ""}`}
               >
-                <Target className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
+                <Target className="w-4 h-4 stroke-[2.2]" />
                 <span className="hidden sm:inline">RFQ</span>
               </Link>
 
@@ -543,10 +616,9 @@ export const BusinessNavbar: React.FC = () => {
               <Link
                 href="/messages"
                 aria-label="Messages"
-                style={{ color: "#0e0f89" }}
-                className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
+                className={`subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group ${pathname.startsWith("/messages") ? "is-active" : ""}`}
               >
-                <Mail className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
+                <Mail className="w-4 h-4 stroke-[2.2]" />
                 <span className="hidden sm:inline">Messages</span>
               </Link>
             </>
@@ -556,10 +628,9 @@ export const BusinessNavbar: React.FC = () => {
           <button
             type="button"
             aria-label="Help & Support"
-            style={{ color: "#0e0f89" }}
-            className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
+            className="subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group"
           >
-            <Headset className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
+            <Headset className="w-4 h-4 stroke-[2.2]" />
             <span className="hidden sm:inline">Help&Support</span>
           </button>
 
@@ -567,10 +638,9 @@ export const BusinessNavbar: React.FC = () => {
           <button
             type="button"
             aria-label="Settings"
-            style={{ color: "#0e0f89" }}
-            className="flex items-center gap-1.5 hover:bg-blue-50/70 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold transition cursor-pointer select-none group"
+            className="subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group"
           >
-            <Settings className="w-4 h-4 stroke-[2.2]" style={{ color: "#0e0f89" }} />
+            <Settings className="w-4 h-4 stroke-[2.2]" />
             <span className="hidden sm:inline">Settings</span>
           </button>
         </div>

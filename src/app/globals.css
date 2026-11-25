@@ -52,6 +52,62 @@ body {
   opacity: 0.8 !important;
 }
 
+/* Topnav Glassmorphism Buttons (Hover slightly dark, Click/Active brighter glass) */
+.topnav-glass-btn {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease !important;
+}
+
+.topnav-glass-btn:hover,
+.topnav-glass-btn:active,
+.topnav-glass-btn.is-active {
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.center-nav-inactive {
+  color: rgba(255, 255, 255, 0.858) !important;
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+}
+
+.center-nav-inactive:hover {
+  color: #ffffff !important;
+
+}
+
+/* Subnav Buttons: White bg + gray-600 icon/text, Hover/Active -> #0e0f89 Glassmorphism */
+.subnav-glass-btn {
+  background-color: #ffffff !important;
+  color: #4b5563 !important;
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.subnav-glass-btn svg {
+  color: #4b5563 !important;
+  transition: color 0.2s ease !important;
+}
+
+.subnav-glass-btn:hover,
+.subnav-glass-btn:active,
+.subnav-glass-btn.is-active {
+  background-color: rgba(14, 14, 137, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-color: rgba(14, 15, 137, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.subnav-glass-btn:hover svg,
+.subnav-glass-btn:active svg,
+.subnav-glass-btn.is-active svg {
+  color: #ffffff !important;
+}
+
 /* Categories 8-Column Mega Menu Grid */
 .categories-megamenu-grid-8 {
   display: grid;
