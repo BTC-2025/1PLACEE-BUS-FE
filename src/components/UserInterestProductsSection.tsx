@@ -123,7 +123,7 @@ export const UserInterestProductsSection: React.FC = () => {
 
                 <div>
                   {/* Product Image Area with Hover Zoom & "Find Similar" trigger */}
-                  <Link href={product.href} className="block relative">
+                  <Link href={`/b2b/product/${product.id}`} className="block relative">
                     <div className="w-full h-[180px] sm:h-[190px] rounded-xl bg-[#fdfdfd] border border-slate-100 p-2 flex items-center justify-center overflow-hidden relative">
                       <img
                         src={product.image}
@@ -143,7 +143,7 @@ export const UserInterestProductsSection: React.FC = () => {
 
                   {/* Title */}
                   <div className="mt-3">
-                    <Link href={product.href}>
+                    <Link href={`/b2b/product/${product.id}`}>
                       <h4 className="text-[13px] font-bold text-slate-800 group-hover:text-[#1d72fe] transition-colors line-clamp-2 leading-snug min-h-[38px]">
                         {product.title}
                       </h4>
@@ -201,7 +201,7 @@ export const UserInterestProductsSection: React.FC = () => {
                 {/* Bottom Action: "Ask for Price / Send Inquiry" CTA Button */}
                 <div className="mt-3 pt-2">
                   <Link
-                    href={product.href}
+                    href={`/b2b/product/${product.id}`}
                     className="w-full py-2 px-3 rounded-xl border border-blue-200/90 bg-blue-50/70 hover:bg-[#1d72fe] text-[#1d72fe] hover:text-white text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-2xs group/btn cursor-pointer"
                   >
                     <span>Ask for Price</span>

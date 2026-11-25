@@ -410,7 +410,7 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                 {B2B_INITIAL_CATEGORIES.map((cat) => (
                   <Link
                     key={cat.id}
-                    href={cat.href}
+                    href={`/b2b/category/${cat.id}`}
                     onClick={onClose}
                     className="bg-white hover:bg-blue-50/30 rounded-2xl p-2.5 flex flex-col items-center justify-center text-center border border-slate-200/90 hover:border-[#1d72fe] hover:shadow-md transition-all duration-200 group category-square-card cursor-pointer"
                   >
@@ -448,7 +448,7 @@ export const CategoriesCarouselMegaMenu: React.FC<CategoriesCarouselMegaMenuProp
                   {B2B_ALL_41_CATEGORIES.map((cat) => (
                     <Link
                       key={cat.id}
-                      href={cat.href}
+                      href={`/b2b/category/${cat.id}`}
                       onClick={onClose}
                       className="bg-white hover:bg-blue-50/30 rounded-2xl p-2.5 flex flex-col items-center justify-center text-center border border-slate-200/90 hover:border-[#1d72fe] hover:shadow-md transition-all duration-200 group category-square-card cursor-pointer"
                     >

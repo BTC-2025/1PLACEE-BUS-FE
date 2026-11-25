@@ -199,7 +199,7 @@ export const BusinessNavbar: React.FC = () => {
             style={
               isHomeActive
                 ? {
-                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backgroundColor: "rgba(255, 255, 255, 0.13)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "1px solid rgba(255, 255, 255, 0.35)",
@@ -219,7 +219,7 @@ export const BusinessNavbar: React.FC = () => {
             style={
               isB2bActive
                 ? {
-                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backgroundColor: "rgba(255, 255, 255, 0.13)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "1px solid rgba(255, 255, 255, 0.35)",
@@ -239,7 +239,7 @@ export const BusinessNavbar: React.FC = () => {
             style={
               isB2cActive
                 ? {
-                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backgroundColor: "rgba(255, 255, 255, 0.13)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "1px solid rgba(255, 255, 255, 0.35)",
@@ -259,7 +259,7 @@ export const BusinessNavbar: React.FC = () => {
             style={
               isOrdersActive
                 ? {
-                  backgroundColor: "rgba(255, 255, 255, 0.28)",
+                  backgroundColor: "rgba(255, 255, 255, 0.13)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "1px solid rgba(255, 255, 255, 0.35)",
@@ -301,7 +301,16 @@ export const BusinessNavbar: React.FC = () => {
             className="topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative"
           >
             <Bell className="w-5 h-5 text-white stroke-[2] transition-colors" />
-            <span className="absolute -top-1 -right-1 bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
+            <span
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.45)",
+                color: "#ffffff",
+              }}
+              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+            >
               1
             </span>
           </button>
@@ -315,7 +324,16 @@ export const BusinessNavbar: React.FC = () => {
             className={`topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative ${pathname.startsWith("/wishlist") ? "is-active" : ""}`}
           >
             <Heart className="w-5 h-5 text-white stroke-[2] fill-transparent" />
-            <span className="absolute -top-1 -right-1  bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
+            <span
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.45)",
+                color: "#ffffff",
+              }}
+              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+            >
               1
             </span>
           </Link>
@@ -344,7 +362,16 @@ export const BusinessNavbar: React.FC = () => {
               <circle cx="8.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
               <circle cx="17.5" cy="19.5" r="1.5" fill="currentColor" stroke="none" />
             </svg>
-            <span className="absolute -top-1 -right-1  bg-white text-black font-black text-[10px] w-3 h-3 rounded-full flex items-center justify-center shadow">
+            <span
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.45)",
+                color: "#ffffff",
+              }}
+              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+            >
               1
             </span>
           </Link>
@@ -358,7 +385,17 @@ export const BusinessNavbar: React.FC = () => {
               style={{ height: "33.6px" }}
               className={`topnav-glass-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border shadow-sm text-white cursor-pointer select-none ${isProfileMenuOpen ? "is-active" : ""}`}
             >
-              <User className="w-5 h-5 text-white stroke-[2] shrink-0" />
+              <span
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.18)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                }}
+                className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+              >
+                <User className="w-3.5 h-3.5 text-white stroke-[2.2]" />
+              </span>
               <div className="flex flex-col text-left leading-tight hidden sm:flex">
                 <span className="font-bold text-sm sm:text-[15px] text-white max-w-[85px]">
                   Vinothkumar

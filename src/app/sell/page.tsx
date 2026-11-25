@@ -47,7 +47,7 @@ export default function SellListingPortalPage() {
     membershipYear: "5th Year Gold Merchant",
   });
 
-  // Top Channel Switcher: "B2B" (Alibaba format) vs "B2C" (Amazon format)
+  // Top Channel Switcher: "B2B" (1PLACEE B2B format) vs "B2C" (1PLACEE B2C format)
   const [activeChannel, setActiveChannel] = useState<"B2B" | "B2C">("B2B");
 
   // Step state for multi-stage workflow
@@ -68,7 +68,7 @@ export default function SellListingPortalPage() {
   const [hsnCode, setHsnCode] = useState("94031000");
   const [gstRate, setGstRate] = useState("18");
 
-  // B2B specific states (Alibaba format)
+  // B2B specific states (1PLACEE B2B format)
   const [b2bGroup, setB2bGroup] = useState("Commercial Workspace Collection");
   const [fabricMaterial, setFabricMaterial] = useState("Industrial Cold-Rolled Carbon Steel + Solid Oak");
   const [finishType, setFinishType] = useState("Anti-Scratch Matte Powder Coating");
@@ -78,21 +78,21 @@ export default function SellListingPortalPage() {
   const [sampleLeadTime, setSampleLeadTime] = useState("5 Days");
   const [samplePrice, setSamplePrice] = useState("3200");
 
-  // Tiered Volume Pricing (Alibaba MOQ Slabs)
+  // Tiered Volume Pricing (1PLACEE B2B MOQ Slabs)
   const [moqSlabs, setMoqSlabs] = useState([
     { minQty: "5", maxQty: "49", priceUnit: "2650" },
     { minQty: "50", maxQty: "199", priceUnit: "2250" },
     { minQty: "200+", maxQty: "Bulk", priceUnit: "1900" },
   ]);
 
-  // Lead Times (Alibaba Logistics)
+  // Lead Times (1PLACEE B2B Logistics)
   const [leadTimes, setLeadTimes] = useState([
     { qtyRange: "1 - 50 Units", leadDays: "7 Days" },
     { qtyRange: "51 - 200 Units", leadDays: "14 Days" },
     { qtyRange: "201+ Units", leadDays: "21 Days (Negotiable)" },
   ]);
 
-  // Customization Services (Alibaba Format)
+  // Customization Services (1PLACEE B2B Format)
   const [customizationOptions, setCustomizationOptions] = useState({
     logo: true,
     logoMoq: "20",
@@ -102,7 +102,7 @@ export default function SellListingPortalPage() {
     designMoq: "100",
   });
 
-  // B2C specific states (Amazon format)
+  // B2C specific states (1PLACEE B2C format)
   const [b2cRetailMrp, setB2cRetailMrp] = useState("4499");
   const [b2c1PlaceePrice, setB2c1PlaceePrice] = useState("3299"); // 1PLACEE Original Price (Retail Consumer)
   // 1PLACEE Business B2C GST-claim price calculation:
@@ -118,7 +118,7 @@ export default function SellListingPortalPage() {
   const [inventoryStock, setInventoryStock] = useState("150");
   const [fulfillmentChannel, setFulfillmentChannel] = useState<"self" | "fba">("self");
 
-  // Bullet Points (Amazon format)
+  // Bullet Points (1PLACEE B2C format)
   const [bulletPoints, setBulletPoints] = useState([
     "DUAL-MOTOR QUIET LIFT: Smooth motorized height adjustment from 72cm to 120cm with whisper-quiet operation under 45dB.",
     "ROBUST INDUSTRIAL CAPACITY: High-grade aerospace carbon steel legs support up to 120kg weight evenly distributed.",
@@ -150,6 +150,33 @@ export default function SellListingPortalPage() {
     { name: "Nordic Natural Oak", sku: "VP-ESD-OAK-02", stock: "50", priceOffset: "+200" },
     { name: "Arctic White Minimalist", sku: "VP-ESD-WHT-03", stock: "40", priceOffset: "+100" },
   ]);
+
+  // Uploaded Images & Video State
+  const [uploadedImages, setUploadedImages] = useState<Record<string, string>>({});
+  const [uploadedVideo, setUploadedVideo] = useState<{ name: string; url: string } | null>(null);
+
+  const handleImageUpload = (slotKey: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setUploadedImages((prev) => ({ ...prev, [slotKey]: url }));
+  };
+
+  const handleRemoveImage = (slotKey: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setUploadedImages((prev) => {
+      const next = { ...prev };
+      delete next[slotKey];
+      return next;
+    });
+  };
+
+  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadedVideo({ name: file.name, url: URL.createObjectURL(file) });
+  };
 
   // Submission State
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -213,7 +240,7 @@ export default function SellListingPortalPage() {
               </div>
             </div>
 
-            {/* Right: Master Switcher B2B (Alibaba style) vs B2C (Amazon style) */}
+            {/* Right: Master Switcher B2B (1PLACEE B2B style) vs B2C (1PLACEE B2C style) */}
             <div
               style={{ backgroundColor: "rgba(255, 255, 255, 0.12)", borderColor: "rgba(255, 255, 255, 0.25)" }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-2 rounded-2xl border backdrop-blur-md"
@@ -234,17 +261,16 @@ export default function SellListingPortalPage() {
                     ? { backgroundColor: "#ffffff", color: "#0e0f89" }
                     : { backgroundColor: "transparent", color: "#ffffff" }
                 }
-                className={`flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer shadow-sm ${
-                  activeChannel === "B2B"
-                    ? "ring-2 ring-amber-400 scale-[1.02]"
-                    : "hover:bg-white/15"
-                }`}
+                className={`flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer shadow-sm ${activeChannel === "B2B"
+                  ? "ring-2 ring-amber-400 scale-[1.02]"
+                  : "hover:bg-white/15"
+                  }`}
               >
                 <Building2 className="w-4 h-4" />
                 <div className="text-left leading-tight">
                   <span className="block text-[13px]">B2B Bulk Wholesale</span>
                   <span className="block text-[10px] font-normal opacity-80">
-                    Alibaba Full Specification Form
+                    1PLACEE Wholesale Specification Form
                   </span>
                 </div>
               </button>
@@ -261,17 +287,16 @@ export default function SellListingPortalPage() {
                     ? { backgroundColor: "#ffffff", color: "#0e0f89" }
                     : { backgroundColor: "transparent", color: "#ffffff" }
                 }
-                className={`flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer shadow-sm ${
-                  activeChannel === "B2C"
-                    ? "ring-2 ring-amber-400 scale-[1.02]"
-                    : "hover:bg-white/15"
-                }`}
+                className={`flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer shadow-sm ${activeChannel === "B2C"
+                  ? "ring-2 ring-amber-400 scale-[1.02]"
+                  : "hover:bg-white/15"
+                  }`}
               >
                 <Package className="w-4 h-4" />
                 <div className="text-left leading-tight">
                   <span className="block text-[13px]">B2C Single Unit Retail</span>
                   <span className="block text-[10px] font-normal opacity-80">
-                    Amazon Listing + GST Input Benefit
+                    1PLACEE Retail + GST Input Benefit
                   </span>
                 </div>
               </button>
@@ -298,7 +323,7 @@ export default function SellListingPortalPage() {
               <p className="text-slate-600 text-sm mt-2 leading-relaxed">
                 Your listing <strong>"{productTitle}"</strong> has been compiled with all verified attributes and published under{" "}
                 <span className="font-bold text-[#0e0f89]">
-                  {activeChannel === "B2B" ? "Alibaba B2B Wholesale Format" : "Amazon B2C Dual-Marketplace Format"}
+                  {activeChannel === "B2B" ? "1PLACEE B2B Wholesale Format" : "1PLACEE B2C Dual-Marketplace Format"}
                 </span>.
               </p>
             </div>
@@ -354,7 +379,7 @@ export default function SellListingPortalPage() {
               </button>
               <Link
                 href={activeChannel === "B2B" ? "/b2b" : "/products"}
-                className="px-7 py-3 rounded-xl bg-[#0e0f89] hover:bg-[#0a0b6e] text-white font-black text-xs transition shadow-md cursor-pointer flex items-center gap-2"
+                className="px-7 py-3 rounded-xl bg-[#0e0f89] hover:bg-[#0a0b6e] border border-slate-300 text-grey-700 font-black text-xs transition shadow-md cursor-pointer flex items-center gap-2"
               >
                 <span>View on Live Store</span>
                 <ArrowRight className="w-4 h-4" />
@@ -368,11 +393,11 @@ export default function SellListingPortalPage() {
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-3 sm:p-4">
               <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-2 sm:gap-4">
                 {activeChannel === "B2B" ? (
-                  // B2B 5-Step Alibaba flow
+                  // B2B 5-Step 1PLACEE B2B flow
                   [
                     { step: 1, title: "Product Information", subtitle: "Name & Keywords" },
                     { step: 2, title: "Attributes & Specs", subtitle: "Materials, Origin & Cert" },
-                    { step: 3, title: "Tiered Pricing & MOQ", subtitle: "Alibaba Volume Slabs" },
+                    { step: 3, title: "Tiered Pricing & MOQ", subtitle: "1PLACEE Volume Slabs" },
                     { step: 4, title: "Logistics & Lead Times", subtitle: "Shipping & Sizing" },
                     { step: 5, title: "Trade & Customization", subtitle: "Logo, Packaging & Terms" },
                   ].map((s) => (
@@ -384,8 +409,8 @@ export default function SellListingPortalPage() {
                         currentStep === s.step
                           ? { backgroundColor: "#0e0f89", color: "#ffffff" }
                           : currentStep > s.step
-                          ? { backgroundColor: "#eff6ff", color: "#0e0f89" }
-                          : { backgroundColor: "#f8fafc", color: "#475569" }
+                            ? { backgroundColor: "#eff6ff", color: "#0e0f89" }
+                            : { backgroundColor: "#f8fafc", color: "#475569" }
                       }
                       className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left shrink-0 transition cursor-pointer border border-slate-200/80"
                     >
@@ -394,8 +419,8 @@ export default function SellListingPortalPage() {
                           currentStep === s.step
                             ? { backgroundColor: "#ffffff", color: "#0e0f89" }
                             : currentStep > s.step
-                            ? { backgroundColor: "#0e0f89", color: "#ffffff" }
-                            : { backgroundColor: "#cbd5e1", color: "#1e293b" }
+                              ? { backgroundColor: "#0e0f89", color: "#ffffff" }
+                              : { backgroundColor: "#cbd5e1", color: "#1e293b" }
                         }
                         className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0"
                       >
@@ -413,7 +438,7 @@ export default function SellListingPortalPage() {
                     </button>
                   ))
                 ) : (
-                  // B2C 5-Step Amazon flow
+                  // B2C 5-Step 1PLACEE B2C flow
                   [
                     { step: 1, title: "Product Identity", subtitle: "Title, Brand & EAN/UPC" },
                     { step: 2, title: "Description & Bullets", subtitle: "A+ Content & Features" },
@@ -429,8 +454,8 @@ export default function SellListingPortalPage() {
                         currentStep === s.step
                           ? { backgroundColor: "#0e0f89", color: "#ffffff" }
                           : currentStep > s.step
-                          ? { backgroundColor: "#eff6ff", color: "#0e0f89" }
-                          : { backgroundColor: "#f8fafc", color: "#475569" }
+                            ? { backgroundColor: "#eff6ff", color: "#0e0f89" }
+                            : { backgroundColor: "#f8fafc", color: "#475569" }
                       }
                       className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left shrink-0 transition cursor-pointer border border-slate-200/80"
                     >
@@ -439,8 +464,8 @@ export default function SellListingPortalPage() {
                           currentStep === s.step
                             ? { backgroundColor: "#ffffff", color: "#0e0f89" }
                             : currentStep > s.step
-                            ? { backgroundColor: "#0e0f89", color: "#ffffff" }
-                            : { backgroundColor: "#cbd5e1", color: "#1e293b" }
+                              ? { backgroundColor: "#0e0f89", color: "#ffffff" }
+                              : { backgroundColor: "#cbd5e1", color: "#1e293b" }
                         }
                         className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0"
                       >
@@ -464,7 +489,7 @@ export default function SellListingPortalPage() {
             {/* Dynamic Step Forms */}
             <form onSubmit={handlePublishListing} className="space-y-6">
               {/* ========================================================================= */}
-              {/* PIPELINE A: B2B ALIBABA-STYLE COMPREHENSIVE FORM                          */}
+              {/* PIPELINE A: B2B 1PLACEE B2B-STYLE COMPREHENSIVE FORM                          */}
               {/* ========================================================================= */}
               {activeChannel === "B2B" && (
                 <>
@@ -475,7 +500,7 @@ export default function SellListingPortalPage() {
                         <div>
                           <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
                             <Package className="w-5 h-5 text-[#0e0f89]" />
-                            <span>1. Alibaba B2B Product Information & Classification</span>
+                            <span>1. 1PLACEE B2B Product Information & Classification</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
                             High-quality product titles and multi-keyword tagging ensure maximum reach across global enterprise buyers.
@@ -514,7 +539,7 @@ export default function SellListingPortalPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                           <label className="text-xs font-black text-slate-700 block mb-1">
-                            Alibaba Primary Category Hierarchy *
+                            1PLACEE Primary Category Hierarchy *
                           </label>
                           <select
                             value={category}
@@ -552,7 +577,7 @@ export default function SellListingPortalPage() {
                         </div>
                       </div>
 
-                      {/* Product Keywords (Alibaba 3-Tag Keyword expansion) */}
+                      {/* Product Keywords (1PLACEE B2B 3-Tag Keyword expansion) */}
                       <div>
                         <label className="text-xs font-black text-slate-700 block mb-1">
                           Product Keywords (Hidden search tags - up to 255 chars) *
@@ -581,40 +606,130 @@ export default function SellListingPortalPage() {
                         </div>
                       </div>
 
-                      {/* Product Image Bank (Alibaba 6-image layout + Main Product Video) */}
+                      {/* Product Image Bank (1PLACEE B2B 6-image layout + Main Product Video) */}
                       <div>
                         <label className="text-xs font-black text-slate-700 block mb-1">
-                          Product Images &amp; Video (Alibaba Multi-Angle &amp; Certificate Bank) *
+                          Product Images &amp; Video (1PLACEE Multi-Angle &amp; Certificate Bank) *
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 pt-2">
                           {/* Image 1 (Main) */}
-                          <div className="border-2 border-dashed border-[#0e0f89] bg-blue-50/30 rounded-2xl p-3 flex flex-col items-center justify-center text-center h-32 relative">
-                            <span className="absolute top-1.5 left-2 bg-[#0e0f89] text-white text-[9px] font-black px-1.5 py-0.5 rounded">
+                          <label className="border-2 border-dashed border-[#0e0f89] bg-blue-50/30 hover:bg-blue-50/60 rounded-2xl p-2 flex flex-col items-center justify-center text-center h-32 relative cursor-pointer overflow-hidden transition">
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => handleImageUpload("angle1", e)}
+                            />
+                            <span
+                              style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                              className="absolute top-1.5 left-2 text-[9px] font-black px-1.5 py-0.5 rounded z-10"
+                            >
                               MAIN
                             </span>
-                            <Upload className="w-6 h-6 text-[#0e0f89] mb-1" />
-                            <span className="text-[11px] font-bold text-slate-700">Angle 1</span>
-                            <span className="text-[9px] text-slate-400">White Background</span>
-                          </div>
+                            {uploadedImages["angle1"] ? (
+                              <>
+                                <img
+                                  src={uploadedImages["angle1"]}
+                                  alt="Angle 1"
+                                  className="w-full h-full object-cover rounded-xl"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleRemoveImage("angle1", e)}
+                                  className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/70 text-white text-xs font-bold flex items-center justify-center hover:bg-rose-600 z-10 cursor-pointer"
+                                  title="Remove image"
+                                >
+                                  ×
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="w-6 h-6 text-[#0e0f89] mb-1" />
+                                <span className="text-[11px] font-bold text-slate-700">Angle 1</span>
+                                <span className="text-[9px] text-slate-400">White Background</span>
+                              </>
+                            )}
+                          </label>
 
                           {/* Image 2, 3, 4, 5 */}
-                          {["Dimension Specs", "Material Detail", "Color Swatches", "Packaging Carton"].map((lbl, idx) => (
-                            <div
-                              key={lbl}
-                              className="border border-dashed border-slate-300 hover:border-slate-400 bg-slate-50 hover:bg-slate-100 rounded-2xl p-3 flex flex-col items-center justify-center text-center h-32 cursor-pointer transition"
+                          {[
+                            { key: "dimension", lbl: "Dimension Specs" },
+                            { key: "material", lbl: "Material Detail" },
+                            { key: "color", lbl: "Color Swatches" },
+                            { key: "packaging", lbl: "Packaging Carton" },
+                          ].map((slot, idx) => (
+                            <label
+                              key={slot.key}
+                              className="border border-dashed border-slate-300 hover:border-[#0e0f89] bg-slate-50 hover:bg-slate-100 rounded-2xl p-2 flex flex-col items-center justify-center text-center h-32 cursor-pointer transition relative overflow-hidden"
                             >
-                              <Upload className="w-5 h-5 text-slate-400 mb-1" />
-                              <span className="text-[10px] font-bold text-slate-600">{lbl}</span>
-                              <span className="text-[9px] text-slate-400">Photo {idx + 2}</span>
-                            </div>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleImageUpload(slot.key, e)}
+                              />
+                              {uploadedImages[slot.key] ? (
+                                <>
+                                  <img
+                                    src={uploadedImages[slot.key]}
+                                    alt={slot.lbl}
+                                    className="w-full h-full object-cover rounded-xl"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={(e) => handleRemoveImage(slot.key, e)}
+                                    className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/70 text-white text-xs font-bold flex items-center justify-center hover:bg-rose-600 z-10 cursor-pointer"
+                                    title="Remove image"
+                                  >
+                                    ×
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <Upload className="w-5 h-5 text-slate-400 mb-1" />
+                                  <span className="text-[10px] font-bold text-slate-600">{slot.lbl}</span>
+                                  <span className="text-[9px] text-slate-400">Photo {idx + 2}</span>
+                                </>
+                              )}
+                            </label>
                           ))}
 
                           {/* Main Product Video Upload */}
-                          <div className="border border-dashed border-amber-400 bg-amber-50/40 rounded-2xl p-3 flex flex-col items-center justify-center text-center h-32 cursor-pointer">
-                            <Zap className="w-5 h-5 text-amber-600 mb-1" />
-                            <span className="text-[10px] font-bold text-slate-800">Factory Video</span>
-                            <span className="text-[9px] text-amber-700 font-semibold">Under 100MB</span>
-                          </div>
+                          <label className="border border-dashed border-amber-400 bg-amber-50/40 hover:bg-amber-50 rounded-2xl p-2 flex flex-col items-center justify-center text-center h-32 cursor-pointer relative overflow-hidden transition">
+                            <input
+                              type="file"
+                              accept="video/*"
+                              className="hidden"
+                              onChange={handleVideoUpload}
+                            />
+                            {uploadedVideo ? (
+                              <>
+                                <Zap className="w-5 h-5 text-emerald-600 mb-1" />
+                                <span className="text-[10px] font-bold text-emerald-700 truncate max-w-full px-1">
+                                  {uploadedVideo.name}
+                                </span>
+                                <span className="text-[9px] text-emerald-600 font-semibold">Video Ready</span>
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setUploadedVideo(null);
+                                  }}
+                                  className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/70 text-white text-xs font-bold flex items-center justify-center hover:bg-rose-600 z-10 cursor-pointer"
+                                  title="Remove video"
+                                >
+                                  ×
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                <Zap className="w-5 h-5 text-amber-600 mb-1" />
+                                <span className="text-[10px] font-bold text-slate-800">Factory Video</span>
+                                <span className="text-[9px] text-amber-700 font-semibold">Under 100MB</span>
+                              </>
+                            )}
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -630,7 +745,7 @@ export default function SellListingPortalPage() {
                             <span>2. Technical Specifications &amp; Factory Compliance</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
-                            Alibaba buyers inspect certified origins, technical dimensions, and quality control badges.
+                            1PLACEE B2B buyers inspect certified origins, technical dimensions, and quality control badges.
                           </p>
                         </div>
                         <span className="text-xs font-black text-[#0e0f89] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -756,14 +871,14 @@ export default function SellListingPortalPage() {
                     </div>
                   )}
 
-                  {/* STEP 3: Tiered Volume Pricing & MOQ (Alibaba Slabs) */}
+                  {/* STEP 3: Tiered Volume Pricing & MOQ (1PLACEE B2B Slabs) */}
                   {currentStep === 3 && (
                     <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
                       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                         <div>
                           <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
                             <DollarSign className="w-5 h-5 text-[#0e0f89]" />
-                            <span>3. Alibaba Tiered MOQ Pricing Slabs &amp; Unit Options</span>
+                            <span>3. 1PLACEE Tiered MOQ Pricing Slabs &amp; Unit Options</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
                             Set progressive volume discounts. Verified B2B buyers automatically unlock discounted wholesale pricing based on order volume.
@@ -909,7 +1024,7 @@ export default function SellListingPortalPage() {
                         </span>
                       </div>
 
-                      {/* Lead Time Table (Alibaba Format) */}
+                      {/* Lead Time Table (1PLACEE B2B Format) */}
                       <div>
                         <label className="text-xs font-black text-slate-700 block mb-2">
                           Quantity vs. Estimated Production &amp; Dispatch Lead Time *
@@ -1003,7 +1118,7 @@ export default function SellListingPortalPage() {
                             <span>5. Buyer Customization Services &amp; Trade Assurance</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
-                            Alibaba B2B buyers favor sellers providing custom company logos, packaging, and Trade Assurance escrow protection.
+                            1PLACEE B2B buyers favor sellers providing custom company logos, packaging, and Trade Assurance escrow protection.
                           </p>
                         </div>
                         <span className="text-xs font-black text-[#0e0f89] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -1115,7 +1230,7 @@ export default function SellListingPortalPage() {
               )}
 
               {/* ========================================================================= */}
-              {/* PIPELINE B: B2C AMAZON-STYLE COMPREHENSIVE FORM + 1PLACEE GST DUAL BENEFIT*/}
+              {/* PIPELINE B: B2C 1PLACEE B2C-STYLE COMPREHENSIVE FORM + 1PLACEE GST DUAL BENEFIT*/}
               {/* ========================================================================= */}
               {activeChannel === "B2C" && (
                 <>
@@ -1126,7 +1241,7 @@ export default function SellListingPortalPage() {
                         <div>
                           <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
                             <Package className="w-5 h-5 text-[#0e0f89]" />
-                            <span>1. Amazon B2C Product Identity &amp; External Barcode</span>
+                            <span>1. 1PLACEE B2C Product Identity &amp; External Barcode</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
                             Accurate brand naming and standard EAN/UPC barcode mapping ensure seamless single-unit retail sales.
@@ -1140,7 +1255,7 @@ export default function SellListingPortalPage() {
                       {/* Product Title */}
                       <div>
                         <label className="text-xs font-black text-slate-700 block mb-1">
-                          Product Title / Name (Amazon format: [Brand] + [Feature] + [Material] + [Type]) *
+                          Product Title / Name (1PLACEE format: [Brand] + [Feature] + [Material] + [Type]) *
                         </label>
                         <input
                           type="text"
@@ -1177,7 +1292,7 @@ export default function SellListingPortalPage() {
                             <option value="EAN">EAN (13 Digits European Article Number)</option>
                             <option value="UPC">UPC (12 Digits Universal Product Code)</option>
                             <option value="GTIN">GTIN-14</option>
-                            <option value="ASIN">Amazon ASIN</option>
+                            <option value="1PLACEE_ID">1PLACEE Catalog ID</option>
                           </select>
                         </div>
 
@@ -1198,7 +1313,7 @@ export default function SellListingPortalPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label className="text-xs font-black text-slate-700 block mb-1">
-                            Amazon Recommended Browse Node Category *
+                            1PLACEE Recommended Browse Node Category *
                           </label>
                           <input
                             type="text"
@@ -1241,7 +1356,7 @@ export default function SellListingPortalPage() {
                     </div>
                   )}
 
-                  {/* STEP 2: Description & Key Bullet Points (Amazon Format) */}
+                  {/* STEP 2: Description & Key Bullet Points (1PLACEE B2C Format) */}
                   {currentStep === 2 && (
                     <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
                       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -1251,7 +1366,7 @@ export default function SellListingPortalPage() {
                             <span>2. Bullet Points (Features) &amp; Product Description</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
-                            Amazon standard 5-bullet point structure for high conversion rates.
+                            1PLACEE standard 5-bullet point structure for high conversion rates.
                           </p>
                         </div>
                         <span className="text-xs font-black text-[#0e0f89] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -1576,7 +1691,7 @@ export default function SellListingPortalPage() {
                             <span>5. Fulfillment Channel &amp; Inventory Allocation</span>
                           </h2>
                           <p className="text-xs text-slate-500 mt-1">
-                            Choose between Merchant Self-Ship (Easy Ship) or 1PLACEE / Amazon FBA Warehouse fulfillment.
+                            Choose between Merchant Self-Ship (Easy Ship) or 1PLACEE Fulfillment Warehouse fulfillment.
                           </p>
                         </div>
                         <span className="text-xs font-black text-[#0e0f89] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
@@ -1619,11 +1734,10 @@ export default function SellListingPortalPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <label
-                            className={`p-4 rounded-2xl border-2 cursor-pointer flex items-start gap-3 transition ${
-                              fulfillmentChannel === "self"
-                                ? "border-[#0e0f89] bg-blue-50/40"
-                                : "border-slate-200 bg-white"
-                            }`}
+                            className={`p-4 rounded-2xl border-2 cursor-pointer flex items-start gap-3 transition ${fulfillmentChannel === "self"
+                              ? "border-[#0e0f89] bg-blue-50/40"
+                              : "border-slate-200 bg-white"
+                              }`}
                           >
                             <input
                               type="radio"
@@ -1643,11 +1757,10 @@ export default function SellListingPortalPage() {
                           </label>
 
                           <label
-                            className={`p-4 rounded-2xl border-2 cursor-pointer flex items-start gap-3 transition ${
-                              fulfillmentChannel === "fba"
-                                ? "border-[#0e0f89] bg-blue-50/40"
-                                : "border-slate-200 bg-white"
-                            }`}
+                            className={`p-4 rounded-2xl border-2 cursor-pointer flex items-start gap-3 transition ${fulfillmentChannel === "fba"
+                              ? "border-[#0e0f89] bg-blue-50/40"
+                              : "border-slate-200 bg-white"
+                              }`}
                           >
                             <input
                               type="radio"
@@ -1696,7 +1809,7 @@ export default function SellListingPortalPage() {
                     <button
                       type="button"
                       onClick={() => setCurrentStep((prev) => Math.min(prev + 1, 5))}
-                      className="px-7 py-2.5 rounded-xl bg-[#0e0f89] hover:bg-[#0a0b6e] text-white font-black text-xs transition shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
+                      className="px-8 py-2.5 rounded-xl bg-[#0e0f89] hover:bg-[#0a0b6e] border border-slate-300  text-slate-700 font-black text-xs transition shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
                     >
                       <span>Proceed to Step {currentStep + 1}</span>
                       <ChevronRight className="w-4 h-4" />

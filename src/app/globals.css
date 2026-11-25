@@ -108,6 +108,16 @@ body {
   color: #ffffff !important;
 }
 
+/* B2B Pillar Banner Links: 1px white underline on hover */
+.pillar-link-text span {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.pillar-link-text:hover span {
+  border-bottom: 1px solid #ffffff !important;
+}
+
 /* Categories 8-Column Mega Menu Grid */
 .categories-megamenu-grid-8 {
   display: grid;

@@ -49,7 +49,9 @@ export const ScientificInstrumentsSection: React.FC = () => {
                       href={link.href}
                       className="flex items-center justify-between pillar-link-text text-xs sm:text-[13px] font-bold py-1 px-1.5 rounded-lg hover:bg-white/20 transition-all group/item"
                     >
-                      <span className="truncate">{link.label}</span>
+                      <span className="truncate border-b border-transparent group-hover/item:border-white transition-colors">
+                        {link.label}
+                      </span>
                       <ChevronRight className="w-4 h-4 text-white group-hover/item:translate-x-1 transition-transform shrink-0 ml-1" />
                     </Link>
                   </li>
