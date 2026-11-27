@@ -70,9 +70,10 @@ export const HeroBannerWithRoundCategories: React.FC = () => {
   const slide = HERO_BANNER_SLIDES[currentSlide];
 
   return (
-    <div className="w-full space-y-3 select-none">
+    <div style={{ paddingTop: "2px" }} className="w-full space-y-3 select-none">
       {/* ================= 1. BANNER CAROUSEL WITH SLIGHT LEFT & RIGHT SPACE ================= */}
-      <div className="w-full px-2.5 sm:px-4 lg:px-6 max-w-[1530px] mx-auto pt-2 sm:pt-0">
+      <div
+        className="w-full  px-2.5 sm:px-4 lg:px-6 max-w-[1530px] mx-auto pt-0 sm:pt-0">
         <div className="relative w-full overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300 rounded-2xl border border-gray-200/70 bg-white">
           <Link href={slide.href} className="block w-full cursor-pointer relative group">
             <div className="w-full relative flex items-center justify-center">

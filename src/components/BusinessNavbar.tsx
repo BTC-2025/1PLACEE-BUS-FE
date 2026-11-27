@@ -120,7 +120,7 @@ export const BusinessNavbar: React.FC = () => {
         className="pl-3 sm:pl-6 pr-1 sm:pr-2 py-2 flex items-center justify-between h-[64px] sm:h-[64px] border-b relative z-30"
         style={{
           height: "64px",
-          backgroundColor: "#26269cff",
+          backgroundColor: "#0f2361",
           borderColor: "#0a0b6e",
           color: "#0e0f89"
         }}
@@ -302,14 +302,16 @@ export const BusinessNavbar: React.FC = () => {
           >
             <Bell className="w-5 h-5 text-white stroke-[2] transition-colors" />
             <span
+              suppressHydrationWarning
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.25)",
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
                 border: "1px solid rgba(255, 255, 255, 0.45)",
                 color: "#ffffff",
+
               }}
-              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+              className="absolute  -top-1 -right-1 font-black text-[11px] w-3.5 h-3.5 rounded-full flex items-center justify-center shadow"
             >
               1
             </span>
@@ -325,6 +327,7 @@ export const BusinessNavbar: React.FC = () => {
           >
             <Heart className="w-5 h-5 text-white stroke-[2] fill-transparent" />
             <span
+              suppressHydrationWarning
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.25)",
                 backdropFilter: "blur(8px)",
@@ -332,7 +335,7 @@ export const BusinessNavbar: React.FC = () => {
                 border: "1px solid rgba(255, 255, 255, 0.45)",
                 color: "#ffffff",
               }}
-              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+              className="absolute -top-1 -right-1 font-black text-[10px] w-3.5 h-3.5 rounded-full flex items-center justify-center shadow"
             >
               1
             </span>
@@ -340,11 +343,11 @@ export const BusinessNavbar: React.FC = () => {
 
           {/* 5. Cart Button with Badge */}
           <Link
-            href="/products"
+            href="/cart"
             aria-label="Cart"
             title="Cart"
             style={{ height: "33.6px", width: "33.6px" }}
-            className={`topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative ${pathname.startsWith("/products") ? "is-active" : ""}`}
+            className={`topnav-glass-btn rounded-full flex items-center justify-center border shadow-sm cursor-pointer relative ${pathname.startsWith("/cart") ? "is-active" : ""}`}
           >
             <svg
               viewBox="0 0 24 24"
@@ -370,7 +373,7 @@ export const BusinessNavbar: React.FC = () => {
                 border: "1px solid rgba(255, 255, 255, 0.45)",
                 color: "#ffffff",
               }}
-              className="absolute -top-1 -right-1 font-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow"
+              className="absolute -top-1 -right-1 font-black text-[10px] w-3.5 h-3.5 rounded-full flex items-center justify-center shadow"
             >
               1
             </span>
@@ -405,30 +408,88 @@ export const BusinessNavbar: React.FC = () => {
             </button>
 
             {isProfileMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl py-2 border border-gray-100 z-50 text-gray-800 animate-in fade-in zoom-in-95 duration-150">
-                <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50/70">
-                  <p className="text-[11px] text-gray-500 font-medium">Business Account</p>
-                  <p className="text-xs font-bold text-gray-900 truncate">vinothkumar@1place.in</p>
-                </div>
-                <div className="py-1">
+              <div
+                style={{ width: "280px" }}
+                className="absolute right-0 mt-2 bg-white rounded-3xl shadow-2xl border border-slate-200 z-50 text-slate-800 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+              >
+                {/* Top Avatar + Name + Email + Manage your account */}
+                <div className="px-5 pt-6 pb-5 flex flex-col items-center text-center border-b border-slate-100">
+                  <div className="relative mb-3">
+                    <div
+                      style={{ backgroundColor: "#1a73e8", color: "#ffffff" }}
+                      className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black shadow-sm"
+                    >
+                      V
+                    </div>
+                    <span
+                      style={{ top: "-2px", right: "-2px" }}
+                      className="absolute w-6 h-6 rounded-full bg-white border border-slate-200 shadow-xs flex items-center justify-center text-slate-600"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+
+                  <p className="text-base font-black text-slate-900 leading-tight">
+                    Vinothkumar
+                  </p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    vinothkumar@1place.in
+                  </p>
+
                   <Link
                     href="/orders"
-                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#0e0f89] transition"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="mt-4 px-5 py-2 rounded-full border border-slate-300 hover:bg-slate-50 text-xs font-bold text-slate-800 flex items-center gap-2 transition"
                   >
-                    Your Orders
+                    <User className="w-3.5 h-3.5 text-slate-600" />
+                    <span>Manage your account</span>
                   </Link>
-                  <Link
-                    href="/contracts"
-                    className="flex items-center px-4 py-2 text-xs font-semibold hover:bg-blue-50 hover:text-[#0e0f89] transition"
+                </div>
+
+                {/* Middle Actions (Manage Branches & Manage SubIDs removed) */}
+                <div className="py-2 border-b border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="w-full px-5 py-2.5 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-3 cursor-pointer transition"
                   >
-                    Vendor Contracts
-                  </Link>
-                  <Link
-                    href="/sell"
-                    className="flex items-center px-4 py-2 text-xs font-bold text-amber-600 hover:bg-amber-50 transition"
+                    <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="8.5" cy="7" r="4" />
+                      <line x1="20" y1="8" x2="20" y2="14" />
+                      <line x1="23" y1="11" x2="17" y2="11" />
+                    </svg>
+                    <span>Add another account</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="w-full px-5 py-2.5 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-3 cursor-pointer transition"
                   >
-                    Seller Portal
-                  </Link>
+                    <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span>Sign out of all accounts</span>
+                  </button>
+                </div>
+
+                {/* Bottom Sign Out */}
+                <div className="py-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="w-full px-5 py-2.5 text-center text-xs font-black text-rose-600 hover:bg-rose-50 flex items-center justify-center gap-2 cursor-pointer transition"
+                  >
+                    <svg className="w-4 h-4 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span>Sign out</span>
+                  </button>
                 </div>
               </div>
             )}
@@ -533,17 +594,6 @@ export const BusinessNavbar: React.FC = () => {
                       {/* Dropdown Menu */}
                       {isSearchTypeOpen && (
                         <div className="absolute top-[48px] left-0 w-[170px] border border-[#0e0f89] bg-white rounded-2xl shadow-2xl border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                          <button
-                            type="button"
-                            onClick={() => { setSearchType("AI Mode"); setIsSearchTypeOpen(false); }}
-                            className={`w-full flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-left transition ${searchType === "AI Mode"
-                              ? "bg-blue-50/70 text-[#0e0f89]"
-                              : "text-slate-700 hover:bg-slate-50 hover:text-[#0e0f89]"
-                              }`}
-                          >
-                            <Sparkles className="w-4 h-4 text-rose-500 fill-rose-500" />
-                            <span>AI Mode</span>
-                          </button>
 
                           <button
                             type="button"
@@ -672,14 +722,14 @@ export const BusinessNavbar: React.FC = () => {
           </button>
 
           {/* 4. Settings */}
-          <button
-            type="button"
+          <Link
+            href="/settings"
             aria-label="Settings"
-            className="subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group"
+            className={`subnav-glass-btn flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs sm:text-[12.5px] font-semibold cursor-pointer select-none group ${pathname.startsWith("/settings") ? "is-active" : ""}`}
           >
             <Settings className="w-4 h-4 stroke-[2.2]" />
             <span className="hidden sm:inline">Settings</span>
-          </button>
+          </Link>
         </div>
       </div>
 

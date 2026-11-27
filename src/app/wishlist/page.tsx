@@ -293,10 +293,13 @@ export default function WishlistPage() {
                       {b2bFavs.map((item) => (
                         <div
                           key={item.id}
-                          className="bg-white rounded-2xl border border-slate-200 p-4 hover:shadow-md transition flex flex-col justify-between"
+                          className="bg-white rounded-2xl border border-slate-200 p-3 hover:shadow-md transition flex flex-col justify-between"
                         >
                           <div>
-                            <div className="relative w-full h-52 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-3 overflow-hidden">
+                            <div
+                              style={{ height: "144px" }}
+                              className="relative w-full rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2 overflow-hidden"
+                            >
                               <button
                                 type="button"
                                 onClick={() => {
@@ -369,17 +372,17 @@ export default function WishlistPage() {
                           </div>
 
                           {/* Bottom Actions: Chat now, Add to cart, ... */}
-                          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                          <div className="mt-2.5 pt-2.5 border-t border-slate-100 flex items-center gap-2">
                             <Link
                               href={`/b2b/product/${item.id}`}
-                              className="flex-1 py-2 px-3 rounded-full border border-slate-300 hover:border-[#0e0f89] text-xs font-bold text-slate-800 hover:text-[#0e0f89] text-center transition"
+                              className="flex-1 py-1.5 px-2.5 rounded-full border border-slate-300 hover:border-[#0e0f89] text-xs font-bold text-slate-800 hover:text-[#0e0f89] text-center transition"
                             >
                               Chat now
                             </Link>
                             <button
                               type="button"
                               onClick={() => showToast("Added to B2B Cart")}
-                              className="flex-1 py-2 px-3 rounded-full border border-slate-300 hover:border-[#0e0f89] text-xs font-bold text-slate-800 hover:text-[#0e0f89] text-center transition cursor-pointer"
+                              className="flex-1 py-1.5 px-2.5 rounded-full border border-slate-300 hover:border-[#0e0f89] text-xs font-bold text-slate-800 hover:text-[#0e0f89] text-center transition cursor-pointer"
                             >
                               Add to cart
                             </button>
@@ -427,44 +430,20 @@ export default function WishlistPage() {
                   key={item.id}
                   className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden"
                 >
-                  {/* Yellow Express Banner */}
-                  <div
-                    style={{ backgroundColor: "#fde047" }}
-                    className="px-4 py-1.5 flex items-center justify-between text-xs font-black text-slate-900"
-                  >
-                    <span className="flex items-center gap-1 italic">
-                      <Zap className="w-3.5 h-3.5 fill-slate-900" />
-                      express
-                    </span>
-                    <span>Guaranteed Delivery</span>
-                  </div>
-
                   {/* Card Body */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: "20px",
-                      flexWrap: "wrap",
-                    }}
-                    className="p-4 sm:p-5"
-                  >
+                  <div className="p-3.5 space-y-3">
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "flex-start",
-                        gap: "16px",
-                        flex: "1 1 320px",
-                        minWidth: 0,
+                        gap: "12px",
                       }}
                     >
                       {/* Product Thumbnail */}
                       <div
-                        style={{ width: "96px", height: "96px" }}
-                        className="rounded-xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center shrink-0"
+                        style={{ width: "80px", height: "80px" }}
+                        className="rounded-xl bg-slate-50 border border-slate-200 p-1.5 flex items-center justify-center shrink-0"
                       >
                         <img
                           src={item.image}
@@ -474,44 +453,53 @@ export default function WishlistPage() {
                       </div>
 
                       {/* Details */}
-                      <div style={{ flex: 1, minWidth: 0 }} className="space-y-1.5">
-                        <h3 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+                      <div style={{ flex: 1, minWidth: 0 }} className="space-y-1">
+                        <h3 className="text-xs sm:text-sm font-black text-slate-900 leading-snug line-clamp-2">
                           {item.title}
                         </h3>
-                        <span className="inline-block text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-lg border border-slate-200">
+                        <span className="inline-block text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">
                           {item.variant}
                         </span>
-                        <div className="flex flex-wrap items-center gap-2 text-xs">
+                        <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
                           <span className="text-slate-600 font-semibold">Get it</span>
-                          <span className="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded">
+                          <span className="bg-amber-100 text-amber-900 font-black px-1.5 py-0.5 rounded">
                             Tomorrow
                           </span>
-                          <span className="text-slate-500 flex items-center gap-1 text-[11px]">
+                          <span className="text-slate-500 flex items-center gap-1 text-[10px]">
                             <Clock className="w-3 h-3" />
-                            Order in 3 hrs 41 mins
+                            3 hrs 41 mins
                           </span>
                         </div>
-                        <div className="flex flex-wrap gap-2 pt-0.5">
-                          <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
                             Extra 15% off
                           </span>
-                          <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
                             Extra 10% off
                           </span>
                         </div>
-                        <span className="text-[11px] font-bold text-amber-700 block">
+                        <span className="text-[10px] font-bold text-amber-700 block">
                           • {item.stockNote}
                         </span>
                       </div>
                     </div>
 
-                    {/* Right Side: Price + Delete Icon & Add to Cart Button (No + / - stepper) */}
-                    <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-100">
-                      <div className="text-left sm:text-right">
-                        <div className="text-lg sm:text-xl font-black text-slate-900">
+                    {/* Compact Bottom Row: Price Left + Delete & Add to Cart Right */}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                      }}
+                      className="pt-2.5 border-t border-slate-100"
+                    >
+                      <div className="text-left">
+                        <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">
                           {item.price}
                         </div>
-                        <div className="text-xs font-bold text-emerald-600">
+                        <div className="text-[11px] font-bold text-emerald-600">
                           {item.discount}{" "}
                           <span className="text-slate-400 line-through font-normal">
                             {item.originalPrice}
@@ -519,7 +507,7 @@ export default function WishlistPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2.5">
+                      <div className="flex items-center gap-2 shrink-0">
                         <button
                           type="button"
                           onClick={() => {
@@ -528,7 +516,7 @@ export default function WishlistPage() {
                           }}
                           title="Delete item"
                           aria-label="Delete item"
-                          className="w-9 h-9 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center cursor-pointer transition"
+                          className="w-8 h-8 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center cursor-pointer transition"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -537,7 +525,7 @@ export default function WishlistPage() {
                           type="button"
                           onClick={() => showToast(`Added "${item.title}" to Cart`)}
                           style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
-                          className="px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 shadow-sm hover:opacity-95 cursor-pointer transition"
+                          className="px-3.5 py-2 rounded-lg text-xs font-black flex items-center gap-1.5 shadow-sm hover:opacity-95 cursor-pointer transition"
                         >
                           <ShoppingCart className="w-3.5 h-3.5" />
                           <span>Add to Cart</span>

@@ -1428,6 +1428,70 @@ export default function SellListingPortalPage() {
                           className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0e0f89] focus:outline-none leading-relaxed"
                         />
                       </div>
+
+                      {/* Amazon B2C Product Images Upload (Up to 6 images with MAIN) */}
+                      <div className="pt-4 border-t border-slate-100">
+                        <label className="text-xs font-black text-slate-700 block mb-1">
+                          Product Images (Amazon Main + Multi-Angle Gallery) *
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 pt-2">
+                          {[
+                            { key: "b2c_main", lbl: "MAIN Image", isMain: true },
+                            { key: "b2c_2", lbl: "Side View", isMain: false },
+                            { key: "b2c_3", lbl: "Dimensions", isMain: false },
+                            { key: "b2c_4", lbl: "In-Use / Lifestyle", isMain: false },
+                            { key: "b2c_5", lbl: "Close-Up Detail", isMain: false },
+                            { key: "b2c_6", lbl: "Box & Contents", isMain: false },
+                          ].map((slot, idx) => (
+                            <label
+                              key={slot.key}
+                              className={`border-dashed rounded-2xl p-2 flex flex-col items-center justify-center text-center h-32 cursor-pointer transition relative overflow-hidden ${
+                                slot.isMain
+                                  ? "border-2 border-[#0e0f89] bg-blue-50/30 hover:bg-blue-50/60"
+                                  : "border border-slate-300 hover:border-[#0e0f89] bg-slate-50 hover:bg-slate-100"
+                              }`}
+                            >
+                              <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={(e) => handleImageUpload(slot.key, e)}
+                              />
+                              {slot.isMain && (
+                                <span
+                                  style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                                  className="absolute top-1.5 left-2 text-[9px] font-black px-1.5 py-0.5 rounded z-10"
+                                >
+                                  MAIN
+                                </span>
+                              )}
+                              {uploadedImages[slot.key] ? (
+                                <>
+                                  <img
+                                    src={uploadedImages[slot.key]}
+                                    alt={slot.lbl}
+                                    className="w-full h-full object-cover rounded-xl"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={(e) => handleRemoveImage(slot.key, e)}
+                                    className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/70 text-white text-xs font-bold flex items-center justify-center hover:bg-rose-600 z-10 cursor-pointer"
+                                    title="Remove image"
+                                  >
+                                    ×
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <Upload className={`w-5 h-5 mb-1 ${slot.isMain ? "text-[#0e0f89]" : "text-slate-400"}`} />
+                                  <span className="text-[10px] font-bold text-slate-700">{slot.lbl}</span>
+                                  <span className="text-[9px] text-slate-400">Photo {idx + 1}</span>
+                                </>
+                              )}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   )}
 
@@ -1807,17 +1871,25 @@ export default function SellListingPortalPage() {
                 <div className="flex items-center gap-3">
                   {currentStep < 5 ? (
                     <button
+                      key="next-step-btn"
                       type="button"
-                      onClick={() => setCurrentStep((prev) => Math.min(prev + 1, 5))}
-                      className="px-8 py-2.5 rounded-xl bg-[#0e0f89] hover:bg-[#0a0b6e] border border-slate-300  text-slate-700 font-black text-xs transition shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setCurrentStep((prev) => Math.min(prev + 1, 5));
+                      }}
+                      style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                      className="px-8 py-2.5 rounded-xl font-black text-xs transition shadow-md flex items-center gap-2 cursor-pointer active:scale-98"
                     >
                       <span>Proceed to Step {currentStep + 1}</span>
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   ) : (
                     <button
+                      key="publish-submit-btn"
                       type="submit"
-                      className="px-8 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm transition shadow-lg flex items-center gap-2 cursor-pointer active:scale-98"
+                      style={{ backgroundColor: "#fbbf24", color: "#0f172a" }}
+                      className="px-8 py-3 rounded-xl font-black text-sm transition shadow-lg flex items-center gap-2 cursor-pointer active:scale-98"
                     >
                       <Store className="w-5 h-5" />
                       <span>

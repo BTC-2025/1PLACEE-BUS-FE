@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { SellerDashboardSection } from "@/components/SellerDashboardSection";
 import {
   Search,
   ArrowRight,
@@ -97,6 +98,8 @@ export default function HomePage() {
     }, 400);
   };
 
+  const isLoggedIn = true; // Vinothkumar logged-in session
+
   return (
     <div
       className="min-h-screen text-slate-800 font-sans flex flex-col justify-between"
@@ -104,6 +107,12 @@ export default function HomePage() {
     >
       <BusinessNavbar />
 
+      {/* Logged-in Seller & Business Dashboard (Amazon + Alibaba Unified) */}
+      {isLoggedIn ? (
+        <div className="flex-1 w-full">
+          <SellerDashboardSection />
+        </div>
+      ) : (
       <main className="w-full flex-1">
         {/* ========================================================================= */}
         {/* SECTION 1: EUROPAGES / INDUSTRIAL B2B HERO BANNER WITH SOURCING SEARCH */}
@@ -921,6 +930,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+      )}
 
       {/* Global Business Footer */}
       <BusinessFooter />

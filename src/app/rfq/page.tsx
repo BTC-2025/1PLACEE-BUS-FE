@@ -1,541 +1,650 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { 
-  Paperclip, 
-  HelpCircle, 
-  Smartphone, 
-  Scan, 
-  ChevronDown, 
-  CheckCircle2, 
-  AlertCircle,
-  ArrowLeft
+import { BusinessNavbar } from "@/components/BusinessNavbar";
+import { BusinessFooter } from "@/components/BusinessFooter";
+import {
+  FileText,
+  Sparkles,
+  Upload,
+  CheckCircle2,
+  Plus,
+  Trash2,
+  Package,
+  Building2,
 } from "lucide-react";
 
-export default function PostRFQPage() {
-  const [productName, setProductName] = useState("");
-  const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState("");
+export default function RFQPage() {
+  const [rfqMode, setRfqMode] = useState<"direct" | "product">("direct");
+  const [productStep, setProductStep] = useState<"add" | "details">("add");
+  const [submitted, setSubmitted] = useState(false);
+
+  // Direct Custom RFQ State (Alibaba + Made-in-China)
+  const [productName, setProductName] = useState("Sewing Needles");
+  const [category, setCategory] = useState("Apparel & Accessories > Sewing Supplies > Sewing Needles");
+  const [purchaseQty, setPurchaseQty] = useState("10000");
   const [unit, setUnit] = useState("Piece(s)");
   const [tradeTerms, setTradeTerms] = useState("FOB");
-  const [targetPrice, setTargetPrice] = useState("");
-  const [currency, setCurrency] = useState("USD");
-  const [maxBudget, setMaxBudget] = useState("");
-  const [details, setDetails] = useState("");
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
-  
-  // Shipping & Payment
+  const [targetPrice, setTargetPrice] = useState("7.50");
+  const [maxBudget, setMaxBudget] = useState("₹50,000 - ₹1,00,000");
+  const [details, setDetails] = useState(
+    "I'm looking for Sewing Needles.\nProduct specifications:\n• Material: Stainless Steel\n• Type: Hand Sewing\n• Packaging: 25pcs/bag, custom logo"
+  );
   const [shippingMethod, setShippingMethod] = useState("Sea freight");
-  const [destinationPort, setDestinationPort] = useState("");
-  const [leadTimeDays, setLeadTimeDays] = useState("");
+  const [destPort, setDestPort] = useState("Chennai Port");
+  const [leadDays, setLeadDays] = useState("15");
   const [paymentTerms, setPaymentTerms] = useState("T/T");
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // Amazon Business Product Quote State
+  const [addMethod, setAddMethod] = useState("ASIN or ISBN");
+  const [itemInput, setItemInput] = useState("");
+  const [itemQtyInput, setItemQtyInput] = useState("50");
+  const [quoteItems, setQuoteItems] = useState([
+    {
+      id: "philips-na231",
+      title:
+        "PHILIPS Air Fryer NA231/00, touch panel, 6.2L, Extra Large, 100% Food Safe | uses up to 90% less fat, 1700W",
+      qty: 50,
+      targetPrice: "5507.63",
+      inclGst: "6499.00",
+      priceRange: "+/- 2%",
+      image: "/categories/b2b-products/presser-foot-set.png",
+    },
+  ]);
+  const [expectedDate, setExpectedDate] = useState("2026-12-07");
+  const [deliverDate, setDeliverDate] = useState("2026-12-10");
+  const [zipCode, setZipCode] = useState("600032");
+  const [shareBusinessName, setShareBusinessName] = useState(true);
 
-  // Calculate completeness score based on required fields
-  const hasProductName = productName.trim().length > 0;
-  const hasQuantity = quantity.trim().length > 0;
-  const hasMaxBudget = maxBudget.length > 0;
-  const hasDetails = details.trim().length >= 10;
-
-  const requiredFields = [
-    { label: "Product Name", met: hasProductName },
-    { label: "Purchase Quantity", met: hasQuantity },
-    { label: "Max Budget", met: hasMaxBudget },
-    { label: "Details", met: hasDetails }
-  ];
-
-  const metCount = requiredFields.filter(f => f.met).length;
-  const percentage = Math.round((metCount / requiredFields.length) * 100);
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files).map(f => f.name);
-      setUploadedFiles(prev => [...prev, ...newFiles].slice(0, 3));
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmitRfq = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!hasProductName || !hasQuantity || !hasMaxBudget || !hasDetails) {
-      alert("Please fill in all required fields indicated by *");
-      return;
-    }
-    setIsSubmitted(true);
+    setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f6f9] text-slate-800 font-sans text-xs sm:text-sm relative pb-16">
-      
-      {/* Right Floating Help Bar */}
-      <aside className="fixed right-2 top-1/2 -translate-y-1/2 z-50 bg-white border border-slate-200 rounded-lg shadow-xl p-1 flex flex-col items-center gap-3 text-[10px] text-slate-600">
-        <button onClick={() => alert("RFQ Assistance Available")} className="flex flex-col items-center gap-0.5 p-1.5 hover:text-[#e60012] group">
-          <HelpCircle className="w-4 h-4 text-slate-700 group-hover:text-[#e60012]" />
-          <span>Help</span>
-        </button>
-        <button className="flex flex-col items-center gap-0.5 p-1.5 hover:text-[#e60012] group">
-          <Smartphone className="w-4 h-4 text-slate-700 group-hover:text-[#e60012]" />
-          <span>APP</span>
-        </button>
-        <button className="flex flex-col items-center gap-0.5 p-1.5 hover:text-[#e60012] group">
-          <Scan className="w-4 h-4 text-slate-700 group-hover:text-[#e60012]" />
-          <span className="text-center leading-tight">Sourcing<br />Lens</span>
-        </button>
-      </aside>
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
+      <BusinessNavbar />
 
-      {/* Floating TradeMessenger Status */}
-      <div className="fixed right-6 bottom-4 z-40 bg-white border border-slate-300 rounded-full px-4 py-2 shadow-lg flex items-center gap-2 cursor-pointer hover:border-[#e60012]">
-        <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-        <span className="text-xs font-semibold text-slate-700">TradeMessenger (Online)</span>
-      </div>
-
-      {/* Header with Made-in-China style Brand */}
-      <header className="bg-white border-b border-slate-200 px-6 py-4 shadow-2xs">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-md bg-[#e60012] flex items-center justify-center text-white font-black text-xl shadow-xs">
-              1P
+      {/* Top Hero Banner (Alibaba RFQ Style - Image 4) */}
+      <section
+        style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+        className="border-b border-[#0a0b6e] shadow-md"
+      >
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-7 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 bg-amber-400 text-slate-950 font-black text-[11px] px-3 py-0.5 rounded-full uppercase">
+              <FileText className="w-3.5 h-3.5" />
+              <span>Request for Quotation (RFQ)</span>
             </div>
-            <div>
-              <span className="text-xl font-black text-slate-900 tracking-tight">
-                1PLACE<span className="text-[#e60012]">.BIZ</span>
-              </span>
-              <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest">
-                Connecting Buyers with Global Suppliers
-              </span>
-            </div>
-          </Link>
-
-          <Link href="/" className="text-xs font-semibold text-slate-600 hover:text-[#e60012] flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Marketplace
-          </Link>
-        </div>
-      </header>
-
-      {/* Page Title Strip */}
-      <div className="max-w-[1200px] mx-auto px-6 pt-6 pb-2">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              Tell suppliers what you need
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              Get quotes for your custom request
             </h1>
-            <p className="text-xs text-slate-500 mt-1">
-              The more specific your information, the faster response you will get.
+            <p className="text-xs sm:text-sm text-blue-100">
+              Accurate supplier matching, fast price comparison &amp; Trade Assurance protection.
             </p>
           </div>
-          <div className="flex items-center gap-1 text-xs text-slate-600 cursor-pointer hover:text-slate-900">
-            <span>English</span>
-            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            {[
+              "Design customization",
+              "Logo customization",
+              "Bundling customization",
+              "Packaging customization",
+            ].map((c) => (
+              <div
+                key={c}
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.12)",
+                  borderColor: "rgba(255, 255, 255, 0.25)",
+                }}
+                className="px-3 py-2.5 rounded-xl border text-xs font-bold text-white text-center"
+              >
+                {c}
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content Form & Completeness Card */}
-      <main className="max-w-[1200px] mx-auto px-6 py-4">
-        <div className="grid grid-cols-12 gap-8 items-start">
-          
-          {/* LEFT: RFQ FORM (COL 12 / LG 8) */}
-          <form onSubmit={handleSubmit} className="col-span-12 lg:col-span-8 bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-xs space-y-8">
-            
-            {/* SECTION 1: BASIC PRODUCT INFORMATION */}
-            <div>
-              <h2 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">
-                Basic Product Information
-              </h2>
+      <main className="flex-1 max-w-[1440px] mx-auto w-full px-4 sm:px-6 py-6 space-y-6">
+        {/* Mode Switcher: Direct Custom RFQ vs Product Quote Request */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-3 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+          <span className="text-xs font-black text-slate-700 px-2">
+            Choose RFQ Type:
+          </span>
+          <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200">
+            <button
+              type="button"
+              onClick={() => {
+                setRfqMode("direct");
+                setSubmitted(false);
+              }}
+              style={
+                rfqMode === "direct"
+                  ? { backgroundColor: "#0e0f89", color: "#ffffff" }
+                  : { backgroundColor: "transparent", color: "#64748b" }
+              }
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-black cursor-pointer transition"
+            >
+              <Building2 className="w-4 h-4" />
+              <span>Direct Custom RFQ (No Product Selected)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setRfqMode("product");
+                setSubmitted(false);
+              }}
+              style={
+                rfqMode === "product"
+                  ? { backgroundColor: "#0e0f89", color: "#ffffff" }
+                  : { backgroundColor: "transparent", color: "#64748b" }
+              }
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-black cursor-pointer transition"
+            >
+              <Package className="w-4 h-4" />
+              <span>Product Quote Request (Bulk Items)</span>
+            </button>
+          </div>
+        </div>
 
-              <div className="space-y-4 pt-4 text-xs">
-                
-                {/* Product Name */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Product Name:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <input 
-                      type="text" 
+        {submitted ? (
+          <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center max-w-xl mx-auto space-y-4 shadow-md">
+            <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
+            <h2 className="text-2xl font-black text-slate-900">
+              RFQ Submitted Successfully!
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Verified suppliers on 1PLACEE Business will review your requirements and send competitive quotes within 4 hours.
+            </p>
+            <button
+              type="button"
+              onClick={() => setSubmitted(false)}
+              style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+              className="px-6 py-2.5 rounded-full text-xs font-black cursor-pointer"
+            >
+              Submit Another RFQ
+            </button>
+          </div>
+        ) : rfqMode === "direct" ? (
+          /* ================================================================= */
+          /* MODE 1: DIRECT CUSTOM RFQ (Made-in-China + Alibaba - Images 3,4,5)*/
+          /* ================================================================= */
+          <form
+            onSubmit={handleSubmitRfq}
+            style={{ display: "flex", flexDirection: "row", gap: "24px", alignItems: "flex-start", flexWrap: "wrap" }}
+          >
+            <div style={{ flex: "1 1 650px", minWidth: 0 }} className="space-y-6">
+              {/* Basic Product Information */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-5">
+                <h2 className="text-base font-black text-slate-900 border-b border-slate-100 pb-3">
+                  Basic Product Information
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Product Name *</label>
+                    <input
+                      type="text"
                       required
                       value={productName}
                       onChange={(e) => setProductName(e.target.value)}
-                      placeholder="Enter a specific product name (e.g. CNC Aluminum Flange 50mm)"
-                      className="w-full border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold"
                     />
                   </div>
-                </div>
-
-                {/* Category */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    Category:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <select 
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Category *</label>
+                    <input
+                      type="text"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full sm:w-1/2 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
-                    >
-                      <option value="">Please select</option>
-                      <option value="Machinery">Manufacturing & Processing Machinery</option>
-                      <option value="Electronics">Consumer Electronics</option>
-                      <option value="Apparel">Apparel & Textiles</option>
-                      <option value="Hardware">Hardware & Tools</option>
-                      <option value="Agro">Agriculture & Food</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Purchase Quantity */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Purchase Quantity:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9 flex gap-3">
-                    <input 
-                      type="number" 
-                      required
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      placeholder="e.g. 500"
-                      className="w-1/2 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
                     />
-                    <select 
-                      value={unit}
-                      onChange={(e) => setUnit(e.target.value)}
-                      className="w-1/2 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
-                    >
-                      <option value="Piece(s)">Piece(s)</option>
-                      <option value="Set(s)">Set(s)</option>
-                      <option value="Kilogram(s)">Kilogram(s)</option>
-                      <option value="Ton(s)">Ton(s)</option>
-                      <option value="Meter(s)">Meter(s)</option>
-                    </select>
                   </div>
-                </div>
-
-                {/* Trade Terms */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Trade Terms:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <select 
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Purchase Quantity *</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        required
+                        value={purchaseQty}
+                        onChange={(e) => setPurchaseQty(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold"
+                      />
+                      <select
+                        value={unit}
+                        onChange={(e) => setUnit(e.target.value)}
+                        className="px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold"
+                      >
+                        <option>Piece(s)</option>
+                        <option>Box(es)</option>
+                        <option>Kg</option>
+                        <option>Sets</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Trade Terms *</label>
+                    <select
                       value={tradeTerms}
                       onChange={(e) => setTradeTerms(e.target.value)}
-                      className="w-full sm:w-1/3 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold"
                     >
-                      <option value="FOB">FOB (Free on Board)</option>
-                      <option value="CIF">CIF (Cost, Insurance & Freight)</option>
-                      <option value="DDP">DDP (Delivered Duty Paid)</option>
-                      <option value="EXW">EXW (Ex Works)</option>
+                      <option>FOB</option>
+                      <option>CIF</option>
+                      <option>EXW</option>
+                      <option>DDP</option>
                     </select>
                   </div>
-                </div>
-
-                {/* Target Unit Price */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    Target Unit Price:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9 flex gap-3">
-                    <input 
-                      type="number" 
-                      step="0.01"
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Target Unit Price (₹)</label>
+                    <input
+                      type="text"
                       value={targetPrice}
                       onChange={(e) => setTargetPrice(e.target.value)}
-                      placeholder="e.g. 12.50"
-                      className="w-1/2 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold"
                     />
-                    <select 
-                      value={currency}
-                      onChange={(e) => setCurrency(e.target.value)}
-                      className="w-1/2 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
-                    >
-                      <option value="USD">USD ($)</option>
-                      <option value="EUR">EUR (€)</option>
-                      <option value="INR">INR (₹)</option>
-                      <option value="GBP">GBP (£)</option>
-                    </select>
                   </div>
-                </div>
-
-                {/* Max Budget */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Max Budget:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9 flex items-center gap-2">
-                    <select 
-                      required
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Max Budget *</label>
+                    <select
                       value={maxBudget}
                       onChange={(e) => setMaxBudget(e.target.value)}
-                      className="w-full sm:w-1/3 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold"
                     >
-                      <option value="">Please select</option>
-                      <option value="< 1,000">&lt; 1,000</option>
-                      <option value="1,000 - 5,000">1,000 - 5,000</option>
-                      <option value="5,000 - 20,000">5,000 - 20,000</option>
-                      <option value="20,000 - 50,000">20,000 - 50,000</option>
-                      <option value="> 50,000">&gt; 50,000</option>
+                      <option>₹10,000 - ₹50,000</option>
+                      <option>₹50,000 - ₹1,00,000</option>
+                      <option>₹1,00,000 - ₹5,00,000</option>
+                      <option>₹5,00,000+</option>
                     </select>
-                    <span className="text-slate-500 font-semibold">{currency}</span>
                   </div>
                 </div>
 
-                {/* Details */}
-                <div className="grid grid-cols-12 gap-4 items-start">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2 pt-2">
-                    <span className="text-[#e60012] mr-1">*</span>Details:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9 space-y-2">
-                    <textarea 
-                      required
-                      rows={5}
-                      value={details}
-                      onChange={(e) => setDetails(e.target.value)}
-                      placeholder="Describe the product you want to source. You may include: Color, Material, Size, Weight, Packaging and certificate requirements and/or others."
-                      className="w-full border border-slate-300 rounded p-3 text-xs focus:border-[#e60012] focus:outline-none leading-relaxed"
+                {/* Detailed Requirements + AI Button + File Upload */}
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center justify-between">
+                    <label className="font-bold text-slate-700">Detailed requirements *</label>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setDetails((prev) => `${prev}\n• Quality Standard: ISO 9001:2015 Certified`)
+                      }
+                      className="px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-[#0e0f89] font-bold flex items-center gap-1 cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Write with AI</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={4}
+                    required
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}
+                    className="w-full p-3 rounded-xl border border-slate-300 leading-relaxed"
+                  />
+                  <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 hover:bg-slate-100 cursor-pointer font-bold text-slate-700">
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={(e) =>
+                        setUploadedFileName(e.target.files?.[0]?.name || null)
+                      }
                     />
+                    <Upload className="w-4 h-4 text-[#0e0f89]" />
+                    <span>
+                      {uploadedFileName
+                        ? `Attached: ${uploadedFileName}`
+                        : "Upload product images or files (jpg, png, pdf < 10MB)"}
+                    </span>
+                  </label>
+                </div>
+              </div>
 
-                    {/* File Upload Box */}
-                    <div className="bg-[#f8f9fb] border border-dashed border-slate-300 rounded p-3 flex flex-wrap items-center justify-between gap-2">
-                      <label className="flex items-center gap-1.5 text-blue-600 hover:text-blue-800 font-medium cursor-pointer">
-                        <Paperclip className="w-3.5 h-3.5" />
-                        <span>Upload product images or files ({uploadedFiles.length}/3)</span>
-                        <input type="file" multiple onChange={handleFileUpload} className="hidden" />
-                      </label>
-                      <span className="text-[10px] text-slate-400">JPG, PNG, PDF up to 10MB</span>
-                    </div>
+              {/* Shipping & Payment (Made-in-China Image 3) */}
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-4">
+                <h2 className="text-base font-black text-slate-900 border-b border-slate-100 pb-3">
+                  Shipping and Payment
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Shipping Method *</label>
+                    <select
+                      value={shippingMethod}
+                      onChange={(e) => setShippingMethod(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold"
+                    >
+                      <option>Sea freight</option>
+                      <option>Air freight</option>
+                      <option>Express Courier</option>
+                      <option>Road Transport</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Destination Port / City</label>
+                    <input
+                      type="text"
+                      value={destPort}
+                      onChange={(e) => setDestPort(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Lead Time (Days)</label>
+                    <input
+                      type="number"
+                      value={leadDays}
+                      onChange={(e) => setLeadDays(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Payment Terms *</label>
+                    <select
+                      value={paymentTerms}
+                      onChange={(e) => setPaymentTerms(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold"
+                    >
+                      <option>T/T</option>
+                      <option>L/C</option>
+                      <option>1PLACEE Trade Assurance</option>
+                      <option>Net-30 GST Invoice</option>
+                    </select>
+                  </div>
+                </div>
 
-                    {uploadedFiles.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {uploadedFiles.map((file, idx) => (
-                          <span key={idx} className="bg-slate-100 border border-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded">
-                            {file}
-                          </span>
-                        ))}
-                      </div>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                    className="px-8 py-3 rounded-full text-xs sm:text-sm font-black shadow-md hover:opacity-95 cursor-pointer"
+                  >
+                    Post request
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Sidebar: How to use RFQ (Image 5) */}
+            <aside
+              style={{ width: "300px", minWidth: "280px" }}
+              className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs space-y-4 shrink-0"
+            >
+              <h3 className="text-sm font-black text-slate-900">How to use RFQ</h3>
+              <div className="space-y-4 text-xs">
+                <div className="flex gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-100 font-black flex items-center justify-center shrink-0">
+                    1
+                  </span>
+                  <div>
+                    <strong className="text-slate-900 block">Describe your request</strong>
+                    <span className="text-slate-500">
+                      Write your detailed requirements in this form and post it as an RFQ.
+                    </span>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-100 font-black flex items-center justify-center shrink-0">
+                    2
+                  </span>
+                  <div>
+                    <strong className="text-slate-900 block">Get accurate quotes</strong>
+                    <span className="text-slate-500">
+                      Receive quotations from matching verified suppliers via message or email.
+                    </span>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-100 font-black flex items-center justify-center shrink-0">
+                    3
+                  </span>
+                  <div>
+                    <strong className="text-slate-900 block">Compare quotes</strong>
+                    <span className="text-slate-500">
+                      Communicate with suppliers that meet your exact needs to finalize order details.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </form>
+        ) : (
+          /* ================================================================= */
+          /* MODE 2: AMAZON BUSINESS PRODUCT QUOTE REQUEST (Images 1 & 2)      */
+          /* ================================================================= */
+          <form onSubmit={handleSubmitRfq} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-6">
+            <div className="flex items-center gap-6 border-b border-slate-200">
+              <button
+                type="button"
+                onClick={() => setProductStep("add")}
+                className={`pb-3 text-xs sm:text-sm font-black border-b-2 cursor-pointer ${
+                  productStep === "add"
+                    ? "border-[#0e0f89] text-[#0e0f89]"
+                    : "border-transparent text-slate-500"
+                }`}
+              >
+                1. Add items
+              </button>
+              <button
+                type="button"
+                onClick={() => setProductStep("details")}
+                className={`pb-3 text-xs sm:text-sm font-black border-b-2 cursor-pointer ${
+                  productStep === "details"
+                    ? "border-[#0e0f89] text-[#0e0f89]"
+                    : "border-transparent text-slate-500"
+                }`}
+              >
+                2. Enter quote details
+              </button>
+            </div>
+
+            {productStep === "add" ? (
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <span className="text-xs font-bold text-slate-700 block">
+                    Add up to 49 different items using product information:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {["ASIN or ISBN", "1PLACEE URL", "Keyword", "Supplier and SKU", "Manufacturer part number"].map(
+                      (m) => (
+                        <button
+                          key={m}
+                          type="button"
+                          onClick={() => setAddMethod(m)}
+                          className={`px-3 py-1 rounded-full text-xs font-bold border cursor-pointer ${
+                            addMethod === m
+                              ? "border-[#0e0f89] bg-blue-50 text-[#0e0f89]"
+                              : "border-slate-300 text-slate-600"
+                          }`}
+                        >
+                          {m}
+                        </button>
+                      )
                     )}
                   </div>
                 </div>
 
-              </div>
-            </div>
-
-            {/* SECTION 2: SHIPPING AND PAYMENT */}
-            <div>
-              <h2 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">
-                Shipping and Payment
-              </h2>
-
-              <div className="space-y-4 pt-4 text-xs">
-                
-                {/* Shipping Method */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Shipping Method:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <select 
-                      value={shippingMethod}
-                      onChange={(e) => setShippingMethod(e.target.value)}
-                      className="w-full sm:w-1/3 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
-                    >
-                      <option value="Sea freight">Sea freight</option>
-                      <option value="Air freight">Air freight</option>
-                      <option value="Express">Express (DHL/FedEx)</option>
-                      <option value="Land freight">Land transportation</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Destination Port */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    Destination Port:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <input 
-                      type="text" 
-                      value={destinationPort}
-                      onChange={(e) => setDestinationPort(e.target.value)}
-                      placeholder="e.g. Mumbai Port, Rotterdam, or Los Angeles"
-                      className="w-full sm:w-2/3 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none"
+                <div className="flex flex-wrap gap-3 items-end text-xs">
+                  <div className="flex-1 min-w-[240px]">
+                    <label className="font-bold text-slate-700 block mb-1">
+                      Enter {addMethod}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. PHILIPS Air Fryer NA231/00"
+                      value={itemInput}
+                      onChange={(e) => setItemInput(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
                     />
                   </div>
-                </div>
-
-                {/* Lead Time */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    Lead Time:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9 flex items-center gap-2">
-                    <span className="text-slate-500">Ship in</span>
-                    <input 
-                      type="number" 
-                      value={leadTimeDays}
-                      onChange={(e) => setLeadTimeDays(e.target.value)}
-                      placeholder="30"
-                      className="w-20 border border-slate-300 rounded px-2.5 py-1.5 text-xs focus:border-[#e60012] focus:outline-none text-center"
+                  <div className="w-28">
+                    <label className="font-bold text-slate-700 block mb-1">Quantity</label>
+                    <input
+                      type="number"
+                      value={itemQtyInput}
+                      onChange={(e) => setItemQtyInput(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold"
                     />
-                    <span className="text-slate-500">day(s) after supplier receives the initial payment.</span>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!itemInput.trim()) return;
+                      setQuoteItems([
+                        ...quoteItems,
+                        {
+                          id: `item-${Date.now()}`,
+                          title: itemInput.trim(),
+                          qty: parseInt(itemQtyInput, 10) || 50,
+                          targetPrice: "4500.00",
+                          inclGst: "5310.00",
+                          priceRange: "+/- 2%",
+                          image: "/categories/b2b-products/hand-needles.png",
+                        },
+                      ]);
+                      setItemInput("");
+                    }}
+                    className="px-4 py-2 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 font-bold flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Add Item</span>
+                  </button>
                 </div>
 
-                {/* Payment Terms */}
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <label className="col-span-12 sm:col-span-3 font-semibold text-slate-700 text-right sm:pr-2">
-                    <span className="text-[#e60012] mr-1">*</span>Payment Terms:
-                  </label>
-                  <div className="col-span-12 sm:col-span-9">
-                    <select 
-                      value={paymentTerms}
-                      onChange={(e) => setPaymentTerms(e.target.value)}
-                      className="w-full sm:w-1/3 border border-slate-300 rounded px-3 py-2 text-xs focus:border-[#e60012] focus:outline-none bg-white text-slate-700"
-                    >
-                      <option value="T/T">T/T (Telegraphic Transfer)</option>
-                      <option value="L/C">L/C (Letter of Credit)</option>
-                      <option value="D/P">D/P (Documents Against Payment)</option>
-                      <option value="Western Union">Western Union / Escrow</option>
-                    </select>
-                  </div>
+                {/* Items Table */}
+                <div className="border border-slate-200 rounded-xl overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                      <tr>
+                        <th className="py-3 px-4">Item</th>
+                        <th className="py-3 px-4">Quantity</th>
+                        <th className="py-3 px-4">Buy now price</th>
+                        <th className="py-3 px-4 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200">
+                      {quoteItems.map((it) => (
+                        <tr key={it.id}>
+                          <td className="py-3 px-4 flex items-center gap-3 max-w-md">
+                            <img
+                              src={it.image}
+                              alt={it.title}
+                              className="w-14 h-14 rounded-lg object-contain border border-slate-200 p-1 shrink-0"
+                            />
+                            <span className="font-bold text-slate-900">{it.title}</span>
+                          </td>
+                          <td className="py-3 px-4 font-black">{it.qty} units</td>
+                          <td className="py-3 px-4">
+                            <strong className="text-slate-900 block">
+                              ₹{it.targetPrice} <span className="text-[10px] font-normal text-slate-500">excl. GST</span>
+                            </strong>
+                            <span className="text-[11px] text-slate-500">
+                              ₹{it.inclGst} incl. GST
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-right">
+                            <button
+                              type="button"
+                              onClick={() => setQuoteItems(quoteItems.filter((x) => x.id !== it.id))}
+                              className="text-rose-500 hover:text-rose-700 cursor-pointer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
 
-                {/* Submit Button */}
-                <div className="grid grid-cols-12 gap-4 pt-4">
-                  <div className="hidden sm:block sm:col-span-3" />
-                  <div className="col-span-12 sm:col-span-9">
-                    <button 
-                      type="submit"
-                      className="bg-[#e60012] hover:bg-[#c80010] text-white font-bold px-8 py-2.5 rounded text-sm transition-colors shadow-sm"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-
+                <button
+                  type="button"
+                  onClick={() => setProductStep("details")}
+                  style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                  className="px-6 py-2.5 rounded-full text-xs font-black cursor-pointer"
+                >
+                  Enter quote details →
+                </button>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-5 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Expected purchase by date</label>
+                    <input
+                      type="date"
+                      value={expectedDate}
+                      onChange={(e) => setExpectedDate(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Deliver by date</label>
+                    <input
+                      type="date"
+                      value={deliverDate}
+                      onChange={(e) => setDeliverDate(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Delivery zip code *</label>
+                    <input
+                      type="text"
+                      required
+                      value={zipCode}
+                      onChange={(e) => setZipCode(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Share business name with suppliers?</label>
+                    <div className="flex items-center gap-4 pt-2">
+                      <label className="flex items-center gap-1.5 cursor-pointer font-bold">
+                        <input
+                          type="radio"
+                          checked={shareBusinessName}
+                          onChange={() => setShareBusinessName(true)}
+                          className="accent-[#0e0f89]"
+                        />
+                        Yes (Recommended)
+                      </label>
+                      <label className="flex items-center gap-1.5 cursor-pointer font-bold">
+                        <input
+                          type="radio"
+                          checked={!shareBusinessName}
+                          onChange={() => setShareBusinessName(false)}
+                          className="accent-[#0e0f89]"
+                        />
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setProductStep("add")}
+                    className="px-5 py-2.5 rounded-full border border-slate-300 font-bold cursor-pointer"
+                  >
+                    ← Back to Add items
+                  </button>
+                  <button
+                    type="submit"
+                    style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                    className="px-7 py-2.5 rounded-full font-black cursor-pointer shadow-md"
+                  >
+                    Request quote
+                  </button>
+                </div>
+              </div>
+            )}
           </form>
-
-          {/* RIGHT: COMPLETENESS PROGRESS CARD (COL 12 / LG 4) */}
-          <div className="col-span-12 lg:col-span-4 bg-white border border-slate-200 rounded-lg p-6 shadow-xs text-center space-y-6">
-            
-            <h3 className="text-base font-bold text-slate-900">
-              Completeness
-            </h3>
-
-            {/* Circular Progress Gauge */}
-            <div className="flex justify-center">
-              <div className="relative w-36 h-36 flex items-center justify-center">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle 
-                    cx="50" 
-                    cy="50" 
-                    r="40" 
-                    className="text-slate-100" 
-                    strokeWidth="8" 
-                    stroke="currentColor" 
-                    fill="transparent" 
-                  />
-                  <circle 
-                    cx="50" 
-                    cy="50" 
-                    r="40" 
-                    className={percentage === 100 ? "text-emerald-500" : "text-[#3b82f6]"} 
-                    strokeWidth="8" 
-                    strokeDasharray={251.2}
-                    strokeDashoffset={251.2 - (251.2 * percentage) / 100}
-                    strokeLinecap="round"
-                    stroke="currentColor" 
-                    fill="transparent" 
-                    style={{ transition: "stroke-dashoffset 0.5s ease" }}
-                  />
-                </svg>
-                <div className="absolute flex flex-col items-center">
-                  <span className={`text-base font-black ${percentage === 100 ? "text-emerald-600" : "text-slate-700"}`}>
-                    {percentage === 100 ? "Complete" : "Incomplete"}
-                  </span>
-                  <span className="text-xs text-slate-400 font-semibold">{percentage}%</span>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-500 leading-relaxed px-4">
-              The more precise information you write, the better response you will get.
-            </p>
-
-            {/* Checklist */}
-            <div className="text-left bg-slate-50 p-4 rounded-lg border border-slate-100 space-y-2 text-xs">
-              <span className="text-[11px] text-slate-400 block font-semibold mb-2">
-                Please fill in the required fields before submitting:
-              </span>
-              {requiredFields.map((field, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  {field.met ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  ) : (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#e60012] shrink-0" />
-                  )}
-                  <span className={field.met ? "text-slate-800 font-semibold line-through opacity-70" : "text-slate-600"}>
-                    {field.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-        </div>
+        )}
       </main>
 
-      {/* SUCCESS MODAL ON SUBMIT */}
-      {isSubmitted && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl border border-slate-200 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-10 h-10" />
-            </div>
-            <h3 className="text-xl font-black text-slate-900">RFQ Successfully Submitted!</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Your sourcing request for <strong>{productName}</strong> ({quantity} {unit}) has been broadcast to <strong>5 verified manufacturers</strong>. You will receive quotes in your Inquiry Basket within 24 hours.
-            </p>
-            <div className="pt-2">
-              <Link 
-                href="/" 
-                className="inline-block bg-[#e60012] hover:bg-[#c80010] text-white font-bold px-6 py-2.5 rounded-lg text-xs"
-              >
-                Return to Marketplace
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Made-in-China Footer Links */}
-      <footer className="max-w-[1200px] mx-auto px-6 pt-12 text-center text-xs text-slate-400 space-y-2">
-        <div className="flex flex-wrap justify-center gap-4 text-slate-500">
-          <span className="hover:text-slate-800 cursor-pointer">About Us</span>
-          <span>|</span>
-          <span className="hover:text-slate-800 cursor-pointer">FAQ</span>
-          <span>|</span>
-          <span className="hover:text-slate-800 cursor-pointer">Help</span>
-          <span>|</span>
-          <span className="hover:text-slate-800 cursor-pointer">Site Map</span>
-          <span>|</span>
-          <span className="hover:text-slate-800 cursor-pointer">Contact Us</span>
-          <span>|</span>
-          <span className="hover:text-slate-800 cursor-pointer">Mobile Site</span>
-        </div>
-        <div className="text-[11px] text-slate-400">
-          User Agreement • Declaration • Privacy Policy
-        </div>
-        <div className="text-[11px] text-slate-400">
-          Copyright © 1998-2026 Focus Technology Co., Ltd. / 1Place.Biz All Rights Reserved.
-        </div>
-      </footer>
-
+      <BusinessFooter />
     </div>
   );
 }
