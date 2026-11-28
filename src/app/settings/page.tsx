@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { AuthGuardGate } from "@/components/AuthGuardGate";
 import {
   User,
   Building2,
@@ -75,6 +76,10 @@ export default function SettingsPage() {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
       <BusinessNavbar />
 
+      <AuthGuardGate
+        title="Account & Business Settings"
+        description="Please sign in to manage your profile, GSTIN, and business preferences."
+      >
       <main className="flex-1 max-w-[1440px] mx-auto w-full px-4 sm:px-6 py-6 space-y-6">
         {/* Header */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs flex items-center justify-between">
@@ -671,6 +676,7 @@ export default function SettingsPage() {
           </div>
         </div>
       </main>
+      </AuthGuardGate>
 
       <BusinessFooter />
     </div>

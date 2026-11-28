@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { AuthGuardGate } from "@/components/AuthGuardGate";
 import {
   Store,
   ShieldCheck,
@@ -192,6 +193,10 @@ export default function SellListingPortalPage() {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
       <BusinessNavbar />
 
+      <AuthGuardGate
+        title="Seller Listing Portal"
+        description="Please sign in to your verified 1PLACEE Business account to publish B2B & B2C products."
+      >
       {/* Top Banner: Merchant Identification & Global Mode Switcher */}
       <section
         style={{ backgroundColor: "#0e0f89" }}
@@ -1903,6 +1908,7 @@ export default function SellListingPortalPage() {
           </div>
         )}
       </main>
+      </AuthGuardGate>
 
       <BusinessFooter />
     </div>

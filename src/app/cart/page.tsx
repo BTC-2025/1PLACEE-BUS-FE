@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { AuthGuardGate } from "@/components/AuthGuardGate";
 import {
   ShoppingCart,
   Building2,
@@ -68,6 +69,10 @@ export default function CartPage() {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
       <BusinessNavbar />
 
+      <AuthGuardGate
+        title="Shopping Cart"
+        description="Please sign in to view your B2B & B2C shopping cart and proceed to checkout."
+      >
       <main className="flex-1 max-w-[1440px] mx-auto w-full px-4 sm:px-6 py-6 space-y-6">
         {/* Top Switcher Bar: B2B Cart vs B2C Cart */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -498,6 +503,7 @@ export default function CartPage() {
           </div>
         )}
       </main>
+      </AuthGuardGate>
 
       <BusinessFooter />
     </div>

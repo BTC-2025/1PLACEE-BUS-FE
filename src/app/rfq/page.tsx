@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { AuthGuardGate } from "@/components/AuthGuardGate";
 import {
   FileText,
   Sparkles,
@@ -66,6 +67,10 @@ export default function RFQPage() {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
       <BusinessNavbar />
 
+      <AuthGuardGate
+        title="Request for Quotation (RFQ)"
+        description="Please sign in to submit custom RFQs and receive quotes from verified suppliers."
+      >
       {/* Top Hero Banner (Alibaba RFQ Style - Image 4) */}
       <section
         style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
@@ -643,6 +648,7 @@ export default function RFQPage() {
           </form>
         )}
       </main>
+      </AuthGuardGate>
 
       <BusinessFooter />
     </div>

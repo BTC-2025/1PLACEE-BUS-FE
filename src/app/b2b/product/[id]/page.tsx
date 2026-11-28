@@ -931,7 +931,29 @@ export default function B2BProductDetailPage() {
               <X className="w-4 h-4" />
             </button>
 
-            {inquirySent ? (
+            {typeof window !== "undefined" && localStorage.getItem("1placee_logged_in") === "false" ? (
+              <div className="py-6 text-center space-y-4">
+                <ShieldCheck className="w-12 h-12 text-[#0e0f89] mx-auto" />
+                <h3 className="text-lg font-black text-slate-900">
+                  Sign In Required
+                </h3>
+                <p className="text-xs text-slate-600">
+                  Please sign in to your 1PLACEE Business account to send inquiries, chat with suppliers, or place orders.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("1placee_logged_in", "true");
+                    window.dispatchEvent(new Event("1placee-auth-change"));
+                    setModalMode(modalMode);
+                  }}
+                  style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+                  className="w-full py-2.5 rounded-full text-xs font-black cursor-pointer"
+                >
+                  Sign in as Vinothkumar
+                </button>
+              </div>
+            ) : inquirySent ? (
               <div className="py-6 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h3 className="text-lg font-black text-slate-900">

@@ -98,7 +98,16 @@ export default function HomePage() {
     }, 400);
   };
 
-  const isLoggedIn = true; // Vinothkumar logged-in session
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  React.useEffect(() => {
+    const syncAuth = () => {
+      setIsLoggedIn(localStorage.getItem("1placee_logged_in") !== "false");
+    };
+    syncAuth();
+    window.addEventListener("1placee-auth-change", syncAuth);
+    return () => window.removeEventListener("1placee-auth-change", syncAuth);
+  }, []);
 
   return (
     <div

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { BusinessNavbar } from "@/components/BusinessNavbar";
 import { BusinessFooter } from "@/components/BusinessFooter";
+import { AuthGuardGate } from "@/components/AuthGuardGate";
 import {
   Search,
   MessageSquare,
@@ -141,6 +142,10 @@ export default function SellerManageOrdersPage() {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-800">
       <BusinessNavbar />
 
+      <AuthGuardGate
+        title="Seller Orders & Buyer Inquiries"
+        description="Please sign in to your verified 1PLACEE Business account to manage B2B/B2C orders, shipments, and buyer messages."
+      >
       <main className="flex-1 max-w-[1440px] mx-auto w-full px-4 sm:px-6 py-6 space-y-5">
         {/* Toast */}
         {toastMsg && (
@@ -594,6 +599,7 @@ export default function SellerManageOrdersPage() {
           </>
         )}
       </main>
+      </AuthGuardGate>
 
       <BusinessFooter />
     </div>

@@ -29,9 +29,32 @@ export const BusinessNavbar: React.FC = () => {
   const router = useRouter();
 
   const [mounted, setMounted] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   useEffect(() => {
     setMounted(true);
+    const saved = localStorage.getItem("1placee_logged_in");
+    if (saved === "false") setIsLoggedIn(false);
+
+    const onAuthChange = () => {
+      setIsLoggedIn(localStorage.getItem("1placee_logged_in") !== "false");
+    };
+    window.addEventListener("1placee-auth-change", onAuthChange);
+    return () => window.removeEventListener("1placee-auth-change", onAuthChange);
   }, []);
+
+  const handleSignOut = () => {
+    localStorage.setItem("1placee_logged_in", "false");
+    setIsLoggedIn(false);
+    setIsProfileMenuOpen(false);
+    window.dispatchEvent(new Event("1placee-auth-change"));
+  };
+
+  const handleSignIn = () => {
+    localStorage.setItem("1placee_logged_in", "true");
+    setIsLoggedIn(true);
+    window.dispatchEvent(new Event("1placee-auth-change"));
+  };
 
   // Location Selector
   const [selectedLocation, setSelectedLocation] = useState("Chennai, TN");
@@ -379,33 +402,46 @@ export const BusinessNavbar: React.FC = () => {
             </span>
           </Link>
 
-          {/* 6. Profile with Icon + Name + Dropdown */}
+          {/* 6. Profile with Icon + Name + Dropdown (or Sign In when logged out) */}
           <div ref={profileMenuRef} className="relative">
-            <button
-              type="button"
-              onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              aria-label="Profile"
-              style={{ height: "33.6px" }}
-              className={`topnav-glass-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border shadow-sm text-white cursor-pointer select-none ${isProfileMenuOpen ? "is-active" : ""}`}
-            >
-              <span
-                style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.18)",
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255, 255, 255, 0.35)",
-                }}
-                className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+            {isLoggedIn ? (
+              <button
+                type="button"
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                aria-label="Profile"
+                style={{ height: "33.6px" }}
+                className={`topnav-glass-btn flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border shadow-sm text-white cursor-pointer select-none ${isProfileMenuOpen ? "is-active" : ""}`}
               >
-                <User className="w-3.5 h-3.5 text-white stroke-[2.2]" />
-              </span>
-              <div className="flex flex-col text-left leading-tight hidden sm:flex">
-                <span className="font-bold text-sm sm:text-[15px] text-white max-w-[85px]">
-                  Vinothkumar
+                <span
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.18)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255, 255, 255, 0.35)",
+                  }}
+                  className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+                >
+                  <User className="w-3.5 h-3.5 text-white stroke-[2.2]" />
                 </span>
-              </div>
-              <ChevronDown className="w-3.5 h-3.5 text-white" />
-            </button>
+                <div className="flex flex-col text-left leading-tight hidden sm:flex">
+                  <span className="font-bold text-sm sm:text-[15px] text-white max-w-[85px]">
+                    Vinothkumar
+                  </span>
+                </div>
+                <ChevronDown className="w-3.5 h-3.5 text-white" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSignIn}
+                aria-label="Sign in"
+                style={{ height: "33.6px" }}
+                className="topnav-glass-btn flex items-center gap-1.5 px-3.5 py-1 rounded-full border shadow-sm text-white cursor-pointer select-none font-bold text-xs sm:text-sm"
+              >
+                <User className="w-4 h-4 text-white stroke-[2.2]" />
+                <span>Sign in</span>
+              </button>
+            )}
 
             {isProfileMenuOpen && (
               <div
@@ -464,7 +500,7 @@ export const BusinessNavbar: React.FC = () => {
 
                   <button
                     type="button"
-                    onClick={() => setIsProfileMenuOpen(false)}
+                    onClick={handleSignOut}
                     className="w-full px-5 py-2.5 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-3 cursor-pointer transition"
                   >
                     <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -480,7 +516,7 @@ export const BusinessNavbar: React.FC = () => {
                 <div className="py-2">
                   <button
                     type="button"
-                    onClick={() => setIsProfileMenuOpen(false)}
+                    onClick={handleSignOut}
                     className="w-full px-5 py-2.5 text-center text-xs font-black text-rose-600 hover:bg-rose-50 flex items-center justify-center gap-2 cursor-pointer transition"
                   >
                     <svg className="w-4 h-4 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

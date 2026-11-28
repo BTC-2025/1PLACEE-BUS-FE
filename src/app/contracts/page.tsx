@@ -72,21 +72,30 @@ export default function ContactsContractsPage() {
 
       <main className="flex-1 max-w-[1400px] mx-auto w-full px-4 py-8">
         {/* Header */}
-        <div className="bg-[#1862c6] text-white rounded-2xl p-6 sm:p-8 mb-8 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div
+          style={{ backgroundColor: "#0e0f89", color: "#ffffff" }}
+          className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4"
+        >
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-black text-xs px-3 py-0.5 rounded-full uppercase tracking-wider mb-2">
+            <div
+              style={{ backgroundColor: "#fbbf24", color: "#0f172a" }}
+              className="inline-flex items-center gap-1.5 font-black text-xs px-3 py-0.5 rounded-full uppercase tracking-wider mb-2"
+            >
               <FileSignature className="w-3.5 h-3.5" />
               <span>Enterprise Procurement</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Vendor Contacts & Long-Term Supply Agreements
+            <h1 style={{ color: "#ffffff" }} className="text-2xl sm:text-3xl font-black tracking-tight">
+              Vendor Contacts &amp; Long-Term Supply Agreements
             </h1>
-            <p className="text-blue-100 text-xs sm:text-sm mt-1 max-w-2xl">
+            <p style={{ color: "#dbeafe" }} className="text-xs sm:text-sm mt-1 max-w-2xl">
               Lock in wholesale price slabs, establish Net-30/60 corporate credit terms, and manage legally enforceable electronic supply contracts on 1PLACEE.
             </p>
           </div>
 
-          <button className="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-md transition flex items-center gap-2 cursor-pointer">
+          <button
+            style={{ backgroundColor: "#fbbf24", color: "#0f172a" }}
+            className="px-5 py-3 rounded-xl font-black text-xs shadow-md transition flex items-center gap-2 cursor-pointer shrink-0"
+          >
             <Plus className="w-4 h-4" />
             <span>Draft New Vendor Agreement</span>
           </button>
